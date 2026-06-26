@@ -448,7 +448,7 @@ def main(safe: bool = False):
     web = {
         "meta": {
             "snapshot": "2026-06-25",
-            "generated": _dt.datetime.now().strftime("%Y-%m-%d %H:%M"),
+            "generated": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
             "w_market": W_MARKET,
             "n_sims": N_SIMS,
         },

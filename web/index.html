@@ -161,12 +161,27 @@
   var mode = 'ev';
 
   // ---- meta -------------------------------------------------------------
+  // format the UTC ISO "generated" stamp in the VIEWER'S local time + "x ago"
+  function fmtUpdated(iso){
+    if(!iso) return '';
+    var d = new Date(iso);
+    if(isNaN(d.getTime())) return 'updated '+esc(iso);   // fallback for old data
+    var mins = Math.round((Date.now() - d.getTime())/60000);
+    var rel;
+    if(mins < 1) rel = 'just now';
+    else if(mins < 60) rel = mins+' min ago';
+    else if(mins < 1440) rel = Math.floor(mins/60)+'h '+(mins%60)+'m ago';
+    else rel = Math.floor(mins/1440)+'d ago';
+    var local = d.toLocaleString(undefined,
+      {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+    return 'updated '+esc(local)+' <span style="opacity:.7">('+rel+')</span>';
+  }
   var m = D.meta||{};
   document.getElementById('meta').innerHTML =
     'Blend <b>'+Math.round((m.w_market||0)*100)+'% market</b> + '+
     Math.round((1-(m.w_market||0))*100)+'% model<br>'+
     'Snapshot <b>'+esc(m.snapshot||'')+'</b> · '+(m.n_sims? (m.n_sims.toLocaleString()+' sims'):'')+
-    (m.generated? '<br>generated '+esc(m.generated):'');
+    (m.generated? '<br>'+fmtUpdated(m.generated):'');
 
   // ---- per-mode field accessors ----------------------------------------
   function view(p){
