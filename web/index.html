@@ -84,6 +84,20 @@
   .advbar{position:relative;height:16px;border-radius:4px;background:var(--panel2);overflow:hidden;min-width:54px}
   .advbar > span{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#1f6b3f,#37d67a)}
   .advbar em{position:relative;font-style:normal;font-size:11px;padding-left:6px;line-height:16px;color:#dff6e7}
+  /* knockout bracket */
+  .bracket{display:flex;gap:16px;overflow-x:auto;padding:4px 0 12px}
+  .bround{min-width:178px;flex:0 0 auto}
+  .bround h4{margin:0 0 10px;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+  .bmatch{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:10px;overflow:hidden}
+  .bmatch .bm{font-size:9.5px;color:var(--muted);padding:3px 9px;background:var(--panel2);letter-spacing:.05em}
+  .bslot{padding:8px 10px;font-size:12.5px;border-top:1px solid var(--line);display:flex;align-items:center;gap:6px;min-height:34px}
+  .bslot:first-of-type{border-top:0}
+  .bslot.confirmed{color:var(--txt);font-weight:600}
+  .bslot.confirmed::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--good);flex:0 0 auto}
+  .bslot.projected{color:#c7d2dd}
+  .bslot.open{color:var(--muted);font-style:italic;opacity:.75}
+  .bslot .bt{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--accent2);border:1px solid var(--line);border-radius:4px;padding:1px 4px}
+  .bslot .bsub{font-size:10px;color:var(--muted);font-weight:400;margin-left:auto;font-style:normal;white-space:nowrap}
   footer{margin-top:40px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:12.5px}
   footer ul{margin:8px 0 0;padding-left:18px} footer li{margin:4px 0}
   .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-top:10px}
@@ -124,6 +138,10 @@
     <span>Win % = chance to win the group · Adv % = chance to reach the knockouts</span>
   </div>
   <div class="groups" id="groups" style="margin-top:14px"></div>
+
+  <h2 class="section">Knockout bracket</h2>
+  <div class="legend" id="bracket-legend"></div>
+  <div class="bracket" id="bracket"></div>
 
   <footer id="footer"></footer>
 </div>
@@ -251,6 +269,31 @@
     document.getElementById('groups').innerHTML = html;
   }
 
+  // ---- knockout bracket -------------------------------------------------
+  function renderBracket(){
+    var bk = D.bracket;
+    var host = document.getElementById('bracket');
+    var leg = document.getElementById('bracket-legend');
+    if(!bk || !host){ if(host) host.innerHTML=''; return; }
+    leg.innerHTML =
+      '<span><i style="background:var(--good)"></i>confirmed (group finished)</span>'+
+      '<span><i style="background:var(--accent2)"></i>proj = projected from current standings</span>'+
+      '<span>open slots fill in as games finish'+
+      (bk.group_stage_complete ? '' : ' — 3rd-place slots lock once the group stage ends')+'</span>';
+    host.innerHTML = bk.rounds.map(function(r){
+      var cards = r.matches.map(function(mt){
+        var slots = mt.slots.map(function(s){
+          if(!s.team) return '<div class="bslot open">'+esc(s.label)+'</div>';
+          var tag = s.status==='projected' ? '<span class="bt">proj</span>' : '';
+          return '<div class="bslot '+s.status+'">'+esc(s.team)+tag+
+                 '<span class="bsub">'+esc(s.label)+'</span></div>';
+        }).join('');
+        return '<div class="bmatch"><div class="bm">Match '+mt.m+'</div>'+slots+'</div>';
+      }).join('');
+      return '<div class="bround"><h4>'+esc(r.name)+'</h4>'+cards+'</div>';
+    }).join('');
+  }
+
   // ---- footer -----------------------------------------------------------
   document.getElementById('footer').innerHTML =
     '<b>Method & caveats.</b>'+
@@ -285,7 +328,7 @@
     });
   });
 
-  renderAll(); renderGroups();
+  renderAll(); renderGroups(); renderBracket();
 })();
 </script>
 </body>

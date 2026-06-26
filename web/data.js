@@ -1,7 +1,7 @@
 window.WC_DATA = {
   "meta": {
     "snapshot": "2026-06-25",
-    "generated": "2026-06-26 14:13",
+    "generated": "2026-06-26 15:12",
     "w_market": 0.7,
     "n_sims": 40000
   },
@@ -523,6 +523,502 @@ window.WC_DATA = {
       }
     }
   ],
+  "bracket": {
+    "group_stage_complete": false,
+    "qualified_thirds": [],
+    "rounds": [
+      {
+        "name": "Round of 32",
+        "matches": [
+          {
+            "m": 73,
+            "slots": [
+              {
+                "label": "Runner-up A",
+                "team": "South Africa",
+                "status": "confirmed"
+              },
+              {
+                "label": "Runner-up B",
+                "team": "Canada",
+                "status": "confirmed"
+              }
+            ]
+          },
+          {
+            "m": 74,
+            "slots": [
+              {
+                "label": "Winner E",
+                "team": "Germany",
+                "status": "confirmed"
+              },
+              {
+                "label": "3rd A/B/C/D/F",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 75,
+            "slots": [
+              {
+                "label": "Winner F",
+                "team": "Netherlands",
+                "status": "confirmed"
+              },
+              {
+                "label": "Runner-up C",
+                "team": "Morocco",
+                "status": "confirmed"
+              }
+            ]
+          },
+          {
+            "m": 76,
+            "slots": [
+              {
+                "label": "Winner C",
+                "team": "Brazil",
+                "status": "confirmed"
+              },
+              {
+                "label": "Runner-up F",
+                "team": "Japan",
+                "status": "confirmed"
+              }
+            ]
+          },
+          {
+            "m": 77,
+            "slots": [
+              {
+                "label": "Winner I",
+                "team": "France",
+                "status": "projected"
+              },
+              {
+                "label": "3rd C/D/F/G/H",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 78,
+            "slots": [
+              {
+                "label": "Runner-up E",
+                "team": "Côte d'Ivoire",
+                "status": "confirmed"
+              },
+              {
+                "label": "Runner-up I",
+                "team": "Norway",
+                "status": "projected"
+              }
+            ]
+          },
+          {
+            "m": 79,
+            "slots": [
+              {
+                "label": "Winner A",
+                "team": "Mexico",
+                "status": "confirmed"
+              },
+              {
+                "label": "3rd C/E/F/H/I",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 80,
+            "slots": [
+              {
+                "label": "Winner L",
+                "team": "England",
+                "status": "projected"
+              },
+              {
+                "label": "3rd E/H/I/J/K",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 81,
+            "slots": [
+              {
+                "label": "Winner D",
+                "team": "United States",
+                "status": "confirmed"
+              },
+              {
+                "label": "3rd B/E/F/I/J",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 82,
+            "slots": [
+              {
+                "label": "Winner G",
+                "team": "Egypt",
+                "status": "projected"
+              },
+              {
+                "label": "3rd A/E/H/I/J",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 83,
+            "slots": [
+              {
+                "label": "Runner-up K",
+                "team": "Portugal",
+                "status": "projected"
+              },
+              {
+                "label": "Runner-up L",
+                "team": "Ghana",
+                "status": "projected"
+              }
+            ]
+          },
+          {
+            "m": 84,
+            "slots": [
+              {
+                "label": "Winner H",
+                "team": "Spain",
+                "status": "projected"
+              },
+              {
+                "label": "Runner-up J",
+                "team": "Austria",
+                "status": "projected"
+              }
+            ]
+          },
+          {
+            "m": 85,
+            "slots": [
+              {
+                "label": "Winner B",
+                "team": "Switzerland",
+                "status": "confirmed"
+              },
+              {
+                "label": "3rd E/F/G/I/J",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 86,
+            "slots": [
+              {
+                "label": "Winner J",
+                "team": "Argentina",
+                "status": "projected"
+              },
+              {
+                "label": "Runner-up H",
+                "team": "Uruguay",
+                "status": "projected"
+              }
+            ]
+          },
+          {
+            "m": 87,
+            "slots": [
+              {
+                "label": "Winner K",
+                "team": "Colombia",
+                "status": "projected"
+              },
+              {
+                "label": "3rd D/E/I/J/L",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 88,
+            "slots": [
+              {
+                "label": "Runner-up D",
+                "team": "Australia",
+                "status": "confirmed"
+              },
+              {
+                "label": "Runner-up G",
+                "team": "IR Iran",
+                "status": "projected"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Round of 16",
+        "matches": [
+          {
+            "m": 89,
+            "slots": [
+              {
+                "label": "Winner M74",
+                "team": null,
+                "status": "open"
+              },
+              {
+                "label": "Winner M77",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 90,
+            "slots": [
+              {
+                "label": "Winner M73",
+                "team": null,
+                "status": "open"
+              },
+              {
+                "label": "Winner M75",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 91,
+            "slots": [
+              {
+                "label": "Winner M76",
+                "team": null,
+                "status": "open"
+              },
+              {
+                "label": "Winner M78",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 92,
+            "slots": [
+              {
+                "label": "Winner M79",
+                "team": null,
+                "status": "open"
+              },
+              {
+                "label": "Winner M80",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 93,
+            "slots": [
+              {
+                "label": "Winner M83",
+                "team": null,
+                "status": "open"
+              },
+              {
+                "label": "Winner M84",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 94,
+            "slots": [
+              {
+                "label": "Winner M81",
+                "team": null,
+                "status": "open"
+              },
+              {
+                "label": "Winner M82",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 95,
+            "slots": [
+              {
+                "label": "Winner M86",
+                "team": null,
+                "status": "open"
+              },
+              {
+                "label": "Winner M88",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 96,
+            "slots": [
+              {
+                "label": "Winner M85",
+                "team": null,
+                "status": "open"
+              },
+              {
+                "label": "Winner M87",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Quarter-finals",
+        "matches": [
+          {
+            "m": 97,
+            "slots": [
+              {
+                "label": "Winner M89",
+                "team": null,
+                "status": "open"
+              },
+              {
+                "label": "Winner M90",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 98,
+            "slots": [
+              {
+                "label": "Winner M93",
+                "team": null,
+                "status": "open"
+              },
+              {
+                "label": "Winner M94",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 99,
+            "slots": [
+              {
+                "label": "Winner M91",
+                "team": null,
+                "status": "open"
+              },
+              {
+                "label": "Winner M92",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 100,
+            "slots": [
+              {
+                "label": "Winner M95",
+                "team": null,
+                "status": "open"
+              },
+              {
+                "label": "Winner M96",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Semi-finals",
+        "matches": [
+          {
+            "m": 101,
+            "slots": [
+              {
+                "label": "Winner M97",
+                "team": null,
+                "status": "open"
+              },
+              {
+                "label": "Winner M98",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          },
+          {
+            "m": 102,
+            "slots": [
+              {
+                "label": "Winner M99",
+                "team": null,
+                "status": "open"
+              },
+              {
+                "label": "Winner M100",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Final",
+        "matches": [
+          {
+            "m": 104,
+            "slots": [
+              {
+                "label": "Winner M101",
+                "team": null,
+                "status": "open"
+              },
+              {
+                "label": "Winner M102",
+                "team": null,
+                "status": "open"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "groups": [
     {
       "group": "A",

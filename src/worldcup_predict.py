@@ -33,6 +33,8 @@ from pathlib import Path
 
 import numpy as np
 
+from src.worldcup_bracket import build_bracket
+
 ROOT = Path(__file__).resolve().parent.parent
 WC = ROOT / "data" / "worldcup"
 WEB_DIR = ROOT / "web"
@@ -451,6 +453,7 @@ def main(safe: bool = False):
             "n_sims": N_SIMS,
         },
         "matches": dump,
+        "bracket": build_bracket(teams),
         "groups": [
             {
                 "group": g,
