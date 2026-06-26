@@ -50,6 +50,7 @@
   .match .grp{position:absolute;top:12px;right:14px;font-size:11px;color:var(--muted);
     background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:2px 7px;letter-spacing:.04em}
   .teams{font-size:13px;color:var(--muted);margin-bottom:2px}
+  .match .ko{font-size:11px;color:var(--muted);margin:1px 0 9px;letter-spacing:.01em}
   .score{display:flex;align-items:baseline;gap:10px;margin:2px 0 12px}
   .score .nums{font-size:30px;font-weight:800;letter-spacing:.01em}
   .score .verb{font-size:12px;color:var(--muted)}
@@ -222,18 +223,29 @@
   }
 
   // ---- match cards (grouped by date) -----------------------------------
+  // kickoff as a Date (UTC ISO -> local); fall back to the date-only field
+  function koDate(p){
+    if(p.kickoff){ var d=new Date(p.kickoff); if(!isNaN(d.getTime())) return d; }
+    if(p.date) return new Date(p.date+'T12:00:00Z');
+    return null;
+  }
   function renderMatches(){
-    var byDate = {};
-    D.matches.forEach(function(p){(byDate[p.date]=byDate[p.date]||[]).push(p);});
-    var dates = Object.keys(byDate).sort();
-    var html = dates.map(function(d){
-      var nice = new Date(d+'T00:00:00').toLocaleDateString(undefined,
-        {weekday:'long',month:'short',day:'numeric'});
-      var cards = byDate[d].map(matchCard).join('');
-      return '<div class="daygroup"><div class="daylabel">'+esc(nice)+'</div>'+
-             '<div class="matches">'+cards+'</div></div>';
+    var ms = D.matches.slice().sort(function(a,b){          // by kickoff, earliest first
+      var ka=koDate(a), kb=koDate(b);
+      return (ka?ka.getTime():8.64e15) - (kb?kb.getTime():8.64e15);
+    });
+    var order=[], byDay={};                                  // group by viewer-local day
+    ms.forEach(function(p){
+      var d=koDate(p);
+      var key=d ? d.toLocaleDateString(undefined,{weekday:'long',month:'short',day:'numeric'})
+                : 'Date TBD';
+      if(!byDay[key]){ byDay[key]=[]; order.push(key); }
+      byDay[key].push(p);
+    });
+    document.getElementById('matches').innerHTML = order.map(function(key){
+      return '<div class="daygroup"><div class="daylabel">'+esc(key)+'</div>'+
+             '<div class="matches">'+byDay[key].map(matchCard).join('')+'</div></div>';
     }).join('');
-    document.getElementById('matches').innerHTML = html;
   }
 
   function srcRow(tag,w){
@@ -248,6 +260,8 @@
     return '<div class="card match">'+
       '<span class="grp">Grp '+esc(p.group)+'</span>'+
       '<div class="teams">'+esc(p.home)+' <span style="opacity:.5">vs</span> '+esc(p.away)+'</div>'+
+      (function(){ var d=koDate(p); return d ? '<div class="ko">'+esc(d.toLocaleString(undefined,
+        {weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))+'</div>' : ''; })()+
       '<div class="score"><span class="nums">'+v.score[0]+'–'+v.score[1]+'</span>'+
         '<span class="verb">'+esc(verb(p,v.cls))+'</span></div>'+
       '<div class="chips">'+

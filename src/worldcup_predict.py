@@ -183,10 +183,22 @@ def build_predictions():
     market = json.load(open(WC / "market.json", encoding="utf-8"))
     # group-stage games only: both teams must exist and be in the SAME group
     # (knockout fixtures, e.g. a Round-of-32 match, are cross-group and are skipped).
+    def _kickoff(m):
+        k = m.get("kickoff")
+        if not k:
+            return None
+        try:
+            return _dt.datetime.fromisoformat(k.replace("Z", "+00:00"))
+        except ValueError:
+            return None
+
+    now = _dt.datetime.now(_dt.timezone.utc)
+    _far = _dt.datetime.max.replace(tzinfo=_dt.timezone.utc)
     games = [m for m in market.values()
              if m["home"] in teams and m["away"] in teams
-             and teams[m["home"]]["group"] == teams[m["away"]]["group"]]
-    order = sorted(games, key=lambda m: (m["date"], m["group"]))
+             and teams[m["home"]]["group"] == teams[m["away"]]["group"]
+             and not ((ko := _kickoff(m)) is not None and ko <= now)]  # drop kicked-off games
+    order = sorted(games, key=lambda m: (_kickoff(m) or _far, m["group"]))
     preds = []
     for m in order:
         h, a = m["home"], m["away"]
@@ -212,6 +224,7 @@ def build_predictions():
         modal_cls, modal_conf, modal_ev = stats_for(*modal)
         preds.append({
             "group": m["group"], "home": h, "away": a, "date": m["date"],
+            "kickoff": m.get("kickoff"),
             "lambda_home": round(lh, 2), "lambda_away": round(la, 2),
             "blend_wdl": [round(pH, 3), round(pD, 3), round(pA, 3)],
             "model_wdl": [round(mH, 3), round(mD, 3), round(mA, 3)],

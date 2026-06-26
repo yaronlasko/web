@@ -290,38 +290,38 @@
  "France": {
   "group": "I",
   "elo": 2090,
-  "pld": 2,
-  "pts": 6,
-  "gf": 6,
-  "ga": 1,
-  "gd": 5
+  "pld": 3,
+  "pts": 9,
+  "gf": 10,
+  "ga": 2,
+  "gd": 8
  },
  "Norway": {
   "group": "I",
   "elo": 1951,
-  "pld": 2,
+  "pld": 3,
   "pts": 6,
-  "gf": 7,
-  "ga": 3,
-  "gd": 4
+  "gf": 8,
+  "ga": 7,
+  "gd": 1
  },
  "Senegal": {
   "group": "I",
   "elo": 1869,
-  "pld": 2,
-  "pts": 0,
-  "gf": 3,
+  "pld": 3,
+  "pts": 3,
+  "gf": 8,
   "ga": 6,
-  "gd": -3
+  "gd": 2
  },
  "Iraq": {
   "group": "I",
   "elo": 1583,
-  "pld": 2,
+  "pld": 3,
   "pts": 0,
   "gf": 1,
-  "ga": 7,
-  "gd": -6
+  "ga": 12,
+  "gd": -11
  },
  "Argentina": {
   "group": "J",

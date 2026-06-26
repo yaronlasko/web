@@ -47,6 +47,22 @@
     0,
     2
    ]
+  },
+  "fifwc-nor-fra-2026-06-26": {
+   "home": "Norway",
+   "away": "France",
+   "score": [
+    1,
+    4
+   ]
+  },
+  "fifwc-sen-irq-2026-06-26": {
+   "home": "Senegal",
+   "away": "Iraq",
+   "score": [
+    5,
+    0
+   ]
   }
  }
 }

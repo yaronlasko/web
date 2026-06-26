@@ -90,8 +90,8 @@ def parse(keep: dict, teams: dict) -> dict:
             dist = {k: round(v / t, 5) for k, v in dist.items()} if t else {}
 
         matches[s] = {"slug": s, "group": group, "home": home, "away": away,
-                      "date": s[-10:], "moneyline_raw": ml, "moneyline": ml_norm,
-                      "exact_score": dist}
+                      "date": s[-10:], "kickoff": e.get("startTime") or e.get("endDate"),
+                      "moneyline_raw": ml, "moneyline": ml_norm, "exact_score": dist}
     return matches
 
 
