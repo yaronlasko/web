@@ -111,30 +111,45 @@ def build_bracket(teams: dict) -> dict:
         kind = slot[0]
         if kind in ("W", "RU"):
             g = slot[1]
-            team = order[g][0] if kind == "W" else order[g][1]
-            label = ("Winner " if kind == "W" else "Runner-up ") + g
-            return {"label": label, "team": team,
-                    "status": "confirmed" if done[g] else "projected"}
+            if done[g]:                                    # group finished -> team known
+                team = order[g][0] if kind == "W" else order[g][1]
+                return {"team": team, "status": "confirmed",
+                        "label": ("Winner " if kind == "W" else "Runner-up ") + g}
+            # not decided yet -> name the slot ("place and group"), no guessed team
+            return {"team": None, "status": "pending",
+                    "label": ("Winner Group " if kind == "W" else "Runner-up Group ") + g}
         # third-place slot
-        label = "3rd " + "/".join(slot[1])
+        groups = "/".join(slot[1])
         if match_no in third_team_for_match:
-            return {"label": label, "team": third_team_for_match[match_no],
-                    "status": "confirmed"}
-        return {"label": label, "team": None, "status": "open"}
+            return {"team": third_team_for_match[match_no], "status": "confirmed",
+                    "label": "3rd " + groups}
+        return {"team": None, "status": "open", "label": "3rd place · Group " + groups}
 
-    rounds = [{
-        "name": "Round of 32",
-        "matches": [{"m": m, "slots": [fill(a, m), fill(b, m)]} for (m, a, b) in R32],
-    }]
-    for name, spec in [("Round of 16", R16), ("Quarter-finals", QF),
-                       ("Semi-finals", SF), ("Final", FINAL)]:
-        rounds.append({
-            "name": name,
-            "matches": [{"m": m, "slots": [
-                {"label": f"Winner M{x}", "team": None, "status": "open"},
-                {"label": f"Winner M{y}", "team": None, "status": "open"},
-            ]} for (m, x, y) in spec],
-        })
+    def _desc(slot) -> str:                                # short "place and group" tag
+        if slot[0] == "W":
+            return "Winner " + slot[1]
+        if slot[0] == "RU":
+            return "Runner-up " + slot[1]
+        return "3rd place"
+
+    # Round of 32 (+ a per-match descriptor used to explain later-round feeders)
+    r32_desc, r32_matches = {}, []
+    for (m, a, b) in R32:
+        r32_matches.append({"m": m, "slots": [fill(a, m), fill(b, m)]})
+        r32_desc[m] = _desc(a) + " vs " + _desc(b)
+    rounds = [{"name": "Round of 32", "matches": r32_matches}]
+
+    def feeder(x, note=False) -> dict:
+        s = {"team": None, "status": "open", "label": f"Winner of Match {x}"}
+        if note and x in r32_desc:
+            s["note"] = r32_desc[x]                         # e.g. "Winner E vs 3rd place"
+        return s
+
+    rounds.append({"name": "Round of 16", "matches": [
+        {"m": m, "slots": [feeder(x, True), feeder(y, True)]} for (m, x, y) in R16]})
+    for name, spec in [("Quarter-finals", QF), ("Semi-finals", SF), ("Final", FINAL)]:
+        rounds.append({"name": name, "matches": [
+            {"m": m, "slots": [feeder(x), feeder(y)]} for (m, x, y) in spec]})
 
     return {
         "group_stage_complete": gs_complete,

@@ -94,10 +94,11 @@
   .bslot:first-of-type{border-top:0}
   .bslot.confirmed{color:var(--txt);font-weight:600}
   .bslot.confirmed::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--good);flex:0 0 auto}
-  .bslot.projected{color:#c7d2dd}
-  .bslot.open{color:var(--muted);font-style:italic;opacity:.75}
-  .bslot .bt{font-size:9px;text-transform:uppercase;letter-spacing:.04em;color:var(--accent2);border:1px solid var(--line);border-radius:4px;padding:1px 4px}
+  .bslot.ph{flex-direction:column;align-items:flex-start;gap:2px}
+  .bslot.pending{color:#b8c4d0}
+  .bslot.open{color:var(--muted);font-style:italic;opacity:.85}
   .bslot .bsub{font-size:10px;color:var(--muted);font-weight:400;margin-left:auto;font-style:normal;white-space:nowrap}
+  .bslot .bnote{font-size:10px;color:var(--muted);opacity:.85;font-style:normal}
   footer{margin-top:40px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:12.5px}
   footer ul{margin:8px 0 0;padding-left:18px} footer li{margin:4px 0}
   .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-top:10px}
@@ -276,17 +277,20 @@
     var leg = document.getElementById('bracket-legend');
     if(!bk || !host){ if(host) host.innerHTML=''; return; }
     leg.innerHTML =
-      '<span><i style="background:var(--good)"></i>confirmed (group finished)</span>'+
-      '<span><i style="background:var(--accent2)"></i>proj = projected from current standings</span>'+
-      '<span>open slots fill in as games finish'+
-      (bk.group_stage_complete ? '' : ' — 3rd-place slots lock once the group stage ends')+'</span>';
+      '<span><i style="background:var(--good)"></i>confirmed — team has qualified</span>'+
+      '<span>otherwise = the group position that feeds the slot (e.g. “Winner Group I”)</span>'+
+      '<span>'+(bk.group_stage_complete ? 'bracket set' :
+                '3rd-place slots lock once the group stage ends')+'</span>';
     host.innerHTML = bk.rounds.map(function(r){
       var cards = r.matches.map(function(mt){
         var slots = mt.slots.map(function(s){
-          if(!s.team) return '<div class="bslot open">'+esc(s.label)+'</div>';
-          var tag = s.status==='projected' ? '<span class="bt">proj</span>' : '';
-          return '<div class="bslot '+s.status+'">'+esc(s.team)+tag+
-                 '<span class="bsub">'+esc(s.label)+'</span></div>';
+          if(s.team){
+            return '<div class="bslot confirmed">'+esc(s.team)+
+                   '<span class="bsub">'+esc(s.label)+'</span></div>';
+          }
+          var cls = s.status==='pending' ? 'pending' : 'open';
+          var note = s.note ? '<span class="bnote">'+esc(s.note)+'</span>' : '';
+          return '<div class="bslot ph '+cls+'">'+esc(s.label)+note+'</div>';
         }).join('');
         return '<div class="bmatch"><div class="bm">Match '+mt.m+'</div>'+slots+'</div>';
       }).join('');
