@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>World Cup 2026 — Office Pool Predictions</title>
+<meta name="description" content="Expected-points-optimal World Cup 2026 score picks, blending Polymarket markets with an Elo/Dixon-Coles model." />
+<style>
+  :root{
+    --bg:#0c1117; --panel:#141b24; --panel2:#1b2531; --line:#243140;
+    --txt:#e7edf3; --muted:#93a4b6; --accent:#37d67a; --accent2:#ffd34e;
+    --home:#4aa3ff; --draw:#8b97a6; --away:#ff6b6b; --good:#37d67a;
+    --shadow:0 1px 0 rgba(255,255,255,.03), 0 12px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--txt);
+    font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;}
+  a{color:var(--accent)}
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
+  header.top{display:flex;flex-wrap:wrap;align-items:flex-end;gap:14px;justify-content:space-between;
+    border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}
+  h1{font-size:26px;margin:0 0 4px;letter-spacing:-.02em}
+  h1 .ball{font-size:22px}
+  .sub{color:var(--muted);font-size:13.5px;max-width:640px}
+  .meta{color:var(--muted);font-size:12px;text-align:right;white-space:nowrap}
+  .meta b{color:var(--txt)}
+  /* toggle */
+  .toggle{display:inline-flex;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
+  .toggle button{appearance:none;border:0;background:transparent;color:var(--muted);
+    font:600 12.5px/1 inherit;padding:8px 14px;border-radius:999px;cursor:pointer;transition:.15s}
+  .toggle button.on{background:var(--accent);color:#08120b}
+  .controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:0 0 18px}
+  .controls .hint{color:var(--muted);font-size:12px}
+  /* highlight strip */
+  .strip{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:26px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+  .strip .card{padding:14px 16px}
+  .strip h3{margin:0 0 8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .pill{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:999px;
+    padding:5px 10px;margin:3px 4px 0 0;font-size:12.5px}
+  .pill b{color:var(--accent)}
+  h2.section{font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);
+    margin:30px 0 12px;border-bottom:1px solid var(--line);padding-bottom:8px}
+  .daygroup{margin-bottom:8px}
+  .daylabel{font-size:13px;color:var(--muted);margin:18px 0 10px;font-weight:600}
+  /* match cards */
+  .matches{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+  .match{padding:16px 16px 14px;position:relative;overflow:hidden}
+  .match .grp{position:absolute;top:12px;right:14px;font-size:11px;color:var(--muted);
+    background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:2px 7px;letter-spacing:.04em}
+  .teams{font-size:13px;color:var(--muted);margin-bottom:2px}
+  .score{display:flex;align-items:baseline;gap:10px;margin:2px 0 12px}
+  .score .nums{font-size:30px;font-weight:800;letter-spacing:.01em}
+  .score .verb{font-size:12px;color:var(--muted)}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+  .chip{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:6px 9px;min-width:62px;text-align:center}
+  .chip .k{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .chip .v{display:block;font-size:15px;font-weight:700;margin-top:2px}
+  .chip.ev .v{color:var(--accent)}
+  /* wdl bar */
+  .bar{display:flex;height:10px;border-radius:5px;overflow:hidden;border:1px solid var(--line)}
+  .bar > span{display:block}
+  .bar .h{background:var(--home)} .bar .d{background:var(--draw)} .bar .a{background:var(--away)}
+  .barwrap{margin-top:4px}
+  .barlbl{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:5px}
+  .barlbl .h{color:var(--home)} .barlbl .a{color:var(--away)}
+  .srcrow{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);margin-top:8px}
+  .srcrow .mini{flex:1;height:6px;border-radius:3px;overflow:hidden;display:flex;border:1px solid var(--line)}
+  .srcrow .mini .h{background:var(--home)} .srcrow .mini .d{background:var(--draw)} .srcrow .mini .a{background:var(--away)}
+  .srcrow .tag{width:48px;text-transform:uppercase;letter-spacing:.05em;font-size:10px}
+  .alt{font-size:11.5px;color:var(--muted);margin-top:10px}
+  .alt b{color:var(--txt)}
+  /* groups */
+  .groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+  .group{padding:14px 16px}
+  .group h4{margin:0 0 10px;font-size:14px;letter-spacing:.02em}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{font-weight:600;color:var(--muted);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding:0 6px 6px}
+  th.num,td.num{text-align:right}
+  td{padding:7px 6px;border-top:1px solid var(--line);vertical-align:middle}
+  tr.adv td:first-child{position:relative}
+  tr.adv td:first-child::before{content:"";position:absolute;left:-16px;top:0;bottom:0;width:3px;background:var(--good)}
+  .advbar{position:relative;height:16px;border-radius:4px;background:var(--panel2);overflow:hidden;min-width:54px}
+  .advbar > span{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#1f6b3f,#37d67a)}
+  .advbar em{position:relative;font-style:normal;font-size:11px;padding-left:6px;line-height:16px;color:#dff6e7}
+  footer{margin-top:40px;border-top:1px solid var(--line);padding-top:18px;color:var(--muted);font-size:12.5px}
+  footer ul{margin:8px 0 0;padding-left:18px} footer li{margin:4px 0}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-top:10px}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+  @media (max-width:560px){.strip{grid-template-columns:1fr}.meta{text-align:left}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1><span class="ball">⚽</span> World Cup 2026 — Office Pool Predictions</h1>
+      <div class="sub">Expected-points-optimal score picks for the office prediction game, blending
+        <b>Polymarket</b> markets with an Elo / Dixon-Coles model.</div>
+    </div>
+    <div class="meta" id="meta"></div>
+  </header>
+
+  <div class="controls">
+    <div class="toggle" id="toggle">
+      <button data-mode="ev" class="on">Max expected points</button>
+      <button data-mode="modal">Most likely score</button>
+    </div>
+    <div class="hint" id="modehint"></div>
+  </div>
+
+  <div class="strip">
+    <div class="card"><h3 id="strip1-h">Bank these first</h3><div id="strip1"></div></div>
+    <div class="card"><h3>Coin-flips — don't overthink</h3><div id="strip2"></div></div>
+  </div>
+
+  <h2 class="section">Per-match picks</h2>
+  <div id="matches"></div>
+
+  <h2 class="section">Projected qualification · Monte-Carlo</h2>
+  <div class="legend">
+    <span><i style="background:var(--good)"></i>advancing (top-2 + best thirds)</span>
+    <span>Win % = chance to win the group · Adv % = chance to reach the knockouts</span>
+  </div>
+  <div class="groups" id="groups" style="margin-top:14px"></div>
+
+  <footer id="footer"></footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  var D = window.WC_DATA;
+  if(!D){document.getElementById('matches').innerHTML =
+    '<div class="card" style="padding:16px">Could not load <code>data.js</code>. '+
+    'Regenerate it with <code>python -m src.worldcup_predict</code>.</div>';return;}
+
+  var pct = function(x){return Math.round(x*100)+'%';};
+  var esc = function(s){return String(s).replace(/[&<>]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});};
+  var mode = 'ev';
+
+  // ---- meta -------------------------------------------------------------
+  var m = D.meta||{};
+  document.getElementById('meta').innerHTML =
+    'Blend <b>'+Math.round((m.w_market||0)*100)+'% market</b> + '+
+    Math.round((1-(m.w_market||0))*100)+'% model<br>'+
+    'Snapshot <b>'+esc(m.snapshot||'')+'</b> · '+(m.n_sims? (m.n_sims.toLocaleString()+' sims'):'')+
+    (m.generated? '<br>generated '+esc(m.generated):'');
+
+  // ---- per-mode field accessors ----------------------------------------
+  function view(p){
+    if(mode==='ev') return {score:p.pick, ev:p.pick_ev, hit:p.pick_hit, conf:p.confidence,
+                            cls:p.pick_class, alt:p.modal, altlab:'Most likely',
+                            altval:pct(p.modal_p)};
+    return {score:p.modal, ev:p.modal_ev, hit:p.modal_p, conf:p.modal_conf,
+            cls:p.modal_class, alt:p.pick, altlab:'Max-EV', altval:'EV '+p.pick_ev.toFixed(2)};
+  }
+  function verb(p,cls){
+    if(cls==='draw') return 'draw';
+    return (cls==='home'? p.home : p.away)+' win';
+  }
+
+  function wdlBar(w){ // w=[home,draw,away]
+    return '<span class="h" style="width:'+(w[0]*100)+'%"></span>'+
+           '<span class="d" style="width:'+(w[1]*100)+'%"></span>'+
+           '<span class="a" style="width:'+(w[2]*100)+'%"></span>';
+  }
+
+  // ---- highlight strips -------------------------------------------------
+  function renderStrips(){
+    var ms = D.matches.slice();
+    var byEv = ms.slice().sort(function(a,b){return view(b).ev-view(a).ev;}).slice(0,5);
+    var coin = ms.slice().sort(function(a,b){return view(a).conf-view(b).conf;}).slice(0,4);
+    document.getElementById('strip1-h').textContent =
+      mode==='ev' ? 'Highest expected points — bank these first' : 'Surest outcomes';
+    document.getElementById('strip1').innerHTML = byEv.map(function(p){
+      var v=view(p);
+      return '<span class="pill">'+esc(p.home)+' <b>'+v.score[0]+'–'+v.score[1]+'</b> '+
+        esc(p.away)+' <span style="color:var(--muted)">('+
+        (mode==='ev'? v.ev.toFixed(2)+' pts' : pct(v.conf))+')</span></span>';
+    }).join('');
+    document.getElementById('strip2').innerHTML = coin.map(function(p){
+      return '<span class="pill">'+esc(p.home)+' v '+esc(p.away)+
+        ' <span style="color:var(--muted)">('+pct(view(p).conf)+')</span></span>';
+    }).join('');
+  }
+
+  // ---- match cards (grouped by date) -----------------------------------
+  function renderMatches(){
+    var byDate = {};
+    D.matches.forEach(function(p){(byDate[p.date]=byDate[p.date]||[]).push(p);});
+    var dates = Object.keys(byDate).sort();
+    var html = dates.map(function(d){
+      var nice = new Date(d+'T00:00:00').toLocaleDateString(undefined,
+        {weekday:'long',month:'short',day:'numeric'});
+      var cards = byDate[d].map(matchCard).join('');
+      return '<div class="daygroup"><div class="daylabel">'+esc(nice)+'</div>'+
+             '<div class="matches">'+cards+'</div></div>';
+    }).join('');
+    document.getElementById('matches').innerHTML = html;
+  }
+
+  function srcRow(tag,w){
+    return '<div class="srcrow"><span class="tag">'+tag+'</span>'+
+      '<span class="mini">'+wdlBar(w)+'</span>'+
+      '<span>'+w.map(function(x){return pct(x);}).join(' / ')+'</span></div>';
+  }
+
+  function matchCard(p){
+    var v = view(p);
+    var b = p.blend_wdl;
+    return '<div class="card match">'+
+      '<span class="grp">Grp '+esc(p.group)+'</span>'+
+      '<div class="teams">'+esc(p.home)+' <span style="opacity:.5">vs</span> '+esc(p.away)+'</div>'+
+      '<div class="score"><span class="nums">'+v.score[0]+'–'+v.score[1]+'</span>'+
+        '<span class="verb">'+esc(verb(p,v.cls))+'</span></div>'+
+      '<div class="chips">'+
+        '<div class="chip ev"><span class="k">EV pts</span><span class="v">'+v.ev.toFixed(2)+'</span></div>'+
+        '<div class="chip"><span class="k">Hit</span><span class="v">'+pct(v.hit)+'</span></div>'+
+        '<div class="chip"><span class="k">Conf</span><span class="v">'+pct(v.conf)+'</span></div>'+
+      '</div>'+
+      '<div class="barwrap"><div class="bar">'+wdlBar(b)+'</div>'+
+        '<div class="barlbl"><span class="h">'+esc(p.home)+' '+pct(b[0])+'</span>'+
+          '<span>draw '+pct(b[1])+'</span>'+
+          '<span class="a">'+pct(b[2])+' '+esc(p.away)+'</span></div></div>'+
+      srcRow('Market',p.market_wdl)+srcRow('Model',p.model_wdl)+
+      '<div class="alt">'+v.altlab+' alt: <b>'+v.alt[0]+'–'+v.alt[1]+'</b> ('+v.altval+')</div>'+
+    '</div>';
+  }
+
+  // ---- group qualification tables --------------------------------------
+  function renderGroups(){
+    var html = (D.groups||[]).map(function(g){
+      var rows = g.teams.map(function(t,i){
+        var adv = i<2;            // visual cue only for clearly-advancing top-2
+        var advW = Math.round(t.advance*100);
+        return '<tr class="'+(t.advance>=0.5?'adv':'')+'">'+
+          '<td>'+esc(t.team)+'</td>'+
+          '<td class="num">'+t.pts+'</td>'+
+          '<td class="num">'+(t.gd>=0?'+':'')+t.gd+'</td>'+
+          '<td class="num">'+pct(t.win_group)+'</td>'+
+          '<td><div class="advbar"><span style="width:'+advW+'%"></span><em>'+advW+'%</em></div></td>'+
+        '</tr>';
+      }).join('');
+      return '<div class="card group"><h4>Group '+esc(g.group)+'</h4>'+
+        '<table><thead><tr><th>Team</th><th class="num">Pts</th><th class="num">GD</th>'+
+        '<th class="num">Win</th><th>Advance</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+    }).join('');
+    document.getElementById('groups').innerHTML = html;
+  }
+
+  // ---- footer -----------------------------------------------------------
+  document.getElementById('footer').innerHTML =
+    '<b>Method & caveats.</b>'+
+    '<ul>'+
+    '<li><b>Market ('+Math.round((m.w_market||0)*100)+'%)</b> — de-vigged Polymarket moneyline + '+
+      'exact-score markets per game. Polymarket sports markets were the best-calibrated signal in the parent project, so they lead the blend.</li>'+
+    '<li><b>Model ('+Math.round((1-(m.w_market||0))*100)+'%)</b> — current Elo + a small this-WC form '+
+      'nudge → expected goals → Dixon-Coles bivariate Poisson. Host edge (+60 Elo) for the USA only.</li>'+
+    '<li><b>Office scoring</b> — exact score = max(total goals, 3) pts; right winner/draw only = 1; '+
+      'wrong = 0. "Max expected points" deliberately chases high scores like 0–4 for heavy favourites.</li>'+
+    '<li><b>Qualification</b> — joint Monte-Carlo of all remaining matches; top-2 per group + 8 best '+
+      'third-placed advance (tie-breaks: points, GD, goals-for; head-to-head not modelled).</li>'+
+    '<li>Lineups/injuries/suspensions enter via the market side. Numbers move as markets update — '+
+      're-run the pipeline before kickoff for the freshest odds.</li>'+
+    '</ul>';
+
+  // ---- mode toggle ------------------------------------------------------
+  var hints = {
+    ev:'Headlines the expected-points-maximising score (chases high scores on lop-sided games).',
+    modal:'Headlines the single most-likely scoreline (higher exact-hit rate, lower variance).'
+  };
+  function renderAll(){
+    document.getElementById('modehint').textContent = hints[mode];
+    renderStrips(); renderMatches();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('#toggle button'),function(btn){
+    btn.addEventListener('click',function(){
+      mode = btn.getAttribute('data-mode');
+      Array.prototype.forEach.call(document.querySelectorAll('#toggle button'),function(b){
+        b.classList.toggle('on', b===btn);});
+      renderAll();
+    });
+  });
+
+  renderAll(); renderGroups();
+})();
+</script>
+</body>
+</html>

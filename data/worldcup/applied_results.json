@@ -1,0 +1,52 @@
+{
+ "applied": {
+  "fifwc-tur-usa-2026-06-25": {
+   "home": "Türkiye",
+   "away": "United States",
+   "score": [
+    3,
+    2
+   ]
+  },
+  "fifwc-jpn-swe-2026-06-25": {
+   "home": "Japan",
+   "away": "Sweden",
+   "score": [
+    1,
+    1
+   ]
+  },
+  "fifwc-ecu-ger-2026-06-25": {
+   "home": "Ecuador",
+   "away": "Germany",
+   "score": [
+    2,
+    1
+   ]
+  },
+  "fifwc-par-aus-2026-06-25": {
+   "home": "Paraguay",
+   "away": "Australia",
+   "score": [
+    0,
+    0
+   ]
+  },
+  "fifwc-tun-nld-2026-06-25": {
+   "home": "Tunisia",
+   "away": "Netherlands",
+   "score": [
+    1,
+    3
+   ]
+  },
+  "fifwc-kor-civ-2026-06-25": {
+   "home": "Curaçao",
+   "away": "Côte d'Ivoire",
+   "score": [
+    0,
+    2
+   ]
+  }
+ }
+}

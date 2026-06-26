@@ -1,0 +1,434 @@
+{
+ "Mexico": {
+  "group": "A",
+  "elo": 1912,
+  "pld": 3,
+  "pts": 9,
+  "gf": 6,
+  "ga": 0,
+  "gd": 6
+ },
+ "South Africa": {
+  "group": "A",
+  "elo": 1500,
+  "pld": 3,
+  "pts": 4,
+  "gf": 2,
+  "ga": 3,
+  "gd": -1
+ },
+ "South Korea": {
+  "group": "A",
+  "elo": 1680,
+  "pld": 3,
+  "pts": 3,
+  "gf": 2,
+  "ga": 3,
+  "gd": -1
+ },
+ "Czechia": {
+  "group": "A",
+  "elo": 1750,
+  "pld": 3,
+  "pts": 1,
+  "gf": 2,
+  "ga": 6,
+  "gd": -4
+ },
+ "Switzerland": {
+  "group": "B",
+  "elo": 1914,
+  "pld": 3,
+  "pts": 7,
+  "gf": 7,
+  "ga": 3,
+  "gd": 4
+ },
+ "Canada": {
+  "group": "B",
+  "elo": 1760,
+  "pld": 3,
+  "pts": 4,
+  "gf": 8,
+  "ga": 3,
+  "gd": 5
+ },
+ "Bosnia and Herzegovina": {
+  "group": "B",
+  "elo": 1690,
+  "pld": 3,
+  "pts": 4,
+  "gf": 5,
+  "ga": 6,
+  "gd": -1
+ },
+ "Qatar": {
+  "group": "B",
+  "elo": 1560,
+  "pld": 3,
+  "pts": 1,
+  "gf": 2,
+  "ga": 10,
+  "gd": -8
+ },
+ "Brazil": {
+  "group": "C",
+  "elo": 2009,
+  "pld": 3,
+  "pts": 7,
+  "gf": 7,
+  "ga": 1,
+  "gd": 6
+ },
+ "Morocco": {
+  "group": "C",
+  "elo": 1877,
+  "pld": 3,
+  "pts": 7,
+  "gf": 6,
+  "ga": 3,
+  "gd": 3
+ },
+ "Scotland": {
+  "group": "C",
+  "elo": 1780,
+  "pld": 3,
+  "pts": 3,
+  "gf": 1,
+  "ga": 4,
+  "gd": -3
+ },
+ "Haiti": {
+  "group": "C",
+  "elo": 1430,
+  "pld": 3,
+  "pts": 0,
+  "gf": 2,
+  "ga": 8,
+  "gd": -6
+ },
+ "United States": {
+  "group": "D",
+  "elo": 1747,
+  "pld": 3,
+  "pts": 6,
+  "gf": 8,
+  "ga": 4,
+  "gd": 4
+ },
+ "Australia": {
+  "group": "D",
+  "elo": 1774,
+  "pld": 3,
+  "pts": 4,
+  "gf": 2,
+  "ga": 2,
+  "gd": 0
+ },
+ "Paraguay": {
+  "group": "D",
+  "elo": 1833,
+  "pld": 3,
+  "pts": 4,
+  "gf": 2,
+  "ga": 4,
+  "gd": -2
+ },
+ "Türkiye": {
+  "group": "D",
+  "elo": 1880,
+  "pld": 3,
+  "pts": 3,
+  "gf": 3,
+  "ga": 5,
+  "gd": -2
+ },
+ "Germany": {
+  "group": "E",
+  "elo": 1954,
+  "pld": 3,
+  "pts": 6,
+  "gf": 10,
+  "ga": 4,
+  "gd": 6
+ },
+ "Côte d'Ivoire": {
+  "group": "E",
+  "elo": 1637,
+  "pld": 3,
+  "pts": 6,
+  "gf": 4,
+  "ga": 2,
+  "gd": 2
+ },
+ "Ecuador": {
+  "group": "E",
+  "elo": 1864,
+  "pld": 3,
+  "pts": 4,
+  "gf": 2,
+  "ga": 2,
+  "gd": 0
+ },
+ "Curaçao": {
+  "group": "E",
+  "elo": 1467,
+  "pld": 3,
+  "pts": 1,
+  "gf": 1,
+  "ga": 9,
+  "gd": -8
+ },
+ "Netherlands": {
+  "group": "F",
+  "elo": 1972,
+  "pld": 3,
+  "pts": 7,
+  "gf": 10,
+  "ga": 4,
+  "gd": 6
+ },
+ "Japan": {
+  "group": "F",
+  "elo": 1925,
+  "pld": 3,
+  "pts": 5,
+  "gf": 7,
+  "ga": 3,
+  "gd": 4
+ },
+ "Sweden": {
+  "group": "F",
+  "elo": 1660,
+  "pld": 3,
+  "pts": 4,
+  "gf": 7,
+  "ga": 7,
+  "gd": 0
+ },
+ "Tunisia": {
+  "group": "F",
+  "elo": 1614,
+  "pld": 3,
+  "pts": 0,
+  "gf": 2,
+  "ga": 12,
+  "gd": -10
+ },
+ "Egypt": {
+  "group": "G",
+  "elo": 1660,
+  "pld": 2,
+  "pts": 4,
+  "gf": 4,
+  "ga": 2,
+  "gd": 2
+ },
+ "IR Iran": {
+  "group": "G",
+  "elo": 1754,
+  "pld": 2,
+  "pts": 2,
+  "gf": 2,
+  "ga": 2,
+  "gd": 0
+ },
+ "Belgium": {
+  "group": "G",
+  "elo": 1869,
+  "pld": 2,
+  "pts": 2,
+  "gf": 1,
+  "ga": 1,
+  "gd": 0
+ },
+ "New Zealand": {
+  "group": "G",
+  "elo": 1586,
+  "pld": 2,
+  "pts": 1,
+  "gf": 3,
+  "ga": 5,
+  "gd": -2
+ },
+ "Spain": {
+  "group": "H",
+  "elo": 2134,
+  "pld": 2,
+  "pts": 4,
+  "gf": 4,
+  "ga": 0,
+  "gd": 4
+ },
+ "Uruguay": {
+  "group": "H",
+  "elo": 1851,
+  "pld": 2,
+  "pts": 2,
+  "gf": 3,
+  "ga": 3,
+  "gd": 0
+ },
+ "Cabo Verde": {
+  "group": "H",
+  "elo": 1561,
+  "pld": 2,
+  "pts": 2,
+  "gf": 2,
+  "ga": 2,
+  "gd": 0
+ },
+ "Saudi Arabia": {
+  "group": "H",
+  "elo": 1592,
+  "pld": 2,
+  "pts": 1,
+  "gf": 1,
+  "ga": 5,
+  "gd": -4
+ },
+ "France": {
+  "group": "I",
+  "elo": 2090,
+  "pld": 2,
+  "pts": 6,
+  "gf": 6,
+  "ga": 1,
+  "gd": 5
+ },
+ "Norway": {
+  "group": "I",
+  "elo": 1951,
+  "pld": 2,
+  "pts": 6,
+  "gf": 7,
+  "ga": 3,
+  "gd": 4
+ },
+ "Senegal": {
+  "group": "I",
+  "elo": 1869,
+  "pld": 2,
+  "pts": 0,
+  "gf": 3,
+  "ga": 6,
+  "gd": -3
+ },
+ "Iraq": {
+  "group": "I",
+  "elo": 1583,
+  "pld": 2,
+  "pts": 0,
+  "gf": 1,
+  "ga": 7,
+  "gd": -6
+ },
+ "Argentina": {
+  "group": "J",
+  "elo": 2144,
+  "pld": 2,
+  "pts": 6,
+  "gf": 5,
+  "ga": 0,
+  "gd": 5
+ },
+ "Austria": {
+  "group": "J",
+  "elo": 1818,
+  "pld": 2,
+  "pts": 3,
+  "gf": 3,
+  "ga": 3,
+  "gd": 0
+ },
+ "Algeria": {
+  "group": "J",
+  "elo": 1728,
+  "pld": 2,
+  "pts": 3,
+  "gf": 2,
+  "ga": 4,
+  "gd": -2
+ },
+ "Jordan": {
+  "group": "J",
+  "elo": 1691,
+  "pld": 2,
+  "pts": 0,
+  "gf": 2,
+  "ga": 5,
+  "gd": -3
+ },
+ "Colombia": {
+  "group": "K",
+  "elo": 2006,
+  "pld": 2,
+  "pts": 6,
+  "gf": 4,
+  "ga": 1,
+  "gd": 3
+ },
+ "Portugal": {
+  "group": "K",
+  "elo": 1988,
+  "pld": 2,
+  "pts": 4,
+  "gf": 6,
+  "ga": 1,
+  "gd": 5
+ },
+ "DR Congo": {
+  "group": "K",
+  "elo": 1639,
+  "pld": 2,
+  "pts": 1,
+  "gf": 1,
+  "ga": 2,
+  "gd": -1
+ },
+ "Uzbekistan": {
+  "group": "K",
+  "elo": 1735,
+  "pld": 2,
+  "pts": 0,
+  "gf": 1,
+  "ga": 8,
+  "gd": -7
+ },
+ "England": {
+  "group": "L",
+  "elo": 2028,
+  "pld": 2,
+  "pts": 4,
+  "gf": 4,
+  "ga": 2,
+  "gd": 2
+ },
+ "Ghana": {
+  "group": "L",
+  "elo": 1509,
+  "pld": 2,
+  "pts": 4,
+  "gf": 1,
+  "ga": 0,
+  "gd": 1
+ },
+ "Croatia": {
+  "group": "L",
+  "elo": 1896,
+  "pld": 2,
+  "pts": 3,
+  "gf": 3,
+  "ga": 4,
+  "gd": -1
+ },
+ "Panama": {
+  "group": "L",
+  "elo": 1743,
+  "pld": 2,
+  "pts": 0,
+  "gf": 0,
+  "ga": 2,
+  "gd": -2
+ }
+}

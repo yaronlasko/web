@@ -1,0 +1,74 @@
+name: Refresh predictions
+
+# Re-runs the exact terminal pipeline (standings -> fetch -> predict) in the cloud
+# and redeploys the site to GitHub Pages.
+#   * workflow_dispatch = the manual "Re-predict" button (Actions tab -> Run workflow)
+#   * schedule          = automatic refresh every 6 hours
+#   * push to main      = redeploy when you edit the site or pipeline
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# one deploy at a time; don't cancel an in-progress publish
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: pip install numpy requests
+
+      # 1. fold finished games' results into the standings (re-derived from the
+      #    committed 2026-06-25 baseline + ledger each run, so it can't double-count).
+      #    Network-dependent -> tolerate a transient Polymarket API hiccup.
+      - name: Fold in results (standings)
+        run: python -m src.worldcup_standings
+        continue-on-error: true
+
+      # 2. refresh the live Polymarket market odds
+      - name: Refresh market odds (fetch)
+        run: python -m src.worldcup_fetch
+        continue-on-error: true
+
+      # 3. re-predict -> regenerates web/data.js + web/data.json (uses the existing
+      #    market.json if step 2 was skipped, so this always produces a site)
+      - name: Re-predict (build site data)
+        run: python -m src.worldcup_predict
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: web
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
