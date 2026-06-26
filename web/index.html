@@ -300,8 +300,14 @@
       var cards = r.matches.map(function(mt){
         var slots = mt.slots.map(function(s){
           if(s.team){
+            var sub = s.label;                       // group position, e.g. "Runner-up A"
+            if(s.from){                              // a later-round winner that advanced
+              sub = 'via Match '+s.from;
+              if(s.score){ var sc=s.score.slice().sort(function(a,b){return b-a;});
+                           sub += ' · '+sc[0]+'–'+sc[1]; }
+            }
             return '<div class="bslot confirmed">'+esc(s.team)+
-                   '<span class="bsub">'+esc(s.label)+'</span></div>';
+                   '<span class="bsub">'+esc(sub)+'</span></div>';
           }
           var cls = s.status==='pending' ? 'pending' : 'open';
           var note = s.note ? '<span class="bnote">'+esc(s.note)+'</span>' : '';

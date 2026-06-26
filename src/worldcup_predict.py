@@ -39,6 +39,7 @@ ROOT = Path(__file__).resolve().parent.parent
 WC = ROOT / "data" / "worldcup"
 WEB_DIR = ROOT / "web"
 OUT_JSON = WC / "predictions.json"
+KO_RESULTS = WC / "knockout_results.json"   # {match_no: {"winner": team, "score": [h, a]}}
 OUT_MD = ROOT / "models" / "worldcup_predictions.md"
 OUT_MD_SAFE = ROOT / "models" / "worldcup_predictions_safe.md"
 
@@ -453,7 +454,8 @@ def main(safe: bool = False):
             "n_sims": N_SIMS,
         },
         "matches": dump,
-        "bracket": build_bracket(teams),
+        "bracket": build_bracket(teams, json.load(open(KO_RESULTS, encoding="utf-8"))
+                                 if KO_RESULTS.exists() else {}),
         "groups": [
             {
                 "group": g,

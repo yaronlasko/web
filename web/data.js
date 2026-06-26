@@ -1,7 +1,7 @@
 window.WC_DATA = {
   "meta": {
     "snapshot": "2026-06-25",
-    "generated": "2026-06-26T21:21:29+00:00",
+    "generated": "2026-06-26T21:31:32+00:00",
     "w_market": 0.7,
     "n_sims": 40000
   },
@@ -376,16 +376,16 @@ window.WC_DATA = {
         0,
         1
       ],
-      "pick_ev": 0.71,
+      "pick_ev": 0.715,
       "pick_class": "away",
-      "pick_hit": 0.119,
+      "pick_hit": 0.122,
       "confidence": 0.471,
       "modal": [
         0,
         1
       ],
-      "modal_p": 0.119,
-      "modal_ev": 0.71,
+      "modal_p": 0.122,
+      "modal_ev": 0.715,
       "modal_class": "away",
       "modal_conf": 0.471,
       "advance": {
@@ -737,12 +737,14 @@ window.WC_DATA = {
             "slots": [
               {
                 "team": null,
+                "from": 74,
                 "status": "open",
                 "label": "Winner of Match 74",
                 "note": "Winner E vs 3rd place"
               },
               {
                 "team": null,
+                "from": 77,
                 "status": "open",
                 "label": "Winner of Match 77",
                 "note": "Winner I vs 3rd place"
@@ -754,12 +756,14 @@ window.WC_DATA = {
             "slots": [
               {
                 "team": null,
+                "from": 73,
                 "status": "open",
                 "label": "Winner of Match 73",
                 "note": "Runner-up A vs Runner-up B"
               },
               {
                 "team": null,
+                "from": 75,
                 "status": "open",
                 "label": "Winner of Match 75",
                 "note": "Winner F vs Runner-up C"
@@ -771,12 +775,14 @@ window.WC_DATA = {
             "slots": [
               {
                 "team": null,
+                "from": 76,
                 "status": "open",
                 "label": "Winner of Match 76",
                 "note": "Winner C vs Runner-up F"
               },
               {
                 "team": null,
+                "from": 78,
                 "status": "open",
                 "label": "Winner of Match 78",
                 "note": "Runner-up E vs Runner-up I"
@@ -788,12 +794,14 @@ window.WC_DATA = {
             "slots": [
               {
                 "team": null,
+                "from": 79,
                 "status": "open",
                 "label": "Winner of Match 79",
                 "note": "Winner A vs 3rd place"
               },
               {
                 "team": null,
+                "from": 80,
                 "status": "open",
                 "label": "Winner of Match 80",
                 "note": "Winner L vs 3rd place"
@@ -805,12 +813,14 @@ window.WC_DATA = {
             "slots": [
               {
                 "team": null,
+                "from": 83,
                 "status": "open",
                 "label": "Winner of Match 83",
                 "note": "Runner-up K vs Runner-up L"
               },
               {
                 "team": null,
+                "from": 84,
                 "status": "open",
                 "label": "Winner of Match 84",
                 "note": "Winner H vs Runner-up J"
@@ -822,12 +832,14 @@ window.WC_DATA = {
             "slots": [
               {
                 "team": null,
+                "from": 81,
                 "status": "open",
                 "label": "Winner of Match 81",
                 "note": "Winner D vs 3rd place"
               },
               {
                 "team": null,
+                "from": 82,
                 "status": "open",
                 "label": "Winner of Match 82",
                 "note": "Winner G vs 3rd place"
@@ -839,12 +851,14 @@ window.WC_DATA = {
             "slots": [
               {
                 "team": null,
+                "from": 86,
                 "status": "open",
                 "label": "Winner of Match 86",
                 "note": "Winner J vs Runner-up H"
               },
               {
                 "team": null,
+                "from": 88,
                 "status": "open",
                 "label": "Winner of Match 88",
                 "note": "Runner-up D vs Runner-up G"
@@ -856,12 +870,14 @@ window.WC_DATA = {
             "slots": [
               {
                 "team": null,
+                "from": 85,
                 "status": "open",
                 "label": "Winner of Match 85",
                 "note": "Winner B vs 3rd place"
               },
               {
                 "team": null,
+                "from": 87,
                 "status": "open",
                 "label": "Winner of Match 87",
                 "note": "Winner K vs 3rd place"
@@ -878,11 +894,13 @@ window.WC_DATA = {
             "slots": [
               {
                 "team": null,
+                "from": 89,
                 "status": "open",
                 "label": "Winner of Match 89"
               },
               {
                 "team": null,
+                "from": 90,
                 "status": "open",
                 "label": "Winner of Match 90"
               }
@@ -893,11 +911,13 @@ window.WC_DATA = {
             "slots": [
               {
                 "team": null,
+                "from": 93,
                 "status": "open",
                 "label": "Winner of Match 93"
               },
               {
                 "team": null,
+                "from": 94,
                 "status": "open",
                 "label": "Winner of Match 94"
               }
@@ -908,11 +928,13 @@ window.WC_DATA = {
             "slots": [
               {
                 "team": null,
+                "from": 91,
                 "status": "open",
                 "label": "Winner of Match 91"
               },
               {
                 "team": null,
+                "from": 92,
                 "status": "open",
                 "label": "Winner of Match 92"
               }
@@ -923,11 +945,13 @@ window.WC_DATA = {
             "slots": [
               {
                 "team": null,
+                "from": 95,
                 "status": "open",
                 "label": "Winner of Match 95"
               },
               {
                 "team": null,
+                "from": 96,
                 "status": "open",
                 "label": "Winner of Match 96"
               }
@@ -943,11 +967,13 @@ window.WC_DATA = {
             "slots": [
               {
                 "team": null,
+                "from": 97,
                 "status": "open",
                 "label": "Winner of Match 97"
               },
               {
                 "team": null,
+                "from": 98,
                 "status": "open",
                 "label": "Winner of Match 98"
               }
@@ -958,11 +984,13 @@ window.WC_DATA = {
             "slots": [
               {
                 "team": null,
+                "from": 99,
                 "status": "open",
                 "label": "Winner of Match 99"
               },
               {
                 "team": null,
+                "from": 100,
                 "status": "open",
                 "label": "Winner of Match 100"
               }
@@ -978,11 +1006,13 @@ window.WC_DATA = {
             "slots": [
               {
                 "team": null,
+                "from": 101,
                 "status": "open",
                 "label": "Winner of Match 101"
               },
               {
                 "team": null,
+                "from": 102,
                 "status": "open",
                 "label": "Winner of Match 102"
               }

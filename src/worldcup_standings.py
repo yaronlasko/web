@@ -27,11 +27,13 @@ from pathlib import Path
 import requests
 
 from config import GAMMA_BASE, USER_AGENT
+from src.worldcup_bracket import build_bracket
 
 ROOT = Path(__file__).resolve().parent.parent
 WC = ROOT / "data" / "worldcup"
 TEAMS = WC / "teams.json"
 LEDGER = WC / "applied_results.json"
+KO_LEDGER = WC / "knockout_results.json"    # {match_no: {"winner": team, "score": [h, a]}}
 SNAPSHOT_FROM_DATE = "2026-06-25"           # apply only games on/after this date
 GAME_RE = re.compile(r"^fifwc-[a-z]{3}-[a-z]{3}-2026-\d\d-\d\d$")
 H = {"User-Agent": USER_AGENT}
@@ -101,6 +103,65 @@ def apply_result(teams: dict, home: str, away: str, hg: int, ag: int):
         teams[home]["pts"] += 1; teams[away]["pts"] += 1
 
 
+def fold_knockouts(teams: dict, events: dict, dry_run: bool = False):
+    """Record winners of finished KNOCKOUT games so the bracket fills in round by round.
+
+    Knockout games are the cross-group fixtures (R32 pairs teams from different groups).
+    We match each resolved cross-group game to its bracket slot by the pair of teams,
+    read the winner from the resolved exact-score market, and store it in
+    `knockout_results.json`. A 90-minute draw (extra time / penalties) or a game with no
+    exact-score market can't reveal who advanced -> flagged for MANUAL entry, exactly like
+    the group-stage fallback. Folds iteratively (R32 -> R16 -> ... -> Final) so each round's
+    winners unlock the next round's pairings. CI re-derives this each run; the committed
+    file persists any manual entries.
+    """
+    ko = _load(KO_LEDGER, {})
+    # resolved cross-group (knockout) games, indexed by their unordered team pair
+    resolved = {}
+    for slug, e in events.items():
+        if not GAME_RE.match(slug) or not e.get("closed"):
+            continue
+        parts = re.split(r"\s+vs\.?\s+", e.get("title", ""), maxsplit=1)
+        if len(parts) != 2:
+            continue
+        home, away = parts[0].strip(), parts[1].strip()
+        if home not in teams or away not in teams:
+            continue
+        if teams[home]["group"] == teams[away]["group"]:
+            continue                                       # same group = group game, skip
+        resolved[frozenset((home, away))] = (home, away, slug)
+
+    applied, manual = [], []
+    for _ in range(5):                                     # R32, R16, QF, SF, Final
+        changed = False
+        for r in build_bracket(teams, ko)["rounds"]:
+            for mt in r["matches"]:
+                m = mt["m"]
+                if str(m) in ko:
+                    continue
+                a, b = mt["slots"][0].get("team"), mt["slots"][1].get("team")
+                if not (a and b):
+                    continue                               # both sides not known yet
+                got = resolved.get(frozenset((a, b)))
+                if not got:
+                    continue                               # not finished (or names mismatch)
+                home, away, slug = got
+                score = resolved_score(events.get(slug + "-exact-score"))
+                if score is None or score == "other" or score[0] == score[1]:
+                    manual.append((a, b, slug))            # pens / no clean market
+                    continue
+                hg, ag = score
+                ko[str(m)] = {"winner": home if hg > ag else away, "score": [hg, ag]}
+                applied.append((m, ko[str(m)]["winner"]))
+                changed = True
+        if not changed:
+            break
+
+    if not dry_run:
+        json.dump(ko, open(KO_LEDGER, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
+    return applied, manual
+
+
 def main(dry_run: bool = False):
     teams = _load(TEAMS, None)
     if teams is None:
@@ -163,7 +224,20 @@ def main(dry_run: bool = False):
         for t in gt:
             i = teams[t]
             print(f"    {t:24} P{i['pld']} {i['pts']:2}pts  {i['gf']}-{i['ga']} ({i['gd']:+d})")
-    if not applied and not manual:
+
+    # knockout stage: fold finished knockout games so the bracket advances
+    ko_applied, ko_manual = fold_knockouts(teams, events, dry_run=dry_run)
+    if ko_applied:
+        print(f"\n{tag}Bracket: advanced {len(ko_applied)} winner(s):")
+        for m, w in ko_applied:
+            print(f"  Match {m}: {w} advances")
+    if ko_manual:
+        print("  ! Knockout game needs a manual winner (extra time / penalties / no exact "
+              "score) — add it to knockout_results.json:")
+        for a, b, slug in ko_manual:
+            print(f"      {a} vs {b}  ({slug})")
+
+    if not (applied or manual or ko_applied or ko_manual):
         print("  nothing to update — standings already current.")
 
 

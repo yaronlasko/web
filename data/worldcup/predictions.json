@@ -369,16 +369,16 @@
       0,
       1
     ],
-    "pick_ev": 0.71,
+    "pick_ev": 0.715,
     "pick_class": "away",
-    "pick_hit": 0.119,
+    "pick_hit": 0.122,
     "confidence": 0.471,
     "modal": [
       0,
       1
     ],
-    "modal_p": 0.119,
-    "modal_ev": 0.71,
+    "modal_p": 0.122,
+    "modal_ev": 0.715,
     "modal_class": "away",
     "modal_conf": 0.471,
     "advance": {

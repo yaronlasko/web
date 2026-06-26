@@ -86,8 +86,22 @@ def _match_thirds(groups: set[str], slots: list[tuple[int, set]]) -> dict[str, i
     return dict(out)
 
 
-def build_bracket(teams: dict) -> dict:
-    """Build the progressively-filled bracket from the current standings (teams.json)."""
+def build_bracket(teams: dict, ko: dict | None = None) -> dict:
+    """Build the progressively-filled bracket from current standings (teams.json)
+    plus any recorded knockout results.
+
+    `ko` maps a match number (str or int) to its winner, either as a bare team name
+    or {"winner": team, "score": [home, away]}. Recorded winners flow into the next
+    round's "Winner of Match N" slot, so R16/QF/SF/Final fill in as games are played.
+    """
+    ko = ko or {}
+
+    def _kw(m):                                            # recorded winner of match m
+        v = ko.get(str(m), ko.get(m))
+        if v is None:
+            return None
+        return {"winner": v} if isinstance(v, str) else v
+
     groups = sorted({teams[t]["group"] for t in teams})
     order = {g: _group_order(teams, g) for g in groups}
     done = {g: _group_done(teams, g) for g in groups}
@@ -140,8 +154,13 @@ def build_bracket(teams: dict) -> dict:
     rounds = [{"name": "Round of 32", "matches": r32_matches}]
 
     def feeder(x, note=False) -> dict:
-        s = {"team": None, "status": "open", "label": f"Winner of Match {x}"}
-        if note and x in r32_desc:
+        w = _kw(x)                                          # winner of feeder match x, if played
+        s = {"team": w["winner"] if w else None, "from": x,
+             "status": "confirmed" if w else "open",
+             "label": f"Winner of Match {x}"}
+        if w and w.get("score"):
+            s["score"] = w["score"]
+        if w is None and note and x in r32_desc:
             s["note"] = r32_desc[x]                         # e.g. "Winner E vs 3rd place"
         return s
 
