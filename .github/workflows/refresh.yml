@@ -3,12 +3,16 @@ name: Refresh predictions
 # Re-runs the exact terminal pipeline (standings -> fetch -> predict) in the cloud
 # and redeploys the site to GitHub Pages.
 #   * workflow_dispatch = the manual "Re-predict" button (Actions tab -> Run workflow)
-#   * schedule          = automatic refresh every 6 hours
+#   * schedule          = automatic hourly refresh during the tournament (Jun-Jul)
 #   * push to main      = redeploy when you edit the site or pipeline
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */6 * * *"
+    # Hourly through the World Cup window. GitHub cron can't target "match days"
+    # exactly, so this fires hourly every day in June & July; rest-day runs just
+    # re-publish the same data (harmless). After the final, delete this schedule.
+    # (GitHub often delays scheduled runs by up to ~an hour — "hourly" is approximate.)
+    - cron: "0 * * 6,7 *"
   push:
     branches: [main]
 
