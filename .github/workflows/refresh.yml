@@ -58,10 +58,33 @@ jobs:
       - name: Re-predict (build site data)
         run: python -m src.worldcup_predict
 
+      # Force the Pages source to "GitHub Actions" (build_type=workflow). If Pages
+      # ever gets switched to "Deploy from a branch" in Settings, deploy-pages can't
+      # publish and the branch-builder serves the (index-less) repo root -> 404.
+      # This self-heals it each run so it can't silently revert.
+      - name: Ensure Pages source = GitHub Actions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          code=$(curl -s -o /tmp/pages.json -w "%{http_code}" -X PUT \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/pages" \
+            -d '{"build_type":"workflow"}')
+          echo "PUT /pages build_type=workflow -> HTTP $code"; cat /tmp/pages.json 2>/dev/null || true
+          if [ "$code" = "404" ]; then
+            echo "No Pages site yet; creating it with build_type=workflow…"
+            curl -s -X POST \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${{ github.repository }}/pages" \
+              -d '{"build_type":"workflow"}'
+          fi
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
