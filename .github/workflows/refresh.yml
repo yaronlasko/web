@@ -21,10 +21,12 @@ permissions:
   pages: write
   id-token: write
 
-# one deploy at a time; don't cancel an in-progress publish
+# one deploy at a time. With hourly + push triggers, runs can overlap; cancel a
+# superseded run instead of letting GitHub fail the queued deploy (we always want
+# the latest data live, so cancelling an outdated in-flight run is correct here).
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
