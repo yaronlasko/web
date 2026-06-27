@@ -1,187 +1,11 @@
 window.WC_DATA = {
   "meta": {
     "snapshot": "2026-06-25",
-    "generated": "2026-06-26T21:51:36+00:00",
+    "generated": "2026-06-27T13:39:12+00:00",
     "w_market": 0.7,
     "n_sims": 40000
   },
   "matches": [
-    {
-      "group": "H",
-      "home": "Uruguay",
-      "away": "Spain",
-      "date": "2026-06-26",
-      "kickoff": "2026-06-27T00:00:00Z",
-      "lambda_home": 0.56,
-      "lambda_away": 2.26,
-      "blend_wdl": [
-        0.125,
-        0.231,
-        0.645
-      ],
-      "model_wdl": [
-        0.08,
-        0.153,
-        0.767
-      ],
-      "market_wdl": [
-        0.144,
-        0.264,
-        0.592
-      ],
-      "pick": [
-        0,
-        1
-      ],
-      "pick_ev": 0.917,
-      "pick_class": "away",
-      "pick_hit": 0.136,
-      "confidence": 0.645,
-      "modal": [
-        0,
-        1
-      ],
-      "modal_p": 0.136,
-      "modal_ev": 0.917,
-      "modal_class": "away",
-      "modal_conf": 0.645,
-      "advance": {
-        "Uruguay": 0.3,
-        "Spain": 1.0
-      }
-    },
-    {
-      "group": "H",
-      "home": "Cabo Verde",
-      "away": "Saudi Arabia",
-      "date": "2026-06-26",
-      "kickoff": "2026-06-27T00:00:00Z",
-      "lambda_home": 1.24,
-      "lambda_away": 1.32,
-      "blend_wdl": [
-        0.347,
-        0.274,
-        0.38
-      ],
-      "model_wdl": [
-        0.354,
-        0.251,
-        0.395
-      ],
-      "market_wdl": [
-        0.343,
-        0.284,
-        0.373
-      ],
-      "pick": [
-        0,
-        1
-      ],
-      "pick_ev": 0.579,
-      "pick_class": "away",
-      "pick_hit": 0.1,
-      "confidence": 0.38,
-      "modal": [
-        1,
-        1
-      ],
-      "modal_p": 0.129,
-      "modal_ev": 0.532,
-      "modal_class": "draw",
-      "modal_conf": 0.274,
-      "advance": {
-        "Cabo Verde": 0.588,
-        "Saudi Arabia": 0.383
-      }
-    },
-    {
-      "group": "G",
-      "home": "Egypt",
-      "away": "IR Iran",
-      "date": "2026-06-26",
-      "kickoff": "2026-06-27T03:00:00Z",
-      "lambda_home": 1.07,
-      "lambda_away": 1.56,
-      "blend_wdl": [
-        0.355,
-        0.326,
-        0.319
-      ],
-      "model_wdl": [
-        0.267,
-        0.239,
-        0.494
-      ],
-      "market_wdl": [
-        0.393,
-        0.363,
-        0.244
-      ],
-      "pick": [
-        1,
-        1
-      ],
-      "pick_ev": 0.618,
-      "pick_class": "draw",
-      "pick_hit": 0.146,
-      "confidence": 0.326,
-      "modal": [
-        1,
-        1
-      ],
-      "modal_p": 0.146,
-      "modal_ev": 0.618,
-      "modal_class": "draw",
-      "modal_conf": 0.326,
-      "advance": {
-        "Egypt": 1.0,
-        "IR Iran": 0.56
-      }
-    },
-    {
-      "group": "G",
-      "home": "New Zealand",
-      "away": "Belgium",
-      "date": "2026-06-26",
-      "kickoff": "2026-06-27T03:00:00Z",
-      "lambda_home": 0.57,
-      "lambda_away": 2.24,
-      "blend_wdl": [
-        0.071,
-        0.127,
-        0.802
-      ],
-      "model_wdl": [
-        0.085,
-        0.157,
-        0.758
-      ],
-      "market_wdl": [
-        0.065,
-        0.114,
-        0.821
-      ],
-      "pick": [
-        0,
-        4
-      ],
-      "pick_ev": 1.131,
-      "pick_class": "away",
-      "pick_hit": 0.11,
-      "confidence": 0.802,
-      "modal": [
-        0,
-        2
-      ],
-      "modal_p": 0.112,
-      "modal_ev": 1.025,
-      "modal_class": "away",
-      "modal_conf": 0.802,
-      "advance": {
-        "New Zealand": 0.071,
-        "Belgium": 0.907
-      }
-    },
     {
       "group": "L",
       "home": "Panama",
@@ -222,7 +46,7 @@ window.WC_DATA = {
       "modal_class": "away",
       "modal_conf": 0.818,
       "advance": {
-        "Panama": 0.005,
+        "Panama": 0.004,
         "England": 1.0
       }
     },
@@ -266,8 +90,8 @@ window.WC_DATA = {
       "modal_class": "home",
       "modal_conf": 0.634,
       "advance": {
-        "Croatia": 0.908,
-        "Ghana": 0.999
+        "Croatia": 0.896,
+        "Ghana": 1.0
       }
     },
     {
@@ -310,8 +134,8 @@ window.WC_DATA = {
       "modal_class": "home",
       "modal_conf": 0.472,
       "advance": {
-        "DR Congo": 0.469,
-        "Uzbekistan": 0.004
+        "DR Congo": 0.474,
+        "Uzbekistan": 0.002
       }
     },
     {
@@ -398,7 +222,7 @@ window.WC_DATA = {
       "modal_class": "away",
       "modal_conf": 0.863,
       "advance": {
-        "Jordan": 0.006,
+        "Jordan": 0.005,
         "Argentina": 1.0
       }
     },
@@ -442,8 +266,8 @@ window.WC_DATA = {
       "modal_class": "draw",
       "modal_conf": 0.378,
       "advance": {
-        "Algeria": 0.64,
-        "Austria": 0.861
+        "Algeria": 0.614,
+        "Austria": 0.857
       }
     }
   ],
@@ -593,9 +417,9 @@ window.WC_DATA = {
             "m": 82,
             "slots": [
               {
-                "team": null,
-                "status": "pending",
-                "label": "Winner Group G"
+                "team": "Belgium",
+                "status": "confirmed",
+                "label": "Winner G"
               },
               {
                 "team": null,
@@ -623,9 +447,9 @@ window.WC_DATA = {
             "m": 84,
             "slots": [
               {
-                "team": null,
-                "status": "pending",
-                "label": "Winner Group H"
+                "team": "Spain",
+                "status": "confirmed",
+                "label": "Winner H"
               },
               {
                 "team": null,
@@ -658,9 +482,9 @@ window.WC_DATA = {
                 "label": "Winner Group J"
               },
               {
-                "team": null,
-                "status": "pending",
-                "label": "Runner-up Group H"
+                "team": "Cabo Verde",
+                "status": "confirmed",
+                "label": "Runner-up H"
               }
             ]
           },
@@ -688,9 +512,9 @@ window.WC_DATA = {
                 "label": "Runner-up D"
               },
               {
-                "team": null,
-                "status": "pending",
-                "label": "Runner-up Group G"
+                "team": "Egypt",
+                "status": "confirmed",
+                "label": "Runner-up G"
               }
             ]
           }
@@ -1012,7 +836,7 @@ window.WC_DATA = {
           "pts": 3,
           "gd": -1,
           "win_group": 0.0,
-          "advance": 0.345
+          "advance": 0.301
         },
         {
           "team": "Czechia",
@@ -1078,7 +902,7 @@ window.WC_DATA = {
           "pts": 3,
           "gd": -3,
           "win_group": 0.0,
-          "advance": 0.019
+          "advance": 0.001
         },
         {
           "team": "Haiti",
@@ -1111,7 +935,7 @@ window.WC_DATA = {
           "pts": 4,
           "gd": -2,
           "win_group": 0.0,
-          "advance": 0.998
+          "advance": 1.0
         },
         {
           "team": "Türkiye",
@@ -1192,32 +1016,32 @@ window.WC_DATA = {
       "group": "G",
       "teams": [
         {
-          "team": "Egypt",
-          "pts": 4,
-          "gd": 2,
-          "win_group": 0.537,
+          "team": "Belgium",
+          "pts": 5,
+          "gd": 4,
+          "win_group": 1.0,
           "advance": 1.0
         },
         {
-          "team": "Belgium",
-          "pts": 2,
-          "gd": 0,
-          "win_group": 0.311,
-          "advance": 0.907
+          "team": "Egypt",
+          "pts": 5,
+          "gd": 2,
+          "win_group": 0.0,
+          "advance": 1.0
         },
         {
           "team": "IR Iran",
-          "pts": 2,
+          "pts": 3,
           "gd": 0,
-          "win_group": 0.152,
-          "advance": 0.56
+          "win_group": 0.0,
+          "advance": 0.845
         },
         {
           "team": "New Zealand",
           "pts": 1,
-          "gd": -2,
+          "gd": -6,
           "win_group": 0.0,
-          "advance": 0.071
+          "advance": 0.0
         }
       ]
     },
@@ -1226,31 +1050,31 @@ window.WC_DATA = {
       "teams": [
         {
           "team": "Spain",
-          "pts": 4,
-          "gd": 4,
-          "win_group": 0.871,
+          "pts": 7,
+          "gd": 5,
+          "win_group": 1.0,
           "advance": 1.0
         },
         {
           "team": "Cabo Verde",
-          "pts": 2,
+          "pts": 3,
           "gd": 0,
-          "win_group": 0.022,
-          "advance": 0.588
-        },
-        {
-          "team": "Saudi Arabia",
-          "pts": 1,
-          "gd": -4,
           "win_group": 0.0,
-          "advance": 0.383
+          "advance": 1.0
         },
         {
           "team": "Uruguay",
           "pts": 2,
-          "gd": 0,
-          "win_group": 0.107,
-          "advance": 0.3
+          "gd": -1,
+          "win_group": 0.0,
+          "advance": 0.0
+        },
+        {
+          "team": "Saudi Arabia",
+          "pts": 2,
+          "gd": -4,
+          "win_group": 0.0,
+          "advance": 0.0
         }
       ]
     },
@@ -1276,7 +1100,7 @@ window.WC_DATA = {
           "pts": 3,
           "gd": 2,
           "win_group": 0.0,
-          "advance": 0.937
+          "advance": 1.0
         },
         {
           "team": "Iraq",
@@ -1302,21 +1126,21 @@ window.WC_DATA = {
           "pts": 3,
           "gd": 0,
           "win_group": 0.002,
-          "advance": 0.861
+          "advance": 0.857
         },
         {
           "team": "Algeria",
           "pts": 3,
           "gd": -2,
           "win_group": 0.0,
-          "advance": 0.64
+          "advance": 0.614
         },
         {
           "team": "Jordan",
           "pts": 0,
           "gd": -3,
           "win_group": 0.0,
-          "advance": 0.006
+          "advance": 0.005
         }
       ]
     },
@@ -1342,14 +1166,14 @@ window.WC_DATA = {
           "pts": 1,
           "gd": -1,
           "win_group": 0.0,
-          "advance": 0.469
+          "advance": 0.474
         },
         {
           "team": "Uzbekistan",
           "pts": 0,
           "gd": -7,
           "win_group": 0.0,
-          "advance": 0.004
+          "advance": 0.002
         }
       ]
     },
@@ -1360,29 +1184,29 @@ window.WC_DATA = {
           "team": "England",
           "pts": 4,
           "gd": 2,
-          "win_group": 0.845,
+          "win_group": 0.846,
           "advance": 1.0
         },
         {
           "team": "Ghana",
           "pts": 4,
           "gd": 1,
-          "win_group": 0.039,
-          "advance": 0.999
+          "win_group": 0.04,
+          "advance": 1.0
         },
         {
           "team": "Croatia",
           "pts": 3,
           "gd": -1,
-          "win_group": 0.116,
-          "advance": 0.908
+          "win_group": 0.115,
+          "advance": 0.896
         },
         {
           "team": "Panama",
           "pts": 0,
           "gd": -2,
           "win_group": 0.0,
-          "advance": 0.005
+          "advance": 0.004
         }
       ]
     }

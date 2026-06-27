@@ -280,11 +280,19 @@
 
   // ---- group qualification tables --------------------------------------
   function renderGroups(){
-    var html = (D.groups||[]).map(function(g){
+    var groups = D.groups||[];
+    // Exactly 32 teams reach the knockouts: the top 2 of every group + the 8 best
+    // third-placed teams. The backend sorts each group's teams by advance% desc, so
+    // index 2 is that group's projected 3rd — rank those 12 and keep the best 8.
+    var bestThird = {};
+    groups.map(function(g){ return g.teams[2]; }).filter(Boolean)
+      .sort(function(a,b){ return b.advance - a.advance; })
+      .slice(0,8).forEach(function(t){ bestThird[t.team] = true; });
+    var html = groups.map(function(g){
       var rows = g.teams.map(function(t,i){
-        var adv = i<2;            // visual cue only for clearly-advancing top-2
+        var advancing = i<2 || bestThird[t.team];   // top-2 + one of the 8 best thirds
         var advW = Math.round(t.advance*100);
-        return '<tr class="'+(t.advance>=0.5?'adv':'')+'">'+
+        return '<tr class="'+(advancing?'adv':'')+'">'+
           '<td>'+esc(t.team)+'</td>'+
           '<td class="num">'+t.pts+'</td>'+
           '<td class="num">'+(t.gd>=0?'+':'')+t.gd+'</td>'+

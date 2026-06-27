@@ -419,7 +419,8 @@ def main(safe: bool = False):
         P("")
         P("| Team | Pts | GD | P(win grp) | P(advance) |")
         P("|---|---|---|---|---|")
-        gt = sorted(groups[g], key=lambda t: adv[t], reverse=True)
+        gt = sorted(groups[g], key=lambda t: (adv[t], teams[t]["pts"],
+                    teams[t]["gd"], teams[t]["gf"]), reverse=True)
         for t in gt:
             P(f"| {t} | {teams[t]['pts']} | {teams[t]['gd']:+d} | "
               f"{fmt_pct(win[t]).strip()} | {fmt_pct(adv[t]).strip()} |")
@@ -480,7 +481,8 @@ def main(safe: bool = False):
                         "win_group": round(win[t], 3),
                         "advance": round(adv[t], 3),
                     }
-                    for t in sorted(groups[g], key=lambda t: adv[t], reverse=True)
+                    for t in sorted(groups[g], key=lambda t: (adv[t], teams[t]["pts"],
+                                    teams[t]["gd"], teams[t]["gf"]), reverse=True)
                 ],
             }
             for g in sorted(groups)

@@ -63,6 +63,38 @@
     5,
     0
    ]
+  },
+  "fifwc-ury-esp-2026-06-26": {
+   "home": "Uruguay",
+   "away": "Spain",
+   "score": [
+    0,
+    1
+   ]
+  },
+  "fifwc-egy-irn-2026-06-26": {
+   "home": "Egypt",
+   "away": "IR Iran",
+   "score": [
+    1,
+    1
+   ]
+  },
+  "fifwc-cvi-ksa-2026-06-26": {
+   "home": "Cabo Verde",
+   "away": "Saudi Arabia",
+   "score": [
+    0,
+    0
+   ]
+  },
+  "fifwc-nzl-bel-2026-06-26": {
+   "home": "New Zealand",
+   "away": "Belgium",
+   "score": [
+    1,
+    5
+   ]
   }
  }
 }
