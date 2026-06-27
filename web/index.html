@@ -165,7 +165,16 @@
   <footer id="footer"></footer>
 </div>
 
-<script src="data.js"></script>
+<script>
+  // Load the data bundle with a per-load cache-buster on http(s) so a fresh deploy never
+  // serves a stale data.js (GitHub Pages sets max-age=600). Plain path on file:// so local
+  // opens still work. document.write here runs during initial parse, so window.WC_DATA is
+  // set synchronously before the app script below runs.
+  (function(){
+    var src = 'data.js' + (location.protocol === 'file:' ? '' : '?cb=' + Date.now());
+    document.write('<script src="' + src + '"><\/script>');
+  })();
+</script>
 <script>
 (function(){
   var D = window.WC_DATA;
