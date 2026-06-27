@@ -131,19 +131,36 @@
     <div class="card"><h3>Coin-flips — don't overthink</h3><div id="strip2"></div></div>
   </div>
 
-  <h2 class="section">Per-match picks</h2>
-  <div id="matches"></div>
-
-  <h2 class="section">Projected qualification · Monte-Carlo</h2>
-  <div class="legend">
-    <span><i style="background:var(--good)"></i>advancing (top-2 + best thirds)</span>
-    <span>Win % = chance to win the group · Adv % = chance to reach the knockouts</span>
+  <div id="ko-section" style="display:none">
+    <h2 class="section">Knockout picks</h2>
+    <div class="legend" id="ko-legend"></div>
+    <div id="knockout" style="margin-top:6px"></div>
   </div>
-  <div class="groups" id="groups" style="margin-top:14px"></div>
+
+  <div id="grp-section">
+    <h2 class="section">Per-match picks · group stage</h2>
+    <div id="matches"></div>
+  </div>
+
+  <div id="title-section" style="display:none">
+    <h2 class="section">Title odds · Monte-Carlo</h2>
+    <div class="legend">
+      <span>Chance each side reaches each round and lifts the cup.</span>
+      <span>R32 ties use the market-blended advance prob; later, not-yet-known matchups lean on the model.</span>
+    </div>
+    <div id="titleodds" style="margin-top:14px"></div>
+  </div>
 
   <h2 class="section">Knockout bracket</h2>
   <div class="legend" id="bracket-legend"></div>
   <div class="bracket" id="bracket"></div>
+
+  <h2 class="section">Group standings</h2>
+  <div class="legend">
+    <span><i style="background:var(--good)"></i>advanced (top-2 + best thirds)</span>
+    <span>Win % = chance to win the group · Adv % = chance to reach the knockouts</span>
+  </div>
+  <div class="groups" id="groups" style="margin-top:14px"></div>
 
   <footer id="footer"></footer>
 </div>
@@ -205,7 +222,7 @@
 
   // ---- highlight strips -------------------------------------------------
   function renderStrips(){
-    var ms = D.matches.slice();
+    var ms = (D.matches||[]).concat(D.knockout||[]);   // group + knockout, all upcoming
     var byEv = ms.slice().sort(function(a,b){return view(b).ev-view(a).ev;}).slice(0,5);
     var coin = ms.slice().sort(function(a,b){return view(a).conf-view(b).conf;}).slice(0,4);
     document.getElementById('strip1-h').textContent =
@@ -230,6 +247,13 @@
     return null;
   }
   function renderMatches(){
+    var grp = document.getElementById('grp-section');
+    if(!(D.matches||[]).length){                            // no group games left
+      if(grp) grp.style.display='none';
+      document.getElementById('matches').innerHTML='';
+      return;
+    }
+    if(grp) grp.style.display='';
     var ms = D.matches.slice().sort(function(a,b){          // by kickoff, earliest first
       var ka=koDate(a), kb=koDate(b);
       return (ka?ka.getTime():8.64e15) - (kb?kb.getTime():8.64e15);
@@ -254,11 +278,14 @@
       '<span>'+w.map(function(x){return pct(x);}).join(' / ')+'</span></div>';
   }
 
+  var ROUND_ABBR = {'Round of 32':'R32','Round of 16':'R16','Quarter-finals':'QF',
+                    'Semi-finals':'SF','Final':'Final'};
   function matchCard(p){
     var v = view(p);
     var b = p.blend_wdl;
+    var chip = p.stage ? (ROUND_ABBR[p.stage]||p.stage)+' · M'+p.match : 'Grp '+esc(p.group);
     return '<div class="card match">'+
-      '<span class="grp">Grp '+esc(p.group)+'</span>'+
+      '<span class="grp">'+esc(chip)+'</span>'+
       '<div class="teams">'+esc(p.home)+' <span style="opacity:.5">vs</span> '+esc(p.away)+'</div>'+
       (function(){ var d=koDate(p); return d ? '<div class="ko">'+esc(d.toLocaleString(undefined,
         {weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}))+'</div>' : ''; })()+
@@ -274,8 +301,62 @@
           '<span>draw '+pct(b[1])+'</span>'+
           '<span class="a">'+pct(b[2])+' '+esc(p.away)+'</span></div></div>'+
       srcRow('Market',p.market_wdl)+srcRow('Model',p.model_wdl)+
+      ((p.needs_advancer && p.advancer) ? '<div class="alt">If drawn → <b>'+esc(p.advancer)+
+        '</b> advances ('+pct(p.advance[p.advancer])+')</div>' : '')+
       '<div class="alt">'+v.altlab+' alt: <b>'+v.alt[0]+'–'+v.alt[1]+'</b> ('+v.altval+')</div>'+
     '</div>';
+  }
+
+  // ---- knockout picks (cards grouped by round) -------------------------
+  var ROUND_ORD = {'Round of 32':0,'Round of 16':1,'Quarter-finals':2,'Semi-finals':3,'Final':4};
+  function renderKnockout(){
+    var ks = (D.knockout||[]).slice();
+    var sec = document.getElementById('ko-section');
+    if(!ks.length){ if(sec) sec.style.display='none'; return; }
+    sec.style.display='';
+    document.getElementById('ko-legend').innerHTML =
+      '<span>R32 plays exactly like the group stage.</span>'+
+      '<span>From the Round of 16, the card also names who advances if your 90-min pick is a draw.</span>';
+    ks.sort(function(a,b){                                   // round order, then kickoff
+      var ra=ROUND_ORD[a.stage]==null?9:ROUND_ORD[a.stage], rb=ROUND_ORD[b.stage]==null?9:ROUND_ORD[b.stage];
+      if(ra!==rb) return ra-rb;
+      var ka=koDate(a), kb=koDate(b);
+      return (ka?ka.getTime():8.64e15)-(kb?kb.getTime():8.64e15);
+    });
+    var order=[], byR={};
+    ks.forEach(function(p){
+      var key=p.stage||'Knockout';
+      if(!byR[key]){ byR[key]=[]; order.push(key); }
+      byR[key].push(p);
+    });
+    document.getElementById('knockout').innerHTML = order.map(function(key){
+      return '<div class="daygroup"><div class="daylabel">'+esc(key)+'</div>'+
+             '<div class="matches">'+byR[key].map(matchCard).join('')+'</div></div>';
+    }).join('');
+  }
+
+  // ---- title odds (forward bracket Monte-Carlo) ------------------------
+  function renderTitleOdds(){
+    var t = (D.title_odds||[]);
+    var sec = document.getElementById('title-section');
+    if(!t.length){ if(sec) sec.style.display='none'; return; }
+    sec.style.display='';
+    var max = t[0] ? t[0].champion : 1;
+    var rows = t.map(function(x){
+      var w = max>0 ? Math.round(x.champion/max*100) : 0;
+      return '<tr>'+
+        '<td>'+esc(x.team)+'</td>'+
+        '<td class="num">'+pct(x.reach_r16)+'</td>'+
+        '<td class="num">'+pct(x.reach_qf)+'</td>'+
+        '<td class="num">'+pct(x.reach_sf)+'</td>'+
+        '<td class="num">'+pct(x.reach_final)+'</td>'+
+        '<td><div class="advbar"><span style="width:'+w+'%"></span><em>'+pct(x.champion)+'</em></div></td>'+
+      '</tr>';
+    }).join('');
+    document.getElementById('titleodds').innerHTML =
+      '<div class="card group"><table><thead><tr><th>Team</th>'+
+      '<th class="num">R16</th><th class="num">QF</th><th class="num">SF</th>'+
+      '<th class="num">Final</th><th>Champion</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
   }
 
   // ---- group qualification tables --------------------------------------
@@ -351,7 +432,12 @@
       'nudge → expected goals → Dixon-Coles bivariate Poisson. Host edge (+60 Elo) for the USA only.</li>'+
     '<li><b>Office scoring</b> — exact score = max(total goals, 3) pts; right winner/draw only = 1; '+
       'wrong = 0. "Max expected points" deliberately chases high scores like 0–4 for heavy favourites.</li>'+
-    '<li><b>Qualification</b> — joint Monte-Carlo of all remaining matches; top-2 per group + 8 best '+
+    '<li><b>Knockouts</b> — picks are the 90-minute score, same as the group stage (R32 needs no '+
+      'winner-in-tie). From R16 the card also names who advances on a drawn pick; those advancer points '+
+      'are a placeholder until the pool\'s tie rule is set.</li>'+
+    '<li><b>Title odds</b> — forward Monte-Carlo of the bracket to the Final. Known R32 ties use the '+
+      'market-blended advance probability; later, not-yet-known matchups have no market so they lean on the model.</li>'+
+    '<li><b>Qualification</b> — joint Monte-Carlo of all remaining group matches; top-2 per group + 8 best '+
       'third-placed advance (tie-breaks: points, GD, goals-for; head-to-head not modelled).</li>'+
     '<li>Lineups/injuries/suspensions enter via the market side. Numbers move as markets update — '+
       're-run the pipeline before kickoff for the freshest odds.</li>'+
@@ -364,7 +450,7 @@
   };
   function renderAll(){
     document.getElementById('modehint').textContent = hints[mode];
-    renderStrips(); renderMatches();
+    renderStrips(); renderKnockout(); renderMatches();
   }
   Array.prototype.forEach.call(document.querySelectorAll('#toggle button'),function(btn){
     btn.addEventListener('click',function(){
@@ -375,7 +461,7 @@
     });
   });
 
-  renderAll(); renderGroups(); renderBracket();
+  renderAll(); renderTitleOdds(); renderGroups(); renderBracket();
 })();
 </script>
 </body>

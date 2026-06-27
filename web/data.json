@@ -1,97 +1,53 @@
 {
   "meta": {
     "snapshot": "2026-06-25",
-    "generated": "2026-06-27T13:39:12+00:00",
+    "generated": "2026-06-27T21:32:29+00:00",
     "w_market": 0.7,
     "n_sims": 40000
   },
   "matches": [
     {
-      "group": "L",
-      "home": "Panama",
-      "away": "England",
+      "group": "K",
+      "home": "Colombia",
+      "away": "Portugal",
       "date": "2026-06-27",
-      "kickoff": "2026-06-27T21:00:00Z",
-      "lambda_home": 0.55,
-      "lambda_away": 2.27,
+      "kickoff": "2026-06-27T23:30:00Z",
+      "lambda_home": 1.31,
+      "lambda_away": 1.25,
       "blend_wdl": [
-        0.062,
-        0.119,
-        0.818
+        0.315,
+        0.246,
+        0.439
       ],
       "model_wdl": [
-        0.079,
-        0.152,
-        0.769
+        0.388,
+        0.251,
+        0.361
       ],
       "market_wdl": [
-        0.055,
-        0.106,
-        0.839
+        0.284,
+        0.244,
+        0.473
       ],
       "pick": [
         0,
-        2
+        1
       ],
-      "pick_ev": 1.096,
+      "pick_ev": 0.637,
       "pick_class": "away",
-      "pick_hit": 0.139,
-      "confidence": 0.818,
-      "modal": [
-        0,
-        2
-      ],
-      "modal_p": 0.139,
-      "modal_ev": 1.096,
-      "modal_class": "away",
-      "modal_conf": 0.818,
-      "advance": {
-        "Panama": 0.004,
-        "England": 1.0
-      }
-    },
-    {
-      "group": "L",
-      "home": "Croatia",
-      "away": "Ghana",
-      "date": "2026-06-27",
-      "kickoff": "2026-06-27T21:00:00Z",
-      "lambda_home": 2.53,
-      "lambda_away": 0.36,
-      "blend_wdl": [
-        0.634,
-        0.24,
-        0.127
-      ],
-      "model_wdl": [
-        0.847,
-        0.114,
-        0.04
-      ],
-      "market_wdl": [
-        0.542,
-        0.294,
-        0.164
-      ],
-      "pick": [
-        1,
-        0
-      ],
-      "pick_ev": 0.922,
-      "pick_class": "home",
-      "pick_hit": 0.144,
-      "confidence": 0.634,
+      "pick_hit": 0.099,
+      "confidence": 0.439,
       "modal": [
         1,
-        0
+        1
       ],
-      "modal_p": 0.144,
-      "modal_ev": 0.922,
-      "modal_class": "home",
-      "modal_conf": 0.634,
+      "modal_p": 0.122,
+      "modal_ev": 0.489,
+      "modal_class": "draw",
+      "modal_conf": 0.246,
       "advance": {
-        "Croatia": 0.896,
-        "Ghana": 1.0
+        "Colombia": 1.0,
+        "Portugal": 1.0
       }
     },
     {
@@ -103,9 +59,9 @@
       "lambda_home": 1.1,
       "lambda_away": 1.51,
       "blend_wdl": [
-        0.472,
-        0.236,
-        0.292
+        0.486,
+        0.243,
+        0.271
       ],
       "model_wdl": [
         0.284,
@@ -113,117 +69,29 @@
         0.474
       ],
       "market_wdl": [
-        0.552,
-        0.234,
-        0.214
+        0.572,
+        0.244,
+        0.184
       ],
       "pick": [
         1,
         0
       ],
-      "pick_ev": 0.72,
+      "pick_ev": 0.77,
       "pick_class": "home",
-      "pick_hit": 0.124,
-      "confidence": 0.472,
+      "pick_hit": 0.142,
+      "confidence": 0.486,
       "modal": [
         1,
         0
       ],
-      "modal_p": 0.124,
-      "modal_ev": 0.72,
+      "modal_p": 0.142,
+      "modal_ev": 0.77,
       "modal_class": "home",
-      "modal_conf": 0.472,
+      "modal_conf": 0.486,
       "advance": {
-        "DR Congo": 0.474,
-        "Uzbekistan": 0.002
-      }
-    },
-    {
-      "group": "K",
-      "home": "Colombia",
-      "away": "Portugal",
-      "date": "2026-06-27",
-      "kickoff": "2026-06-27T23:30:00Z",
-      "lambda_home": 1.31,
-      "lambda_away": 1.25,
-      "blend_wdl": [
-        0.282,
-        0.248,
-        0.471
-      ],
-      "model_wdl": [
-        0.388,
-        0.251,
-        0.361
-      ],
-      "market_wdl": [
-        0.236,
-        0.246,
-        0.518
-      ],
-      "pick": [
-        0,
-        1
-      ],
-      "pick_ev": 0.716,
-      "pick_class": "away",
-      "pick_hit": 0.123,
-      "confidence": 0.471,
-      "modal": [
-        0,
-        1
-      ],
-      "modal_p": 0.123,
-      "modal_ev": 0.716,
-      "modal_class": "away",
-      "modal_conf": 0.471,
-      "advance": {
-        "Colombia": 1.0,
-        "Portugal": 1.0
-      }
-    },
-    {
-      "group": "J",
-      "home": "Jordan",
-      "away": "Argentina",
-      "date": "2026-06-27",
-      "kickoff": "2026-06-28T02:00:00Z",
-      "lambda_home": 0.18,
-      "lambda_away": 2.88,
-      "blend_wdl": [
-        0.041,
-        0.096,
-        0.863
-      ],
-      "model_wdl": [
-        0.013,
-        0.072,
-        0.914
-      ],
-      "market_wdl": [
-        0.053,
-        0.106,
-        0.841
-      ],
-      "pick": [
-        0,
-        4
-      ],
-      "pick_ev": 1.237,
-      "pick_class": "away",
-      "pick_hit": 0.125,
-      "confidence": 0.863,
-      "modal": [
-        0,
-        2
-      ],
-      "modal_p": 0.158,
-      "modal_ev": 1.178,
-      "modal_class": "away",
-      "modal_conf": 0.863,
-      "advance": {
-        "Jordan": 0.005,
-        "Argentina": 1.0
+        "DR Congo": 0.484,
+        "Uzbekistan": 0.001
       }
     },
     {
@@ -235,9 +103,9 @@
       "lambda_home": 1.04,
       "lambda_away": 1.6,
       "blend_wdl": [
-        0.238,
-        0.378,
-        0.384
+        0.264,
+        0.401,
+        0.334
       ],
       "model_wdl": [
         0.254,
@@ -245,32 +113,319 @@
         0.511
       ],
       "market_wdl": [
-        0.232,
-        0.438,
-        0.33
+        0.269,
+        0.472,
+        0.259
+      ],
+      "pick": [
+        0,
+        0
+      ],
+      "pick_ev": 0.762,
+      "pick_class": "draw",
+      "pick_hit": 0.18,
+      "confidence": 0.401,
+      "modal": [
+        0,
+        0
+      ],
+      "modal_p": 0.18,
+      "modal_ev": 0.762,
+      "modal_class": "draw",
+      "modal_conf": 0.401,
+      "advance": {
+        "Algeria": 0.663,
+        "Austria": 0.888
+      }
+    },
+    {
+      "group": "J",
+      "home": "Jordan",
+      "away": "Argentina",
+      "date": "2026-06-27",
+      "kickoff": "2026-06-28T02:00:00Z",
+      "lambda_home": 0.18,
+      "lambda_away": 2.88,
+      "blend_wdl": [
+        0.034,
+        0.088,
+        0.878
+      ],
+      "model_wdl": [
+        0.013,
+        0.072,
+        0.914
+      ],
+      "market_wdl": [
+        0.043,
+        0.095,
+        0.862
+      ],
+      "pick": [
+        0,
+        4
+      ],
+      "pick_ev": 1.261,
+      "pick_class": "away",
+      "pick_hit": 0.128,
+      "confidence": 0.878,
+      "modal": [
+        0,
+        2
+      ],
+      "modal_p": 0.173,
+      "modal_ev": 1.225,
+      "modal_class": "away",
+      "modal_conf": 0.878,
+      "advance": {
+        "Jordan": 0.003,
+        "Argentina": 1.0
+      }
+    }
+  ],
+  "knockout": [
+    {
+      "group": "A",
+      "home": "South Africa",
+      "away": "Canada",
+      "date": "2026-06-28",
+      "kickoff": "2026-06-28T19:00:00Z",
+      "lambda_home": 0.61,
+      "lambda_away": 2.19,
+      "blend_wdl": [
+        0.144,
+        0.243,
+        0.613
+      ],
+      "model_wdl": [
+        0.094,
+        0.164,
+        0.741
+      ],
+      "market_wdl": [
+        0.166,
+        0.276,
+        0.558
+      ],
+      "pick": [
+        0,
+        1
+      ],
+      "pick_ev": 0.904,
+      "pick_class": "away",
+      "pick_hit": 0.145,
+      "confidence": 0.613,
+      "modal": [
+        0,
+        1
+      ],
+      "modal_p": 0.145,
+      "modal_ev": 0.904,
+      "modal_class": "away",
+      "modal_conf": 0.613,
+      "stage": "Round of 32",
+      "match": 73,
+      "needs_advancer": false,
+      "advance": {
+        "South Africa": 0.191,
+        "Canada": 0.809
+      },
+      "advancer": "Canada"
+    },
+    {
+      "group": "C",
+      "home": "Brazil",
+      "away": "Japan",
+      "date": "2026-06-29",
+      "kickoff": "2026-06-29T17:00:00Z",
+      "lambda_home": 1.57,
+      "lambda_away": 1.06,
+      "blend_wdl": [
+        0.55,
+        0.242,
+        0.208
+      ],
+      "model_wdl": [
+        0.499,
+        0.238,
+        0.263
+      ],
+      "market_wdl": [
+        0.572,
+        0.244,
+        0.184
       ],
       "pick": [
         1,
-        1
+        0
       ],
-      "pick_ev": 0.698,
-      "pick_class": "draw",
-      "pick_hit": 0.16,
-      "confidence": 0.378,
+      "pick_ev": 0.823,
+      "pick_class": "home",
+      "pick_hit": 0.136,
+      "confidence": 0.55,
+      "modal": [
+        1,
+        0
+      ],
+      "modal_p": 0.136,
+      "modal_ev": 0.823,
+      "modal_class": "home",
+      "modal_conf": 0.55,
+      "stage": "Round of 32",
+      "match": 76,
+      "needs_advancer": false,
+      "advance": {
+        "Brazil": 0.726,
+        "Japan": 0.274
+      },
+      "advancer": "Brazil"
+    },
+    {
+      "group": "F",
+      "home": "Netherlands",
+      "away": "Morocco",
+      "date": "2026-06-29",
+      "kickoff": "2026-06-30T01:00:00Z",
+      "lambda_home": 1.62,
+      "lambda_away": 1.03,
+      "blend_wdl": [
+        0.472,
+        0.283,
+        0.245
+      ],
+      "model_wdl": [
+        0.518,
+        0.234,
+        0.248
+      ],
+      "market_wdl": [
+        0.453,
+        0.303,
+        0.244
+      ],
+      "pick": [
+        1,
+        0
+      ],
+      "pick_ev": 0.713,
+      "pick_class": "home",
+      "pick_hit": 0.12,
+      "confidence": 0.472,
       "modal": [
         1,
         1
       ],
-      "modal_p": 0.16,
-      "modal_ev": 0.698,
+      "modal_p": 0.131,
+      "modal_ev": 0.545,
       "modal_class": "draw",
-      "modal_conf": 0.378,
+      "modal_conf": 0.283,
+      "stage": "Round of 32",
+      "match": 75,
+      "needs_advancer": false,
       "advance": {
-        "Algeria": 0.614,
-        "Austria": 0.857
-      }
+        "Netherlands": 0.658,
+        "Morocco": 0.342
+      },
+      "advancer": "Netherlands"
+    },
+    {
+      "group": "E",
+      "home": "Côte d'Ivoire",
+      "away": "Norway",
+      "date": "2026-06-30",
+      "kickoff": "2026-06-30T17:00:00Z",
+      "lambda_home": 0.53,
+      "lambda_away": 2.3,
+      "blend_wdl": [
+        0.208,
+        0.238,
+        0.554
+      ],
+      "model_wdl": [
+        0.073,
+        0.147,
+        0.78
+      ],
+      "market_wdl": [
+        0.266,
+        0.276,
+        0.457
+      ],
+      "pick": [
+        0,
+        1
+      ],
+      "pick_ev": 0.743,
+      "pick_class": "away",
+      "pick_hit": 0.094,
+      "confidence": 0.554,
+      "modal": [
+        1,
+        1
+      ],
+      "modal_p": 0.107,
+      "modal_ev": 0.451,
+      "modal_class": "draw",
+      "modal_conf": 0.238,
+      "stage": "Round of 32",
+      "match": 78,
+      "needs_advancer": false,
+      "advance": {
+        "Côte d'Ivoire": 0.273,
+        "Norway": 0.727
+      },
+      "advancer": "Norway"
+    },
+    {
+      "group": "D",
+      "home": "Australia",
+      "away": "Egypt",
+      "date": "2026-07-03",
+      "kickoff": "2026-07-03T18:00:00Z",
+      "lambda_home": 1.63,
+      "lambda_away": 1.01,
+      "blend_wdl": [
+        0.363,
+        0.296,
+        0.341
+      ],
+      "model_wdl": [
+        0.526,
+        0.233,
+        0.242
+      ],
+      "market_wdl": [
+        0.294,
+        0.323,
+        0.383
+      ],
+      "pick": [
+        0,
+        1
+      ],
+      "pick_ev": 0.565,
+      "pick_class": "away",
+      "pick_hit": 0.112,
+      "confidence": 0.341,
+      "modal": [
+        1,
+        1
+      ],
+      "modal_p": 0.124,
+      "modal_ev": 0.544,
+      "modal_class": "draw",
+      "modal_conf": 0.296,
+      "stage": "Round of 32",
+      "match": 88,
+      "needs_advancer": false,
+      "advance": {
+        "Australia": 0.516,
+        "Egypt": 0.484
+      },
+      "advancer": "Australia"
     }
   ],
+  "title_odds": [],
   "bracket": {
     "group_stage_complete": false,
     "qualified_thirds": [],
@@ -836,7 +991,7 @@
           "pts": 3,
           "gd": -1,
           "win_group": 0.0,
-          "advance": 0.301
+          "advance": 0.217
         },
         {
           "team": "Czechia",
@@ -902,7 +1057,7 @@
           "pts": 3,
           "gd": -3,
           "win_group": 0.0,
-          "advance": 0.001
+          "advance": 0.0
         },
         {
           "team": "Haiti",
@@ -1034,7 +1189,7 @@
           "pts": 3,
           "gd": 0,
           "win_group": 0.0,
-          "advance": 0.845
+          "advance": 1.0
         },
         {
           "team": "New Zealand",
@@ -1118,29 +1273,29 @@
           "team": "Argentina",
           "pts": 6,
           "gd": 5,
-          "win_group": 0.998,
+          "win_group": 0.999,
           "advance": 1.0
         },
         {
           "team": "Austria",
           "pts": 3,
           "gd": 0,
-          "win_group": 0.002,
-          "advance": 0.857
+          "win_group": 0.001,
+          "advance": 0.888
         },
         {
           "team": "Algeria",
           "pts": 3,
           "gd": -2,
           "win_group": 0.0,
-          "advance": 0.614
+          "advance": 0.663
         },
         {
           "team": "Jordan",
           "pts": 0,
           "gd": -3,
           "win_group": 0.0,
-          "advance": 0.005
+          "advance": 0.003
         }
       ]
     },
@@ -1151,14 +1306,14 @@
           "team": "Colombia",
           "pts": 6,
           "gd": 3,
-          "win_group": 0.532,
+          "win_group": 0.566,
           "advance": 1.0
         },
         {
           "team": "Portugal",
           "pts": 4,
           "gd": 5,
-          "win_group": 0.468,
+          "win_group": 0.434,
           "advance": 1.0
         },
         {
@@ -1166,14 +1321,14 @@
           "pts": 1,
           "gd": -1,
           "win_group": 0.0,
-          "advance": 0.474
+          "advance": 0.484
         },
         {
           "team": "Uzbekistan",
           "pts": 0,
           "gd": -7,
           "win_group": 0.0,
-          "advance": 0.002
+          "advance": 0.001
         }
       ]
     },
@@ -1184,29 +1339,29 @@
           "team": "England",
           "pts": 4,
           "gd": 2,
-          "win_group": 0.846,
+          "win_group": 1.0,
           "advance": 1.0
         },
         {
           "team": "Ghana",
           "pts": 4,
           "gd": 1,
-          "win_group": 0.04,
+          "win_group": 0.0,
           "advance": 1.0
         },
         {
           "team": "Croatia",
           "pts": 3,
           "gd": -1,
-          "win_group": 0.115,
-          "advance": 0.896
+          "win_group": 0.0,
+          "advance": 0.743
         },
         {
           "team": "Panama",
           "pts": 0,
           "gd": -2,
           "win_group": 0.0,
-          "advance": 0.004
+          "advance": 0.0
         }
       ]
     }
