@@ -120,6 +120,17 @@
   td.pick b{color:var(--txt)} td .side-h{color:var(--home)} td .side-a{color:var(--away)} td .side-d{color:var(--draw)}
   .disclaimer{font-size:11.5px;color:var(--muted);margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
   .disclaimer b{color:var(--accent2)}
+  /* tabs */
+  .tabs{display:inline-flex;gap:4px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:4px;margin-bottom:22px}
+  .tabs button{appearance:none;border:0;background:transparent;color:var(--muted);
+    font:700 13.5px/1 inherit;padding:10px 20px;border-radius:999px;cursor:pointer;transition:.15s}
+  .tabs button.on{background:var(--accent);color:#08120b}
+  .toggle.wrap{flex-wrap:wrap}
+  /* allocation split bar */
+  .allocbar{display:flex;height:14px;border-radius:7px;overflow:hidden;border:1px solid var(--line);margin:6px 0 16px;background:var(--panel2)}
+  .allocbar > span{display:block;min-width:2px}
+  .dot{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:7px;vertical-align:0;flex:0 0 auto}
+  .pickwrap{display:flex;align-items:center}
   @media (max-width:560px){.strip{grid-template-columns:1fr}.meta{text-align:left}}
 </style>
 </head>
@@ -134,6 +145,13 @@
     <div class="meta" id="meta"></div>
   </header>
 
+  <nav class="tabs" id="tabs">
+    <button data-tab="predictions" class="on">⚽ Predictions</button>
+    <button data-tab="invest">💰 Invest</button>
+  </nav>
+
+  <div id="tab-predictions" class="tabpane">
+
   <div class="controls">
     <div class="toggle" id="toggle">
       <button data-mode="ev" class="on">Max expected points</button>
@@ -145,27 +163,6 @@
   <div class="strip">
     <div class="card"><h3 id="strip1-h">Bank these first</h3><div id="strip1"></div></div>
     <div class="card"><h3>Coin-flips — don't overthink</h3><div id="strip2"></div></div>
-  </div>
-
-  <div id="invest-section">
-    <h2 class="section">Where to invest · bankroll allocator</h2>
-    <div class="legend">
-      <span>Type a bankroll; this sizes bets where our blend disagrees with the live Polymarket price.</span>
-      <span>Kelly-sized, risk-capped, simulated. <b style="color:var(--accent2)">Not financial advice.</b></span>
-    </div>
-    <div class="card" style="padding:16px 18px;margin-top:10px">
-      <div class="invctl">
-        <label for="inv-bank">Bankroll</label>
-        <div class="ip"><span>$</span><input id="inv-bank" type="number" min="1" step="10" value="100" /></div>
-        <label>Risk</label>
-        <div class="toggle" id="inv-risk">
-          <button data-risk="conservative" class="on">Conservative</button>
-          <button data-risk="moderate">Moderate</button>
-          <button data-risk="aggressive">Aggressive</button>
-        </div>
-      </div>
-      <div id="inv-out"></div>
-    </div>
   </div>
 
   <div id="ko-section" style="display:none">
@@ -204,6 +201,33 @@
     <span>Win % = chance to win the group · Adv % = chance to reach the knockouts</span>
   </div>
   <div class="groups" id="groups" style="margin-top:14px"></div>
+
+  </div><!-- /tab-predictions -->
+
+  <div id="tab-invest" class="tabpane" style="display:none">
+    <h2 class="section">Where to invest · bankroll allocator</h2>
+    <div class="legend">
+      <span>Enter a bankroll and pick how to spread it across the games where our blend beats the live Polymarket price.</span>
+      <span><b style="color:var(--accent2)">Not financial advice.</b></span>
+    </div>
+    <div class="card" style="padding:16px 18px;margin-top:10px">
+      <div class="invctl">
+        <label for="inv-bank">Bankroll</label>
+        <div class="ip"><span>$</span><input id="inv-bank" type="number" min="1" step="10" value="100" /></div>
+      </div>
+      <div class="invctl" style="margin-top:10px">
+        <label>Spread style</label>
+        <div class="toggle wrap" id="inv-style">
+          <button data-style="balanced" class="on">Balanced spread</button>
+          <button data-style="even">Even split</button>
+          <button data-style="wide">Wide spread</button>
+          <button data-style="strong">Strong only</button>
+        </div>
+      </div>
+      <div class="hint" id="inv-stylehint" style="margin:8px 0 0"></div>
+      <div id="inv-out"></div>
+    </div>
+  </div>
 
   <footer id="footer"></footer>
 </div>
@@ -517,16 +541,27 @@
     '</ul>';
 
   // ---- investment / bankroll allocator ---------------------------------
-  // Mirrors src/worldcup_invest.py: edge = our blend_wdl - (price + slippage);
-  // size with fractional Kelly f*=(p-c)/(1-c), cap per bet, keep best +EV side
-  // per match, scale to <= bankroll, then Monte-Carlo the P&L for risk numbers.
-  var INV_RISK = {
-    conservative:{kelly:.25,maxBet:.10,minEdge:.04,slip:.02},
-    moderate:    {kelly:.50,maxBet:.20,minEdge:.03,slip:.015},
-    aggressive:  {kelly:1.0,maxBet:.35,minEdge:.02,slip:.01}
+  // Edge = our blend_wdl - (price + slippage); we bet the best +EV side per game.
+  // Four SPREAD STYLES decide how the money divides across those games:
+  //   strong   - tiny fractional-Kelly stakes only on the strongest edges; rest = cash.
+  //   even     - equal $ on every game with an edge, deploying a target slice.
+  //   balanced - target slice, weighted by edge size, capped so none dominates.
+  //   wide     - lower edge bar (more games) + target slice, weighted, tighter cap.
+  // The three "spread" styles deliberately deploy MORE than strict Kelly to put the
+  // bankroll to work and diversify; the Monte-Carlo risk box shows the cost (variance).
+  var INV_STYLE = {
+    balanced:{label:'Balanced spread', minEdge:.03, slip:.015, weight:'kelly', deploy:.65, gameCap:.34,
+      hint:'Bets on every game with a clear edge, staking MORE on the bigger edges and capping any one game. Diversified, tilted to quality. Recommended.'},
+    even:    {label:'Even split',      minEdge:.03, slip:.015, weight:'equal', deploy:.60, gameCap:.40,
+      hint:'The same dollar amount on each game that has an edge. Simplest to place and maximally even.'},
+    wide:    {label:'Wide spread',     minEdge:.02, slip:.015, weight:'kelly', deploy:.75, gameCap:.22,
+      hint:'Lowers the edge bar so MORE games qualify, spreading the money widest. Most diversified — but the extra games have thin edges (lower quality).'},
+    strong:  {label:'Strong only',     minEdge:.03, slip:.02,  weight:'kelly-cash', kfrac:.25, betCap:.10,
+      hint:'Only the strongest edges, sized strictly by Kelly. Stakes stay small and most of the bankroll sits in cash. Lowest risk, highest return % on the little you deploy.'}
   };
-  var invRisk = 'conservative';
+  var invStyle = 'balanced';
   var INV_SIDES = ['home','draw','away'];
+  var INV_COLORS = ['#4aa3ff','#37d67a','#ffd34e','#ff6b6b','#b07cff','#46d6c8','#ff9f43','#7f8da0','#e879b9','#5ad1ff'];
   var money = function(x){return (x<0?'-$':'$')+Math.abs(x).toFixed(2);};
   var sideLabel = function(b){
     if(b.side==='home') return '<span class="side-h">'+esc(b.home)+' win</span>';
@@ -534,7 +569,27 @@
     return '<span class="side-d">Draw</span>';
   };
 
-  function invBets(bankroll, rp){
+  // Water-fill: split `target` $ across `weights`, never letting a slice exceed `capAmt`.
+  // Capped slices are fixed and the remainder is re-split among the rest (a few passes).
+  function waterfill(weights, target, capAmt){
+    var n=weights.length, alloc=weights.map(function(){return 0;}), capped=weights.map(function(){return false;});
+    for(var pass=0; pass<n+2; pass++){
+      var cappedSum=0, freeW=0, i;
+      for(i=0;i<n;i++){ if(capped[i]) cappedSum+=alloc[i]; else freeW+=weights[i]; }
+      var rem = target - cappedSum;
+      if(freeW<=1e-12 || rem<=1e-9) break;
+      var any=false;
+      for(i=0;i<n;i++){ if(capped[i]) continue;
+        var a = rem*weights[i]/freeW;
+        if(a > capAmt+1e-9){ alloc[i]=capAmt; capped[i]=true; any=true; }
+      }
+      if(!any){ for(i=0;i<n;i++) if(!capped[i]) alloc[i]=rem*weights[i]/freeW; break; }
+    }
+    return alloc;
+  }
+
+  function invPlan(bankroll, styleKey){
+    var cfg = INV_STYLE[styleKey];
     var cands = (D.matches||[]).concat(D.knockout||[]);
     var bets = [];
     cands.forEach(function(g){
@@ -542,28 +597,32 @@
       var best = null;
       INV_SIDES.forEach(function(side,i){
         var p = g.blend_wdl[i];
-        var c = Math.min(.99, (g.price[side]||0) + rp.slip);  // pay the mid + slippage
+        var c = Math.min(.99, (g.price[side]||0) + cfg.slip);   // pay the mid + slippage
         if(c <= 0) return;
         var edge = p - c;
-        if(edge < rp.minEdge) return;
-        var ev = p/c - 1;                                     // expected profit per $1
-        var cand = {side:side, p:p, c:c, edge:edge, ev:ev,
-                    kf:(p-c)/(1-c), mf:(g.market_wdl? g.market_wdl[i] : null)};
+        if(edge < cfg.minEdge) return;
+        var cand = {side:side, p:p, c:c, edge:edge, ev:p/c-1, kf:(p-c)/(1-c),
+                    mf:(g.market_wdl? g.market_wdl[i] : null), home:g.home, away:g.away};
         if(!best || cand.ev > best.ev) best = cand;
       });
-      if(!best) return;
-      best.home=g.home; best.away=g.away;
-      best.stake = Math.min(rp.kelly*best.kf*bankroll, rp.maxBet*bankroll);
-      bets.push(best);
+      if(best) bets.push(best);
     });
+    if(!bets.length) return bets;
+
+    if(cfg.weight === 'kelly-cash'){                          // size by Kelly, leave the rest in cash
+      bets.forEach(function(b){ b.stake = Math.min(cfg.kfrac*b.kf*bankroll, cfg.betCap*bankroll); });
+    } else {                                                  // deploy a target slice, spread + capped
+      var target = cfg.deploy*bankroll;
+      var w = bets.map(function(b){ return cfg.weight==='equal' ? 1 : Math.max(b.kf,1e-6); });
+      var alloc = waterfill(w, target, cfg.gameCap*target);
+      bets.forEach(function(b,i){ b.stake = alloc[i]; });
+    }
     bets.sort(function(a,b){return b.stake-a.stake;});
-    var total = bets.reduce(function(s,b){return s+b.stake;},0);
-    if(total > bankroll && total > 0) bets.forEach(function(b){b.stake *= bankroll/total;});
     bets.forEach(function(b){ b.shares=b.stake/b.c; b.win=b.shares-b.stake; b.exp=b.stake*b.ev; });
     return bets;
   }
 
-  function invSim(bets, bankroll){            // Monte-Carlo P&L under our probabilities
+  function invSim(bets){                       // Monte-Carlo P&L under our probabilities
     if(!bets.length) return null;
     var n=8000, pr=new Float64Array(n), k, sum=0, nLoss=0;
     for(k=0;k<n;k++){
@@ -578,16 +637,16 @@
 
   function renderInvest(){
     var out = document.getElementById('inv-out');
+    document.getElementById('inv-stylehint').textContent = INV_STYLE[invStyle].hint;
     var bankroll = parseFloat(document.getElementById('inv-bank').value);
-    if(!(bankroll>0)){ out.innerHTML='<p style="color:var(--muted)">Enter a bankroll above.</p>'; return; }
-    var rp = INV_RISK[invRisk];
+    if(!(bankroll>0)){ out.innerHTML='<p style="color:var(--muted);margin-top:14px">Enter a bankroll above.</p>'; return; }
     var nMarkets = (D.matches||[]).concat(D.knockout||[]).filter(function(g){return g.price;}).length;
-    var bets = invBets(bankroll, rp);
+    var bets = invPlan(bankroll, invStyle);
 
     if(!bets.length){
       var msg = nMarkets
-        ? 'Our model doesn\'t disagree with the market enough to justify the risk right now '+
-          '— the efficient-market outcome. Try a higher risk level, or check back after a refresh.'
+        ? 'Our model doesn\'t disagree with the market enough on these games to find an edge. '+
+          'Try the "Wide spread" style (looser edge bar), or check back after a refresh.'
         : 'No upcoming World Cup markets are open right now. Check back when the next round\'s odds post.';
       out.innerHTML =
         '<div class="invsum"><div class="box" style="grid-column:1/-1">'+
@@ -600,39 +659,50 @@
     var exp = bets.reduce(function(s,b){return s+b.exp;},0);
     var floor = bets.every(function(b){return b.mf!=null;})
       ? bets.reduce(function(s,b){return s + b.stake*(b.mf/b.c - 1);},0) : null;
-    var sim = invSim(bets, bankroll);
+    var sim = invSim(bets);
     var retStake = exp/staked*100;
 
-    var rows = bets.map(function(b){
-      return '<tr><td class="pick">'+sideLabel(b)+'<div class="sub" style="font-size:10.5px">'+
-        esc(b.home)+' v '+esc(b.away)+'</div></td>'+
+    // stacked split bar — one coloured segment per bet, width = share of staked money
+    var barSeg = bets.map(function(b,i){
+      return '<span title="'+esc(b.home)+' v '+esc(b.away)+'" style="width:'+(b.stake/staked*100)+
+        '%;background:'+INV_COLORS[i%INV_COLORS.length]+'"></span>';
+    }).join('');
+
+    var rows = bets.map(function(b,i){
+      var dot = '<span class="dot" style="background:'+INV_COLORS[i%INV_COLORS.length]+'"></span>';
+      return '<tr><td class="pick"><div class="pickwrap">'+dot+'<div>'+sideLabel(b)+
+        '<div class="sub" style="font-size:10.5px">'+esc(b.home)+' v '+esc(b.away)+'</div></div></div></td>'+
+        '<td class="num"><b>'+money(b.stake)+'</b></td>'+
+        '<td class="num">'+Math.round(b.stake/staked*100)+'%</td>'+
         '<td class="num">'+pct(b.p)+'</td>'+
         '<td class="num">'+Math.round(b.c*100)+'¢</td>'+
         '<td class="num" style="color:var(--accent)">+'+Math.round(b.edge*100)+'%</td>'+
-        '<td class="num"><b>'+money(b.stake)+'</b></td>'+
         '<td class="num">'+money(b.shares)+'</td></tr>';
     }).join('');
 
     out.innerHTML =
       '<div class="invsum">'+
-        '<div class="box"><div class="k">Deployed</div><div class="v">'+money(staked)+'</div>'+
-          '<div class="sub">'+Math.round(staked/bankroll*100)+'% of bankroll · '+money(bankroll-staked)+' cash · '+bets.length+' bets</div></div>'+
+        '<div class="box"><div class="k">Invested</div><div class="v">'+money(staked)+'</div>'+
+          '<div class="sub">'+Math.round(staked/bankroll*100)+'% of bankroll · '+money(bankroll-staked)+' cash · '+bets.length+' games</div></div>'+
         '<div class="box"><div class="k">Expected profit</div><div class="v '+(exp>=0?'good':'bad')+'">'+money(exp)+'</div>'+
           '<div class="sub">if our model is right</div></div>'+
-        '<div class="box"><div class="k">Return on staked $</div><div class="v '+(retStake>=0?'good':'bad')+'">'+
+        '<div class="box"><div class="k">Return on invested $</div><div class="v '+(retStake>=0?'good':'bad')+'">'+
           (retStake>=0?'+':'')+retStake.toFixed(1)+'%</div><div class="sub">'+
           (exp/bankroll*100>=0?'+':'')+(exp/bankroll*100).toFixed(1)+'% on full bankroll</div></div>'+
         (sim? '<div class="box"><div class="k">Risk</div><div class="v">'+Math.round((1-sim.pLoss)*100)+'% win-chance</div>'+
           '<div class="sub">5th pct '+money(sim.p05)+' · worst '+money(sim.worst)+'</div></div>' : '')+
       '</div>'+
+      '<div class="allocbar">'+barSeg+'</div>'+
       '<div style="overflow-x:auto"><table><thead><tr>'+
-        '<th>Bet</th><th class="num">Our P</th><th class="num">Price</th><th class="num">Edge</th>'+
-        '<th class="num">Stake</th><th class="num">Shares</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+        '<th>Bet</th><th class="num">Stake</th><th class="num">% of pot</th><th class="num">Our P</th>'+
+        '<th class="num">Price</th><th class="num">Edge</th><th class="num">Shares</th></tr></thead>'+
+        '<tbody>'+rows+'</tbody></table></div>'+
       '<div class="disclaimer">'+
         'Each "edge" exists only because our 70/30 blend disagrees with the market — and Polymarket sports '+
         'markets are well-calibrated, so this upside is <b>unproven</b>. '+
         (floor!=null? 'If the market is actually right, this set returns about <b>'+(floor/staked*100).toFixed(1)+
-          '%</b> on staked money (≈ the spread you cross) — the honest downside. ' : '')+
+          '%</b> on invested money (≈ the spread you cross) — the honest downside. ' : '')+
+        'The spread styles deploy more than strict Kelly to diversify, which raises both expected profit and swings. '+
         'Prices are mids + a slippage cushion; real fills can be worse and big stakes move thin markets. '+
         '<b>Bet only what you can afford to lose. Not financial advice.</b>'+
       '</div>';
@@ -658,12 +728,24 @@
 
   // ---- investment panel wiring -----------------------------------------
   document.getElementById('inv-bank').addEventListener('input', renderInvest);
-  Array.prototype.forEach.call(document.querySelectorAll('#inv-risk button'),function(btn){
+  Array.prototype.forEach.call(document.querySelectorAll('#inv-style button'),function(btn){
     btn.addEventListener('click',function(){
-      invRisk = btn.getAttribute('data-risk');
-      Array.prototype.forEach.call(document.querySelectorAll('#inv-risk button'),function(b){
+      invStyle = btn.getAttribute('data-style');
+      Array.prototype.forEach.call(document.querySelectorAll('#inv-style button'),function(b){
         b.classList.toggle('on', b===btn);});
       renderInvest();
+    });
+  });
+
+  // ---- tab switching ----------------------------------------------------
+  Array.prototype.forEach.call(document.querySelectorAll('#tabs button'),function(btn){
+    btn.addEventListener('click',function(){
+      var tab = btn.getAttribute('data-tab');
+      Array.prototype.forEach.call(document.querySelectorAll('#tabs button'),function(b){
+        b.classList.toggle('on', b===btn);});
+      document.getElementById('tab-predictions').style.display = tab==='predictions' ? '' : 'none';
+      document.getElementById('tab-invest').style.display     = tab==='invest'      ? '' : 'none';
+      window.scrollTo(0,0);
     });
   });
 
