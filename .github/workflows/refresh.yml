@@ -7,6 +7,7 @@ name: Refresh predictions
 #   * push to main      = redeploy when you edit the site or pipeline
 on:
   workflow_dispatch:
+  schedule:
     # GitHub's shared scheduler delays/DROPS scheduled runs under load, and the top
     # of the hour (minute 0) is the most congested slot — so a plain hourly "0 * * * *"
     # in practice fired every 1–5h (observed gaps up to 5.5h => the site read ">1h ago").
