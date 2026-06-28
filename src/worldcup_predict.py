@@ -5,10 +5,13 @@ markets are the best-calibrated): predict every remaining group-stage match with
 *point-optimal* exact-score guess for the office prediction game, plus W/D/L
 confidence and a Monte-Carlo qualification projection.
 
-Office game scoring (the optimisation target):
-    exact score correct  -> max(total goals in match, 3) points
-    right winner/draw only -> 1 point
-    wrong outcome          -> 0 points
+Office game scoring (the optimisation target — see src.worldcup_scoring for the
+authoritative rule shared with the grader):
+    exact score correct    -> 3  (+1 per goal OVER 3, only on an exact hit)
+    right winner/draw only -> 1  (does not stack on an exact hit)
+    exact REVERSED score   -> -1 (predict 1-2, it ends exactly 2-1)
+    anything else          -> 0
+    knockout multiplier    -> R32/R16 x2, QF/SF/3rd/Final x3, on the earned points
 So the recommended score is the one MAXIMISING EXPECTED POINTS, not the single most
 likely score.
 
@@ -34,6 +37,7 @@ from pathlib import Path
 import numpy as np
 
 from src.worldcup_bracket import build_bracket, R16, QF, SF, FINAL
+from src.worldcup_scoring import ev_of_pick, stage_mult
 
 ROOT = Path(__file__).resolve().parent.parent
 WC = ROOT / "data" / "worldcup"
@@ -170,31 +174,35 @@ def market_matrix(match: dict, model_mat: np.ndarray) -> np.ndarray | None:
 # ----------------------------------------------------------------------------
 # Expected-points optimiser for the office game
 # ----------------------------------------------------------------------------
-def best_pick(mat: np.ndarray, maxg: int = 6, eps: float = 0.005, tie_bonus: float = 0.0):
-    """Score (a,b) maximising expected office-game points under matrix `mat`.
+def best_pick(mat: np.ndarray, maxg: int = 6, eps: float = 0.005, tie_bonus: float = 0.0,
+              mult: int = 1):
+    """Score (a,b) maximising expected office-game points under matrix `mat`, at knockout
+    points multiplier `mult` (see src.worldcup_scoring.ev_of_pick for the point rule).
 
-    Tie-break: among scorelines within `eps` of the best EV (common for blowouts where
-    0-2/0-3/0-4 are near-tied), prefer the one MOST LIKELY to actually hit, then the
-    lower-scoring one. Same expected value, lower variance / higher exact-hit rate.
+    Under the real rule an exact hit pays a flat 3 (+1 per goal over 3) and a right
+    winner/draw pays 1, so the optimiser settles near the modal scoreline and only nudges
+    up a goal when the goals bonus on a plausible high-scoring exact outweighs its lower
+    hit rate — it no longer blindly chases 0-4. The -1 mirror-cell penalty is a tiny
+    nudge away from picks whose reverse is itself likely.
+
+    Tie-break: among scorelines within `eps` (scaled by `mult`) of the best EV, prefer the
+    one MOST LIKELY to actually hit, then the lower-scoring one — same EV, lower variance.
     Returns (pick, ev_of_pick, p_exact_of_pick).
 
     `tie_bonus` (knockout R16+ only): extra expected points credited to a DRAWN pick for
     also naming the team that advances (ET/pens), valued as P(best advancer) * tie_bonus.
     Default 0 leaves the pick identical to the group-stage logic.
     """
-    pH, pD, pA = wdl(mat)
-    adv_bonus = max(advance_probs(mat)) * tie_bonus if tie_bonus else 0.0
+    adv_bonus = max(advance_probs(mat)) * tie_bonus * mult if tie_bonus else 0.0
     cands = []
     for a in range(maxg + 1):
         for b in range(maxg + 1):
-            p_exact = mat[a, b]
-            p_outcome = pH if a > b else (pD if a == b else pA)
-            ev = p_exact * max(a + b, 3) + (p_outcome - p_exact) * 1.0
+            ev, p_exact, _ = ev_of_pick(mat, a, b, mult=mult)
             if a == b:
                 ev += adv_bonus           # banked alongside a drawn pick (R16+)
             cands.append((ev, p_exact, (a, b)))
     best_ev = max(c[0] for c in cands)
-    near = [c for c in cands if c[0] >= best_ev - eps]
+    near = [c for c in cands if c[0] >= best_ev - eps * mult]
     near.sort(key=lambda c: (c[1], -(c[2][0] + c[2][1])), reverse=True)
     ev, p_exact, pick = near[0]
     return pick, ev, p_exact
@@ -208,9 +216,10 @@ def modal_score(mat: np.ndarray) -> tuple[tuple[int, int], float]:
 # ----------------------------------------------------------------------------
 # Driver
 # ----------------------------------------------------------------------------
-def predict_match(m: dict, teams: dict, tie_bonus: float = 0.0) -> dict:
+def predict_match(m: dict, teams: dict, tie_bonus: float = 0.0, mult: int = 1) -> dict:
     """Blend market + model for one match and return its prediction dict (group or
-    knockout). `tie_bonus` is passed to best_pick for R16+ knockout games."""
+    knockout). `tie_bonus` is passed to best_pick for R16+ knockout games; `mult` is the
+    knockout points multiplier (1 for group games) applied to every EV here."""
     h, a = m["home"], m["away"]
     mm, lh, la = model_matrix(teams[h], teams[a], h)
     km = market_matrix(m, mm)
@@ -219,7 +228,7 @@ def predict_match(m: dict, teams: dict, tie_bonus: float = 0.0) -> dict:
     blend = W_MARKET * km + (1 - W_MARKET) * mm
     blend /= blend.sum()
 
-    pick, ev, pick_p = best_pick(blend, tie_bonus=tie_bonus)
+    pick, ev, pick_p = best_pick(blend, tie_bonus=tie_bonus, mult=mult)
     modal, modal_p = modal_score(blend)
     pH, pD, pA = wdl(blend)
     mH, mD, mA = wdl(mm)               # model-only
@@ -228,8 +237,7 @@ def predict_match(m: dict, teams: dict, tie_bonus: float = 0.0) -> dict:
     def stats_for(a, b):
         c = "home" if a > b else ("draw" if a == b else "away")
         conf = {"home": pH, "draw": pD, "away": pA}[c]
-        p_exact = blend[a, b]
-        ev_pts = p_exact * max(a + b, 3) + (conf - p_exact)
+        ev_pts, _, _ = ev_of_pick(blend, a, b, mult=mult)
         return c, conf, ev_pts
 
     pick_cls, pick_conf, _ = stats_for(*pick)
@@ -237,7 +245,7 @@ def predict_match(m: dict, teams: dict, tie_bonus: float = 0.0) -> dict:
     return {
         "slug": m.get("slug"),
         "group": m["group"], "home": h, "away": a, "date": m["date"],
-        "kickoff": m.get("kickoff"),
+        "kickoff": m.get("kickoff"), "mult": mult,
         "lambda_home": round(lh, 2), "lambda_away": round(la, 2),
         "blend_wdl": [round(pH, 3), round(pD, 3), round(pA, 3)],
         "model_wdl": [round(mH, 3), round(mD, 3), round(mA, 3)],
@@ -301,7 +309,8 @@ def build_predictions():
     for m in sorted(ko_games, key=lambda m: (_kickoff(m) or _far)):
         match_no, round_name = ko_lookup[frozenset((m["home"], m["away"]))]
         r16plus = round_name != "Round of 32"
-        p = predict_match(m, teams, tie_bonus=(KO_TIE_ADVANCER_PTS if r16plus else 0.0))
+        p = predict_match(m, teams, tie_bonus=(KO_TIE_ADVANCER_PTS if r16plus else 0.0),
+                          mult=stage_mult(round_name))
         ph_adv, pa_adv = advance_probs(p["matrix"])
         p["stage"] = round_name
         p["match"] = match_no
@@ -547,7 +556,8 @@ def main(safe: bool = False):
       + ("Score pick = single MOST LIKELY scoreline (highest exact-hit rate)._"
          if safe else
          "Score pick MAXIMISES EXPECTED POINTS for the office game "
-         "(exact = max(total goals,3); right winner = 1)._"))
+         "(exact = 3, +1 per goal over 3; right winner/draw = 1; -1 if exactly reversed; "
+         "KO points x2 in R32/R16, x3 from the QF)._"))
     P("")
     P("## How to read this (office-game strategy)")
     P("")
@@ -558,15 +568,18 @@ def main(safe: bool = False):
         P("- **Max-EV alt** = the expected-points-optimal score (run without `--safe`); "
           "for heavy favourites it chases a higher score like 0-4.")
     else:
-        P("- **Score pick** = the scoreline with the highest EXPECTED POINTS, not the "
-          "most likely score. For heavy favourites it deliberately chases a high score "
-          "(e.g. 0-4) because exact 4-goal games pay `max(4,3)=4` and you still bank 1 "
-          "pt for the right winner — that genuinely beats a 'safe' 0-2 in EV.")
+        P("- **Score pick** = the scoreline with the highest EXPECTED POINTS, not "
+          "necessarily the most likely score. Under the real rule an exact hit pays a "
+          "flat 3 (+1 per goal over 3) while a right winner/draw pays 1, so the pick "
+          "sits near the most-likely score and only nudges up a goal when a plausible "
+          "high-scoring exact's goals bonus beats its lower hit rate — it no longer "
+          "blindly chases 0-4.")
         P("- **Most likely alt** = the single highest-probability score, if you'd rather "
           "lock in exacts than chase EV (run with `--safe`).")
-    P("- **EV pts** = expected office-game points from the pick. **Hit%** = chance the "
-      "exact score lands (your variance). **Conf** = chance the predicted winner/draw is "
-      "right (your floor — the +1 outcome point).")
+    P("- **EV pts** = expected office-game points from the pick — already stage-multiplied "
+      "for knockout games (R32/R16 x2, QF/SF/Final x3), so KO games rank above group "
+      "games. **Hit%** = chance the exact score lands (your variance). **Conf** = chance "
+      "the predicted winner/draw is right (your floor — the +1 outcome point).")
     P("- **Blend / Market / Model W/D/W** shows when the model and the (well-calibrated) "
       "market disagree.")
     P("")
@@ -619,7 +632,10 @@ def main(safe: bool = False):
     if ko_preds:
         P("## Knockout picks")
         P("")
-        P("_Round of 32 plays exactly like the group stage. From the Round of 16 you also "
+        P("_Knockout points are MULTIPLIED as the tournament advances (R32/R16 x2, "
+          "QF/SF/3rd/Final x3) — already baked into the EV pts column, which is why KO "
+          "games dominate the EV rankings. The -1 reverse-result penalty is left unscaled. "
+          "Round of 32 plays exactly like the group stage. From the Round of 16 you also "
           "name who ADVANCES if your 90-minute pick is a draw (shown below). The advancer "
           f"points are a placeholder (KO_TIE_ADVANCER_PTS = {KO_TIE_ADVANCER_PTS}) until the "
           "pool's tie rule is confirmed — set it and R16+ draw picks re-optimise automatically._")
@@ -632,7 +648,8 @@ def main(safe: bool = False):
             wdl_b, wdl_k, _ = wdl_cells(p)
             adv_txt = (f"{p['advancer']} {fmt_pct(p['advance'][p['advancer']]).strip()}"
                        if p.get("needs_advancer") else "—")
-            P(f"| {p['stage']} · M{p['match']} | {p['date'][5:]} | {p['home']} vs {p['away']} | "
+            stage_lbl = f"{p['stage']} · M{p['match']}" + (f" ×{p['mult']}" if p.get('mult', 1) > 1 else "")
+            P(f"| {stage_lbl} | {p['date'][5:]} | {p['home']} vs {p['away']} | "
               f"{pk} | {ev_s} | {hit_s} | {conf_s} | {alt} | {adv_txt} | {wdl_b} | {wdl_k} |")
         P("")
 

@@ -21,6 +21,7 @@
 !/src/worldcup_predict.py
 !/src/worldcup_bracket.py
 !/src/worldcup_score.py
+!/src/worldcup_scoring.py
 
 # 4) within data/, keep only the worldcup data
 /data/*

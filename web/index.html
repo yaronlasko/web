@@ -365,7 +365,8 @@
   function matchCard(p){
     var v = view(p);
     var b = p.blend_wdl;
-    var chip = p.stage ? (ROUND_ABBR[p.stage]||p.stage)+' · M'+p.match : 'Grp '+esc(p.group);
+    var chip = p.stage ? (ROUND_ABBR[p.stage]||p.stage)+' · M'+p.match+
+                         (p.mult>1 ? ' ×'+p.mult : '') : 'Grp '+esc(p.group);
     return '<div class="card match">'+
       '<span class="grp">'+esc(chip)+'</span>'+
       '<div class="teams">'+esc(p.home)+' <span style="opacity:.5">vs</span> '+esc(p.away)+'</div>'+
@@ -559,11 +560,13 @@
       'exact-score markets per game. Polymarket sports markets were the best-calibrated signal in the parent project, so they lead the blend.</li>'+
     '<li><b>Model ('+Math.round((1-(m.w_market||0))*100)+'%)</b> — current Elo + a small this-WC form '+
       'nudge → expected goals → Dixon-Coles bivariate Poisson. Host edge (+60 Elo) for the USA only.</li>'+
-    '<li><b>Office scoring</b> — exact score = max(total goals, 3) pts; right winner/draw only = 1; '+
-      'wrong = 0. "Max expected points" deliberately chases high scores like 0–4 for heavy favourites.</li>'+
-    '<li><b>Knockouts</b> — picks are the 90-minute score, same as the group stage (R32 needs no '+
-      'winner-in-tie). From R16 the card also names who advances on a drawn pick; those advancer points '+
-      'are a placeholder until the pool\'s tie rule is set.</li>'+
+    '<li><b>Office scoring</b> — exact score = 3 pts (+1 per goal over 3); right winner/draw only = 1; '+
+      'exactly-reversed score = −1; anything else = 0. "Max expected points" therefore sits near the '+
+      'most-likely score and only nudges up a goal when a plausible high-scoring exact\'s bonus beats its lower hit rate.</li>'+
+    '<li><b>Knockouts</b> — points are MULTIPLIED as the tournament advances (R32/R16 ×2, QF/SF/Final ×3), '+
+      'already baked into EV pts, so KO games top the rankings (the −1 penalty is left unscaled). Picks are '+
+      'the 90-minute score, same as the group stage. From R16 the card also names who advances on a drawn '+
+      'pick; those advancer points are a placeholder until the pool\'s tie rule is set.</li>'+
     '<li><b>Title odds</b> — forward Monte-Carlo of the bracket to the Final. Known R32 ties use the '+
       'market-blended advance probability; later, not-yet-known matchups have no market so they lean on the model.</li>'+
     '<li><b>Qualification</b> — joint Monte-Carlo of all remaining group matches; top-2 per group + 8 best '+
@@ -742,7 +745,7 @@
 
   // ---- mode toggle ------------------------------------------------------
   var hints = {
-    ev:'Headlines the expected-points-maximising score (chases high scores on lop-sided games).',
+    ev:'Headlines the expected-points-maximising score (flat-3 exact + goals bonus, KO points ×2/×3).',
     modal:'Headlines the single most-likely scoreline (higher exact-hit rate, lower variance).'
   };
   function renderAll(){

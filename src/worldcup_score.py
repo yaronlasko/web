@@ -5,8 +5,8 @@
 so the stored prediction always predates the match). This script grades each logged game
 that has since resolved and reports:
 
-  * realized office points: EV-max pick vs the safe / most-likely pick (did chasing high
-    scores actually pay off in OUR pool?)
+  * realized office points (the real league rule, incl. knockout x2/x3 multipliers):
+    EV-max pick vs the safe / most-likely pick (is the EV-max strategy paying off in OUR pool?)
   * exact-score hit rate and outcome (W/D/L) accuracy
   * calibration: Brier + log-loss of the blended W/D/L vs market-only vs model-only
     (does the 30% model help or hurt on top of the market?)
@@ -26,6 +26,8 @@ import argparse
 import json
 import math
 from pathlib import Path
+
+from src.worldcup_scoring import office_points, stage_mult
 
 ROOT = Path(__file__).resolve().parent.parent
 WC = ROOT / "data" / "worldcup"
@@ -64,14 +66,6 @@ def _merge_logs(*logs: dict) -> dict:
 def cls(h: int, a: int) -> int:
     """Outcome index: 0 home win, 1 draw, 2 away win — matches the [H, D, A] wdl order."""
     return 0 if h > a else (1 if h == a else 2)
-
-
-def office_points(pick, actual) -> int:
-    """Office-game points: exact score = max(total goals, 3); right outcome only = 1; else 0."""
-    (ph, pa), (ah, aa) = pick, actual
-    if ph == ah and pa == aa:
-        return max(ah + aa, 3)
-    return 1 if cls(ph, pa) == cls(ah, aa) else 0
 
 
 def brier(wdl, idx: int) -> float:
@@ -118,11 +112,13 @@ def grade(fetch: bool = True):
         ah, aa = a
         aidx = cls(ah, aa)
         pick, modal = tuple(p["pick"]), tuple(p["modal"])
+        mult = stage_mult(p.get("stage"))                # knockout points multiplier (1 for group)
         rows.append({
             "slug": slug, "home": p["home"], "away": p["away"],
             "stage": p.get("stage") or (f"Grp {p.get('group')}" if p.get("group") else ""),
+            "mult": mult,
             "actual": (ah, aa), "pick": pick, "modal": modal,
-            "ev_pts": office_points(pick, a), "safe_pts": office_points(modal, a),
+            "ev_pts": office_points(pick, a, mult), "safe_pts": office_points(modal, a, mult),
             "exact_ev": pick == a, "exact_safe": modal == a,
             "out_ev": cls(*pick) == aidx, "out_safe": cls(*modal) == aidx,
             "brier_blend": brier(p["blend_wdl"], aidx), "ll_blend": logloss(p["blend_wdl"], aidx),
@@ -168,7 +164,7 @@ def report(rows, ungraded):
     diff = ev_tot - safe_tot
     verdict = ("EV-max ahead" if diff > 0 else "safe ahead" if diff < 0 else "tied")
     P(f"- **Difference:** {diff:+d} pts in favour of **{verdict}** "
-      f"(this is the whole point of the EV-max strategy — is chasing high scores paying off?).")
+      f"(this is the whole point of the EV-max strategy — is it beating the safe pick?).")
     P("")
     P("## Calibration (lower is better) — is the 30% model helping?")
     P("")
@@ -189,7 +185,8 @@ def report(rows, ungraded):
     for r in rows:
         def mark(score, exact):
             return f"{score[0]}-{score[1]}" + ("✓" if exact else "")
-        P(f"| {r['stage']}: {r['home']} v {r['away']} | {r['actual'][0]}-{r['actual'][1]} | "
+        stage_lbl = r["stage"] + (f" ×{r['mult']}" if r.get("mult", 1) > 1 else "")
+        P(f"| {stage_lbl}: {r['home']} v {r['away']} | {r['actual'][0]}-{r['actual'][1]} | "
           f"{mark(r['pick'], r['exact_ev'])} ({r['ev_pts']}) | "
           f"{mark(r['modal'], r['exact_safe'])} ({r['safe_pts']}) |")
     P("")
