@@ -1,0 +1,66 @@
+{
+  "title": "World Cup: Golden Boot Winner",
+  "generated": "2026-06-28T18:08:33+00:00",
+  "players": [
+    {
+      "player": "Lionel Messi",
+      "prob": 0.5101,
+      "raw": 0.5185
+    },
+    {
+      "player": "Kylian Mbappe",
+      "prob": 0.2213,
+      "raw": 0.225
+    },
+    {
+      "player": "Erling Haaland",
+      "prob": 0.0639,
+      "raw": 0.065
+    },
+    {
+      "player": "Ousmane Dembele",
+      "prob": 0.0625,
+      "raw": 0.0635
+    },
+    {
+      "player": "Vinicius Junior",
+      "prob": 0.0526,
+      "raw": 0.0535
+    },
+    {
+      "player": "Harry Kane",
+      "prob": 0.0339,
+      "raw": 0.0345
+    },
+    {
+      "player": "Cristiano Ronaldo",
+      "prob": 0.0103,
+      "raw": 0.0105
+    },
+    {
+      "player": "Mikel Oyarzabal",
+      "prob": 0.0064,
+      "raw": 0.0065
+    },
+    {
+      "player": "Deniz Undav",
+      "prob": 0.0054,
+      "raw": 0.0055
+    },
+    {
+      "player": "Lamine Yamal",
+      "prob": 0.0054,
+      "raw": 0.0055
+    },
+    {
+      "player": "Cody Gakpo",
+      "prob": 0.0034,
+      "raw": 0.0035
+    },
+    {
+      "player": "Kai Havertz",
+      "prob": 0.0025,
+      "raw": 0.0025
+    }
+  ]
+}

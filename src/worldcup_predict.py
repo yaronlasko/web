@@ -40,6 +40,7 @@ WC = ROOT / "data" / "worldcup"
 WEB_DIR = ROOT / "web"
 OUT_JSON = WC / "predictions.json"
 KO_RESULTS = WC / "knockout_results.json"   # {match_no: {"winner": team, "score": [h, a]}}
+GOLDEN_BOOT = WC / "golden_boot.json"       # de-vigged top-scorer market (from worldcup_fetch)
 OUT_MD = ROOT / "models" / "worldcup_predictions.md"
 OUT_MD_SAFE = ROOT / "models" / "worldcup_predictions_safe.md"
 
@@ -660,6 +661,8 @@ def main(safe: bool = False):
     # `groups` (built above for the markdown qualification section) is still in
     # scope; reuse it so the site carries the full per-team standings, not just
     # the two teams per match that predictions.json keeps.
+    golden_boot = (json.load(open(GOLDEN_BOOT, encoding="utf-8"))
+                   if GOLDEN_BOOT.exists() else None)
     web = {
         "meta": {
             "snapshot": "2026-06-25",
@@ -670,6 +673,7 @@ def main(safe: bool = False):
         "matches": group_dump,
         "knockout": ko_dump,
         "title_odds": title_odds,
+        "golden_boot": golden_boot,
         "bracket": bracket,
         "groups": [
             {

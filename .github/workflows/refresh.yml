@@ -7,12 +7,13 @@ name: Refresh predictions
 #   * push to main      = redeploy when you edit the site or pipeline
 on:
   workflow_dispatch:
-  schedule:
-    # Hourly through the World Cup window. GitHub cron can't target "match days"
-    # exactly, so this fires hourly every day in June & July; rest-day runs just
-    # re-publish the same data (harmless). After the final, delete this schedule.
-    # (GitHub often delays scheduled runs by up to ~an hour — "hourly" is approximate.)
-    - cron: "0 * * 6,7 *"
+    # GitHub's shared scheduler delays/DROPS scheduled runs under load, and the top
+    # of the hour (minute 0) is the most congested slot — so a plain hourly "0 * * * *"
+    # in practice fired every 1–5h (observed gaps up to 5.5h => the site read ">1h ago").
+    # Fix: run THREE times an hour at OFF-PEAK minutes. Even if GitHub drops 2 of the 3,
+    # the site still refreshes well within the hour. Rest-day runs just re-publish the
+    # same data (harmless). After the final, delete this schedule.
+    - cron: "9,29,49 * * 6,7 *"
   push:
     branches: [main]
 

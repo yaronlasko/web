@@ -151,6 +151,12 @@
     <div id="titleodds" style="margin-top:14px"></div>
   </div>
 
+  <div id="scorer-section" style="display:none">
+    <h2 class="section">Top scorer · Golden Boot</h2>
+    <div class="legend" id="scorer-legend"></div>
+    <div id="scorer" style="margin-top:14px"></div>
+  </div>
+
   <h2 class="section">Knockout bracket</h2>
   <div class="legend" id="bracket-legend"></div>
   <div class="bracket" id="bracket"></div>
@@ -368,6 +374,27 @@
       '<th class="num">Final</th><th>Champion</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
   }
 
+  // ---- top scorer (Golden Boot market, de-vigged) ----------------------
+  function renderScorer(){
+    var gb = D.golden_boot;
+    var sec = document.getElementById('scorer-section');
+    if(!gb || !gb.players || !gb.players.length){ if(sec) sec.style.display='none'; return; }
+    sec.style.display='';
+    document.getElementById('scorer-legend').innerHTML =
+      '<span>Live Polymarket <b>Golden Boot</b> market, de-vigged — the market-led signal, '+
+      'already pricing in goals scored so far + each player\'s remaining fixtures.</span>';
+    var top = gb.players.slice(0,12);
+    var max = top[0] ? top[0].prob : 1;
+    var rows = top.map(function(x){
+      var w = max>0 ? Math.round(x.prob/max*100) : 0;
+      return '<tr><td>'+esc(x.player)+'</td>'+
+        '<td><div class="advbar"><span style="width:'+w+'%"></span><em>'+pct(x.prob)+'</em></div></td></tr>';
+    }).join('');
+    document.getElementById('scorer').innerHTML =
+      '<div class="card group"><table><thead><tr><th>Player</th>'+
+      '<th>Win Golden Boot</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+  }
+
   // ---- group qualification tables --------------------------------------
   function renderGroups(){
     var groups = D.groups||[];
@@ -470,7 +497,7 @@
     });
   });
 
-  renderAll(); renderTitleOdds(); renderGroups(); renderBracket();
+  renderAll(); renderTitleOdds(); renderScorer(); renderGroups(); renderBracket();
 })();
 </script>
 </body>

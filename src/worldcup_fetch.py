@@ -11,6 +11,7 @@ Group labels are looked up from data/worldcup/teams.json by the home team, so th
 working as new fixtures appear (just keep teams.json's group assignments current).
 """
 from __future__ import annotations
+import datetime as _dt
 import json
 import re
 from pathlib import Path
@@ -22,6 +23,7 @@ from config import GAMMA_BASE, USER_AGENT
 ROOT = Path(__file__).resolve().parent.parent
 WC = ROOT / "data" / "worldcup"
 GAME_SLUG = re.compile(r"^fifwc-[a-z]{3}-[a-z]{3}-2026-\d\d-\d\d$")  # main game (no suffix)
+GOLDEN_BOOT_SLUG = "world-cup-golden-boot-winner"   # tournament top-scorer market
 H = {"User-Agent": USER_AGENT}
 
 
@@ -95,6 +97,40 @@ def parse(keep: dict, teams: dict) -> dict:
     return matches
 
 
+def fetch_golden_boot() -> dict | None:
+    """Pull the live tournament top-scorer (Golden Boot) market and return a de-vigged
+    per-player win probability. This is a single Polymarket event with ~80 yes/no player
+    sub-markets; mid-tournament it already prices in goals scored so far + each player's
+    remaining fixtures, so it's a genuine market-led signal (no model needed). Returns
+    None if the market can't be read (so a hiccup never breaks the rest of the refresh)."""
+    r = requests.get(f"{GAMMA_BASE}/events", params={"slug": GOLDEN_BOOT_SLUG},
+                     headers=H, timeout=25)
+    evs = r.json()
+    ev = evs[0] if isinstance(evs, list) and evs else (evs if isinstance(evs, dict) else None)
+    if not ev:
+        return None
+    rows = []
+    for m in ev.get("markets", []):
+        pr = _jl(m.get("outcomePrices")); outs = _jl(m.get("outcomes"))
+        if not (outs and pr and len(outs) == 2 and str(outs[0]).lower() == "yes"):
+            continue
+        yes = float(pr[0])
+        name = m.get("groupItemTitle") or m.get("question", "")
+        if name:
+            rows.append((name, yes))
+    tot = sum(y for _, y in rows)
+    if not tot:
+        return None
+    rows.sort(key=lambda x: -x[1])
+    players = [{"player": n, "prob": round(y / tot, 4), "raw": round(y, 4)}
+               for n, y in rows if y > 0.002]            # drop the long tail of ~0% names
+    return {
+        "title": ev.get("title", "Golden Boot Winner"),
+        "generated": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
+        "players": players,
+    }
+
+
 def main():
     teams = json.load(open(WC / "teams.json", encoding="utf-8"))
     keep = fetch_events()
@@ -103,6 +139,19 @@ def main():
     json.dump(matches, open(WC / "market.json", "w", encoding="utf-8"),
               indent=2, ensure_ascii=False)
     print(f"Saved {len(matches)} games to {WC/'market.json'}")
+
+    # tournament-wide top-scorer market (best-effort: never block the game refresh)
+    try:
+        gb = fetch_golden_boot()
+    except Exception as e:
+        gb = None
+        print(f"  golden boot fetch failed ({e}); keeping previous golden_boot.json")
+    if gb:
+        json.dump(gb, open(WC / "golden_boot.json", "w", encoding="utf-8"),
+                  indent=2, ensure_ascii=False)
+        top = gb["players"][0] if gb["players"] else None
+        print(f"  golden boot: {len(gb['players'])} players"
+              + (f"  (lead: {top['player']} {top['prob']*100:.0f}%)" if top else ""))
     for m in sorted(matches.values(), key=lambda x: (x["date"], x["group"])):
         ml = m["moneyline"]
         nes = len(m["exact_score"]) if m["exact_score"] else 0

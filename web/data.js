@@ -1,7 +1,7 @@
 window.WC_DATA = {
   "meta": {
     "snapshot": "2026-06-25",
-    "generated": "2026-06-28T11:52:21+00:00",
+    "generated": "2026-06-28T18:08:44+00:00",
     "w_market": 0.7,
     "n_sims": 40000
   },
@@ -16,9 +16,9 @@ window.WC_DATA = {
       "lambda_home": 0.61,
       "lambda_away": 2.19,
       "blend_wdl": [
-        0.136,
-        0.227,
-        0.637
+        0.153,
+        0.252,
+        0.595
       ],
       "model_wdl": [
         0.094,
@@ -26,32 +26,32 @@ window.WC_DATA = {
         0.741
       ],
       "market_wdl": [
-        0.154,
-        0.254,
-        0.592
+        0.178,
+        0.289,
+        0.533
       ],
       "pick": [
         0,
         1
       ],
-      "pick_ev": 0.919,
+      "pick_ev": 0.866,
       "pick_class": "away",
-      "pick_hit": 0.141,
-      "confidence": 0.637,
+      "pick_hit": 0.135,
+      "confidence": 0.595,
       "modal": [
         0,
         1
       ],
-      "modal_p": 0.141,
-      "modal_ev": 0.919,
+      "modal_p": 0.135,
+      "modal_ev": 0.866,
       "modal_class": "away",
-      "modal_conf": 0.637,
+      "modal_conf": 0.595,
       "stage": "Round of 32",
       "match": 73,
       "needs_advancer": false,
       "advance": {
-        "South Africa": 0.176,
-        "Canada": 0.824
+        "South Africa": 0.204,
+        "Canada": 0.796
       },
       "advancer": "Canada"
     },
@@ -74,7 +74,7 @@ window.WC_DATA = {
         0.263
       ],
       "market_wdl": [
-        0.566,
+        0.567,
         0.251,
         0.182
       ],
@@ -82,16 +82,16 @@ window.WC_DATA = {
         1,
         0
       ],
-      "pick_ev": 0.801,
+      "pick_ev": 0.804,
       "pick_class": "home",
-      "pick_hit": 0.128,
+      "pick_hit": 0.129,
       "confidence": 0.546,
       "modal": [
         1,
         0
       ],
-      "modal_p": 0.128,
-      "modal_ev": 0.801,
+      "modal_p": 0.129,
+      "modal_ev": 0.804,
       "modal_class": "home",
       "modal_conf": 0.546,
       "stage": "Round of 32",
@@ -112,9 +112,9 @@ window.WC_DATA = {
       "lambda_home": 1.75,
       "lambda_away": 0.93,
       "blend_wdl": [
-        0.683,
-        0.195,
-        0.121
+        0.689,
+        0.19,
+        0.122
       ],
       "model_wdl": [
         0.572,
@@ -122,32 +122,32 @@ window.WC_DATA = {
         0.206
       ],
       "market_wdl": [
-        0.731,
-        0.184,
+        0.739,
+        0.176,
         0.085
       ],
       "pick": [
         2,
         0
       ],
-      "pick_ev": 0.934,
+      "pick_ev": 0.951,
       "pick_class": "home",
-      "pick_hit": 0.125,
-      "confidence": 0.683,
+      "pick_hit": 0.131,
+      "confidence": 0.689,
       "modal": [
         2,
         0
       ],
-      "modal_p": 0.125,
-      "modal_ev": 0.934,
+      "modal_p": 0.131,
+      "modal_ev": 0.951,
       "modal_class": "home",
-      "modal_conf": 0.683,
+      "modal_conf": 0.689,
       "stage": "Round of 32",
       "match": 74,
       "needs_advancer": false,
       "advance": {
-        "Germany": 0.849,
-        "Paraguay": 0.151
+        "Germany": 0.85,
+        "Paraguay": 0.15
       },
       "advancer": "Germany"
     },
@@ -160,9 +160,9 @@ window.WC_DATA = {
       "lambda_home": 1.62,
       "lambda_away": 1.03,
       "blend_wdl": [
-        0.468,
-        0.285,
-        0.247
+        0.464,
+        0.287,
+        0.249
       ],
       "model_wdl": [
         0.518,
@@ -170,32 +170,32 @@ window.WC_DATA = {
         0.248
       ],
       "market_wdl": [
-        0.447,
-        0.307,
-        0.246
+        0.442,
+        0.31,
+        0.249
       ],
       "pick": [
         1,
         0
       ],
-      "pick_ev": 0.703,
+      "pick_ev": 0.697,
       "pick_class": "home",
-      "pick_hit": 0.118,
-      "confidence": 0.468,
+      "pick_hit": 0.116,
+      "confidence": 0.464,
       "modal": [
         1,
         1
       ],
-      "modal_p": 0.135,
-      "modal_ev": 0.555,
+      "modal_p": 0.136,
+      "modal_ev": 0.558,
       "modal_class": "draw",
-      "modal_conf": 0.285,
+      "modal_conf": 0.287,
       "stage": "Round of 32",
       "match": 75,
       "needs_advancer": false,
       "advance": {
-        "Netherlands": 0.655,
-        "Morocco": 0.345
+        "Netherlands": 0.651,
+        "Morocco": 0.349
       },
       "advancer": "Netherlands"
     },
@@ -226,16 +226,16 @@ window.WC_DATA = {
         0,
         1
       ],
-      "pick_ev": 0.785,
+      "pick_ev": 0.783,
       "pick_class": "away",
-      "pick_hit": 0.108,
+      "pick_hit": 0.107,
       "confidence": 0.568,
       "modal": [
         0,
         1
       ],
-      "modal_p": 0.108,
-      "modal_ev": 0.785,
+      "modal_p": 0.107,
+      "modal_ev": 0.783,
       "modal_class": "away",
       "modal_conf": 0.568,
       "stage": "Round of 32",
@@ -256,8 +256,8 @@ window.WC_DATA = {
       "lambda_home": 2.77,
       "lambda_away": 0.19,
       "blend_wdl": [
-        0.809,
-        0.133,
+        0.811,
+        0.132,
         0.057
       ],
       "model_wdl": [
@@ -266,26 +266,26 @@ window.WC_DATA = {
         0.016
       ],
       "market_wdl": [
-        0.769,
-        0.156,
+        0.771,
+        0.154,
         0.075
       ],
       "pick": [
         4,
         0
       ],
-      "pick_ev": 1.128,
+      "pick_ev": 1.14,
       "pick_class": "home",
-      "pick_hit": 0.106,
-      "confidence": 0.809,
+      "pick_hit": 0.11,
+      "confidence": 0.811,
       "modal": [
         2,
         0
       ],
-      "modal_p": 0.151,
-      "modal_ev": 1.112,
+      "modal_p": 0.149,
+      "modal_ev": 1.11,
       "modal_class": "home",
-      "modal_conf": 0.809,
+      "modal_conf": 0.811,
       "stage": "Round of 32",
       "match": 77,
       "needs_advancer": false,
@@ -304,9 +304,9 @@ window.WC_DATA = {
       "lambda_home": 1.69,
       "lambda_away": 0.98,
       "blend_wdl": [
-        0.467,
+        0.46,
         0.295,
-        0.238
+        0.245
       ],
       "model_wdl": [
         0.547,
@@ -314,32 +314,32 @@ window.WC_DATA = {
         0.225
       ],
       "market_wdl": [
-        0.433,
+        0.423,
         0.323,
-        0.244
+        0.254
       ],
       "pick": [
         1,
         0
       ],
-      "pick_ev": 0.749,
+      "pick_ev": 0.74,
       "pick_class": "home",
-      "pick_hit": 0.141,
-      "confidence": 0.467,
+      "pick_hit": 0.14,
+      "confidence": 0.46,
       "modal": [
         1,
         0
       ],
-      "modal_p": 0.141,
-      "modal_ev": 0.749,
+      "modal_p": 0.14,
+      "modal_ev": 0.74,
       "modal_class": "home",
-      "modal_conf": 0.467,
+      "modal_conf": 0.46,
       "stage": "Round of 32",
       "match": 79,
       "needs_advancer": false,
       "advance": {
-        "Mexico": 0.662,
-        "Ecuador": 0.338
+        "Mexico": 0.652,
+        "Ecuador": 0.348
       },
       "advancer": "Mexico"
     },
@@ -370,16 +370,16 @@ window.WC_DATA = {
         2,
         0
       ],
-      "pick_ev": 1.144,
+      "pick_ev": 1.154,
       "pick_class": "home",
-      "pick_hit": 0.173,
+      "pick_hit": 0.178,
       "confidence": 0.798,
       "modal": [
         2,
         0
       ],
-      "modal_p": 0.173,
-      "modal_ev": 1.144,
+      "modal_p": 0.178,
+      "modal_ev": 1.154,
       "modal_class": "home",
       "modal_conf": 0.798,
       "stage": "Round of 32",
@@ -426,8 +426,8 @@ window.WC_DATA = {
         1,
         1
       ],
-      "modal_p": 0.133,
-      "modal_ev": 0.554,
+      "modal_p": 0.135,
+      "modal_ev": 0.558,
       "modal_class": "draw",
       "modal_conf": 0.288,
       "stage": "Round of 32",
@@ -466,16 +466,16 @@ window.WC_DATA = {
         1,
         0
       ],
-      "pick_ev": 0.952,
+      "pick_ev": 0.935,
       "pick_class": "home",
-      "pick_hit": 0.141,
+      "pick_hit": 0.133,
       "confidence": 0.67,
       "modal": [
         1,
         0
       ],
-      "modal_p": 0.141,
-      "modal_ev": 0.952,
+      "modal_p": 0.133,
+      "modal_ev": 0.935,
       "modal_class": "home",
       "modal_conf": 0.67,
       "stage": "Round of 32",
@@ -496,9 +496,9 @@ window.WC_DATA = {
       "lambda_home": 2.36,
       "lambda_away": 0.48,
       "blend_wdl": [
-        0.775,
-        0.164,
-        0.061
+        0.771,
+        0.165,
+        0.065
       ],
       "model_wdl": [
         0.799,
@@ -506,32 +506,32 @@ window.WC_DATA = {
         0.063
       ],
       "market_wdl": [
-        0.765,
-        0.175,
-        0.06
+        0.759,
+        0.176,
+        0.065
       ],
       "pick": [
         2,
         0
       ],
-      "pick_ev": 1.088,
+      "pick_ev": 1.098,
       "pick_class": "home",
-      "pick_hit": 0.156,
-      "confidence": 0.775,
+      "pick_hit": 0.164,
+      "confidence": 0.771,
       "modal": [
         2,
         0
       ],
-      "modal_p": 0.156,
-      "modal_ev": 1.088,
+      "modal_p": 0.164,
+      "modal_ev": 1.098,
       "modal_class": "home",
-      "modal_conf": 0.775,
+      "modal_conf": 0.771,
       "stage": "Round of 32",
       "match": 84,
       "needs_advancer": false,
       "advance": {
-        "Spain": 0.927,
-        "Austria": 0.073
+        "Spain": 0.923,
+        "Austria": 0.077
       },
       "advancer": "Spain"
     },
@@ -562,16 +562,16 @@ window.WC_DATA = {
         1,
         0
       ],
-      "pick_ev": 0.774,
+      "pick_ev": 0.777,
       "pick_class": "home",
-      "pick_hit": 0.122,
+      "pick_hit": 0.124,
       "confidence": 0.529,
       "modal": [
         1,
         0
       ],
-      "modal_p": 0.122,
-      "modal_ev": 0.774,
+      "modal_p": 0.124,
+      "modal_ev": 0.777,
       "modal_class": "home",
       "modal_conf": 0.529,
       "stage": "Round of 32",
@@ -592,9 +592,9 @@ window.WC_DATA = {
       "lambda_home": 1.94,
       "lambda_away": 0.79,
       "blend_wdl": [
-        0.556,
-        0.25,
-        0.194
+        0.551,
+        0.253,
+        0.196
       ],
       "model_wdl": [
         0.651,
@@ -602,32 +602,32 @@ window.WC_DATA = {
         0.15
       ],
       "market_wdl": [
-        0.515,
-        0.272,
-        0.213
+        0.508,
+        0.276,
+        0.216
       ],
       "pick": [
         1,
         0
       ],
-      "pick_ev": 0.782,
+      "pick_ev": 0.809,
       "pick_class": "home",
-      "pick_hit": 0.113,
-      "confidence": 0.556,
+      "pick_hit": 0.129,
+      "confidence": 0.551,
       "modal": [
         1,
-        1
+        0
       ],
-      "modal_p": 0.118,
-      "modal_ev": 0.487,
-      "modal_class": "draw",
-      "modal_conf": 0.25,
+      "modal_p": 0.129,
+      "modal_ev": 0.809,
+      "modal_class": "home",
+      "modal_conf": 0.551,
       "stage": "Round of 32",
       "match": 85,
       "needs_advancer": false,
       "advance": {
-        "Switzerland": 0.741,
-        "Algeria": 0.259
+        "Switzerland": 0.737,
+        "Algeria": 0.263
       },
       "advancer": "Switzerland"
     },
@@ -658,9 +658,9 @@ window.WC_DATA = {
         0,
         1
       ],
-      "pick_ev": 0.591,
+      "pick_ev": 0.589,
       "pick_class": "away",
-      "pick_hit": 0.125,
+      "pick_hit": 0.124,
       "confidence": 0.341,
       "modal": [
         1,
@@ -688,9 +688,9 @@ window.WC_DATA = {
       "lambda_home": 3.26,
       "lambda_away": 0.18,
       "blend_wdl": [
-        0.881,
+        0.88,
         0.089,
-        0.03
+        0.031
       ],
       "model_wdl": [
         0.938,
@@ -698,32 +698,32 @@ window.WC_DATA = {
         0.01
       ],
       "market_wdl": [
-        0.857,
+        0.855,
         0.105,
-        0.038
+        0.04
       ],
       "pick": [
         2,
         0
       ],
-      "pick_ev": 1.224,
+      "pick_ev": 1.217,
       "pick_class": "home",
-      "pick_hit": 0.171,
-      "confidence": 0.881,
+      "pick_hit": 0.169,
+      "confidence": 0.88,
       "modal": [
         2,
         0
       ],
-      "modal_p": 0.171,
-      "modal_ev": 1.224,
+      "modal_p": 0.169,
+      "modal_ev": 1.217,
       "modal_class": "home",
-      "modal_conf": 0.881,
+      "modal_conf": 0.88,
       "stage": "Round of 32",
       "match": 86,
       "needs_advancer": false,
       "advance": {
-        "Argentina": 0.967,
-        "Cabo Verde": 0.033
+        "Argentina": 0.966,
+        "Cabo Verde": 0.034
       },
       "advancer": "Argentina"
     },
@@ -736,9 +736,9 @@ window.WC_DATA = {
       "lambda_home": 2.95,
       "lambda_away": 0.18,
       "blend_wdl": [
-        0.704,
-        0.198,
-        0.098
+        0.715,
+        0.193,
+        0.092
       ],
       "model_wdl": [
         0.919,
@@ -746,32 +746,32 @@ window.WC_DATA = {
         0.013
       ],
       "market_wdl": [
-        0.612,
-        0.254,
-        0.134
+        0.628,
+        0.246,
+        0.126
       ],
       "pick": [
-        4,
+        2,
         0
       ],
-      "pick_ev": 1.024,
+      "pick_ev": 1.023,
       "pick_class": "home",
-      "pick_hit": 0.107,
-      "confidence": 0.704,
+      "pick_hit": 0.154,
+      "confidence": 0.715,
       "modal": [
         2,
         0
       ],
-      "modal_p": 0.148,
-      "modal_ev": 0.999,
+      "modal_p": 0.154,
+      "modal_ev": 1.023,
       "modal_class": "home",
-      "modal_conf": 0.704,
+      "modal_conf": 0.715,
       "stage": "Round of 32",
       "match": 87,
       "needs_advancer": false,
       "advance": {
-        "Colombia": 0.878,
-        "Ghana": 0.122
+        "Colombia": 0.886,
+        "Ghana": 0.114
       },
       "advancer": "Colombia"
     }
@@ -780,34 +780,34 @@ window.WC_DATA = {
     {
       "team": "Argentina",
       "reach_r16": 0.967,
-      "reach_qf": 0.942,
-      "reach_sf": 0.747,
-      "reach_final": 0.567,
-      "champion": 0.353
+      "reach_qf": 0.941,
+      "reach_sf": 0.745,
+      "reach_final": 0.565,
+      "champion": 0.352
     },
     {
       "team": "Spain",
-      "reach_r16": 0.926,
-      "reach_qf": 0.717,
-      "reach_sf": 0.648,
-      "reach_final": 0.437,
-      "champion": 0.251
+      "reach_r16": 0.921,
+      "reach_qf": 0.714,
+      "reach_sf": 0.645,
+      "reach_final": 0.435,
+      "champion": 0.25
     },
     {
       "team": "France",
-      "reach_r16": 0.934,
-      "reach_qf": 0.706,
+      "reach_r16": 0.935,
+      "reach_qf": 0.707,
       "reach_sf": 0.554,
       "reach_final": 0.307,
-      "champion": 0.157
+      "champion": 0.158
     },
     {
       "team": "England",
       "reach_r16": 0.934,
-      "reach_qf": 0.65,
-      "reach_sf": 0.38,
+      "reach_qf": 0.651,
+      "reach_sf": 0.381,
       "reach_final": 0.142,
-      "champion": 0.06
+      "champion": 0.061
     },
     {
       "team": "Brazil",
@@ -819,15 +819,15 @@ window.WC_DATA = {
     },
     {
       "team": "Colombia",
-      "reach_r16": 0.874,
-      "reach_qf": 0.626,
-      "reach_sf": 0.183,
-      "reach_final": 0.094,
+      "reach_r16": 0.883,
+      "reach_qf": 0.632,
+      "reach_sf": 0.185,
+      "reach_final": 0.095,
       "champion": 0.038
     },
     {
       "team": "Netherlands",
-      "reach_r16": 0.655,
+      "reach_r16": 0.651,
       "reach_qf": 0.542,
       "reach_sf": 0.199,
       "reach_final": 0.072,
@@ -836,8 +836,8 @@ window.WC_DATA = {
     {
       "team": "Portugal",
       "reach_r16": 0.714,
-      "reach_qf": 0.213,
-      "reach_sf": 0.159,
+      "reach_qf": 0.215,
+      "reach_sf": 0.16,
       "reach_final": 0.068,
       "champion": 0.023
     },
@@ -859,18 +859,18 @@ window.WC_DATA = {
     },
     {
       "team": "Mexico",
-      "reach_r16": 0.664,
-      "reach_qf": 0.257,
-      "reach_sf": 0.116,
+      "reach_r16": 0.655,
+      "reach_qf": 0.254,
+      "reach_sf": 0.114,
       "reach_final": 0.03,
       "champion": 0.009
     },
     {
       "team": "Switzerland",
-      "reach_r16": 0.738,
-      "reach_qf": 0.314,
-      "reach_sf": 0.058,
-      "reach_final": 0.021,
+      "reach_r16": 0.734,
+      "reach_qf": 0.309,
+      "reach_sf": 0.057,
+      "reach_final": 0.02,
       "champion": 0.005
     },
     {
@@ -891,9 +891,9 @@ window.WC_DATA = {
     },
     {
       "team": "Morocco",
-      "reach_r16": 0.345,
-      "reach_qf": 0.239,
-      "reach_sf": 0.053,
+      "reach_r16": 0.348,
+      "reach_qf": 0.245,
+      "reach_sf": 0.055,
       "reach_final": 0.012,
       "champion": 0.003
     },
@@ -902,22 +902,22 @@ window.WC_DATA = {
       "reach_r16": 0.405,
       "reach_qf": 0.269,
       "reach_sf": 0.047,
-      "reach_final": 0.011,
+      "reach_final": 0.012,
       "champion": 0.002
     },
     {
       "team": "Croatia",
       "reach_r16": 0.286,
-      "reach_qf": 0.05,
-      "reach_sf": 0.029,
+      "reach_qf": 0.051,
+      "reach_sf": 0.03,
       "reach_final": 0.009,
       "champion": 0.001
     },
     {
       "team": "Canada",
-      "reach_r16": 0.823,
-      "reach_qf": 0.215,
-      "reach_sf": 0.031,
+      "reach_r16": 0.793,
+      "reach_qf": 0.207,
+      "reach_sf": 0.03,
       "reach_final": 0.006,
       "champion": 0.001
     },
@@ -931,16 +931,16 @@ window.WC_DATA = {
     },
     {
       "team": "Ecuador",
-      "reach_r16": 0.336,
-      "reach_qf": 0.086,
-      "reach_sf": 0.027,
+      "reach_r16": 0.345,
+      "reach_qf": 0.087,
+      "reach_sf": 0.028,
       "reach_final": 0.004,
       "champion": 0.001
     },
     {
       "team": "Austria",
-      "reach_r16": 0.074,
-      "reach_qf": 0.019,
+      "reach_r16": 0.079,
+      "reach_qf": 0.02,
       "reach_sf": 0.01,
       "reach_final": 0.002,
       "champion": 0.0
@@ -963,8 +963,8 @@ window.WC_DATA = {
     },
     {
       "team": "Algeria",
-      "reach_r16": 0.262,
-      "reach_qf": 0.051,
+      "reach_r16": 0.266,
+      "reach_qf": 0.05,
       "reach_sf": 0.003,
       "reach_final": 0.0,
       "champion": 0.0
@@ -980,7 +980,7 @@ window.WC_DATA = {
     {
       "team": "Egypt",
       "reach_r16": 0.488,
-      "reach_qf": 0.016,
+      "reach_qf": 0.017,
       "reach_sf": 0.002,
       "reach_final": 0.0,
       "champion": 0.0
@@ -995,7 +995,7 @@ window.WC_DATA = {
     },
     {
       "team": "Sweden",
-      "reach_r16": 0.066,
+      "reach_r16": 0.065,
       "reach_qf": 0.007,
       "reach_sf": 0.001,
       "reach_final": 0.0,
@@ -1011,8 +1011,8 @@ window.WC_DATA = {
     },
     {
       "team": "South Africa",
-      "reach_r16": 0.177,
-      "reach_qf": 0.004,
+      "reach_r16": 0.207,
+      "reach_qf": 0.005,
       "reach_sf": 0.0,
       "reach_final": 0.0,
       "champion": 0.0
@@ -1027,13 +1027,79 @@ window.WC_DATA = {
     },
     {
       "team": "Ghana",
-      "reach_r16": 0.126,
+      "reach_r16": 0.117,
       "reach_qf": 0.009,
       "reach_sf": 0.0,
       "reach_final": 0.0,
       "champion": 0.0
     }
   ],
+  "golden_boot": {
+    "title": "World Cup: Golden Boot Winner",
+    "generated": "2026-06-28T18:08:33+00:00",
+    "players": [
+      {
+        "player": "Lionel Messi",
+        "prob": 0.5101,
+        "raw": 0.5185
+      },
+      {
+        "player": "Kylian Mbappe",
+        "prob": 0.2213,
+        "raw": 0.225
+      },
+      {
+        "player": "Erling Haaland",
+        "prob": 0.0639,
+        "raw": 0.065
+      },
+      {
+        "player": "Ousmane Dembele",
+        "prob": 0.0625,
+        "raw": 0.0635
+      },
+      {
+        "player": "Vinicius Junior",
+        "prob": 0.0526,
+        "raw": 0.0535
+      },
+      {
+        "player": "Harry Kane",
+        "prob": 0.0339,
+        "raw": 0.0345
+      },
+      {
+        "player": "Cristiano Ronaldo",
+        "prob": 0.0103,
+        "raw": 0.0105
+      },
+      {
+        "player": "Mikel Oyarzabal",
+        "prob": 0.0064,
+        "raw": 0.0065
+      },
+      {
+        "player": "Deniz Undav",
+        "prob": 0.0054,
+        "raw": 0.0055
+      },
+      {
+        "player": "Lamine Yamal",
+        "prob": 0.0054,
+        "raw": 0.0055
+      },
+      {
+        "player": "Cody Gakpo",
+        "prob": 0.0034,
+        "raw": 0.0035
+      },
+      {
+        "player": "Kai Havertz",
+        "prob": 0.0025,
+        "raw": 0.0025
+      }
+    ]
+  },
   "bracket": {
     "group_stage_complete": true,
     "qualified_thirds": [
