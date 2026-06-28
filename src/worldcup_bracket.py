@@ -41,6 +41,20 @@ R32 = [
     (88, ("RU", "D"), ("RU", "G")),
 ]
 
+# --- official FIFA third-place → Round-of-32 slot assignment --------------------
+# FIFA fixes which qualifying third plays which group-winner via a PUBLISHED lookup
+# table keyed by the set of eight groups whose third-placed team advanced. The
+# eligible-set heuristic in `_match_thirds` only guarantees *a* valid matching, which
+# can differ from the official one (it did for 2026: it paired Germany–Bosnia instead
+# of Germany–Paraguay). When the qualifying-group set is in this table we use the
+# official assignment; otherwise we fall back to the heuristic. Key = sorted tuple of
+# the eight groups; value = {group: R32 match number}.
+# 2026 row verified against the live R32 fixtures (Polymarket, 2026-06).
+OFFICIAL_THIRD_SLOTS: dict[tuple[str, ...], dict[str, int]] = {
+    ("B", "D", "E", "F", "I", "J", "K", "L"):
+        {"D": 74, "F": 77, "E": 79, "K": 80, "B": 81, "I": 82, "J": 85, "L": 87},
+}
+
 # --- later rounds: (match, feeder_match_x, feeder_match_y) ----------------------
 R16   = [(89, 74, 77), (90, 73, 75), (91, 76, 78), (92, 79, 80),
          (93, 83, 84), (94, 81, 82), (95, 86, 88), (96, 85, 87)]
@@ -117,8 +131,11 @@ def build_bracket(teams: dict, ko: dict | None = None) -> dict:
                                        teams[thirds[g]]["gf"]))
         qualified = ranked[:8]                                    # 8 best thirds advance
         qualified_thirds = [thirds[g] for g in qualified]
-        third_slots = [(m, set(b[1])) for (m, a, b) in R32 if b[0] == "3RD"]
-        for grp, m in _match_thirds(set(qualified), third_slots).items():
+        assign = OFFICIAL_THIRD_SLOTS.get(tuple(sorted(qualified)))
+        if assign is None:                                        # not in the official table
+            third_slots = [(m, set(b[1])) for (m, a, b) in R32 if b[0] == "3RD"]
+            assign = _match_thirds(set(qualified), third_slots)
+        for grp, m in assign.items():
             third_team_for_match[m] = thirds[grp]
 
     def fill(slot, match_no) -> dict:

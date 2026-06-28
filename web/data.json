@@ -1,188 +1,11 @@
 {
   "meta": {
     "snapshot": "2026-06-25",
-    "generated": "2026-06-27T21:32:29+00:00",
+    "generated": "2026-06-28T11:52:21+00:00",
     "w_market": 0.7,
     "n_sims": 40000
   },
-  "matches": [
-    {
-      "group": "K",
-      "home": "Colombia",
-      "away": "Portugal",
-      "date": "2026-06-27",
-      "kickoff": "2026-06-27T23:30:00Z",
-      "lambda_home": 1.31,
-      "lambda_away": 1.25,
-      "blend_wdl": [
-        0.315,
-        0.246,
-        0.439
-      ],
-      "model_wdl": [
-        0.388,
-        0.251,
-        0.361
-      ],
-      "market_wdl": [
-        0.284,
-        0.244,
-        0.473
-      ],
-      "pick": [
-        0,
-        1
-      ],
-      "pick_ev": 0.637,
-      "pick_class": "away",
-      "pick_hit": 0.099,
-      "confidence": 0.439,
-      "modal": [
-        1,
-        1
-      ],
-      "modal_p": 0.122,
-      "modal_ev": 0.489,
-      "modal_class": "draw",
-      "modal_conf": 0.246,
-      "advance": {
-        "Colombia": 1.0,
-        "Portugal": 1.0
-      }
-    },
-    {
-      "group": "K",
-      "home": "DR Congo",
-      "away": "Uzbekistan",
-      "date": "2026-06-27",
-      "kickoff": "2026-06-27T23:30:00Z",
-      "lambda_home": 1.1,
-      "lambda_away": 1.51,
-      "blend_wdl": [
-        0.486,
-        0.243,
-        0.271
-      ],
-      "model_wdl": [
-        0.284,
-        0.242,
-        0.474
-      ],
-      "market_wdl": [
-        0.572,
-        0.244,
-        0.184
-      ],
-      "pick": [
-        1,
-        0
-      ],
-      "pick_ev": 0.77,
-      "pick_class": "home",
-      "pick_hit": 0.142,
-      "confidence": 0.486,
-      "modal": [
-        1,
-        0
-      ],
-      "modal_p": 0.142,
-      "modal_ev": 0.77,
-      "modal_class": "home",
-      "modal_conf": 0.486,
-      "advance": {
-        "DR Congo": 0.484,
-        "Uzbekistan": 0.001
-      }
-    },
-    {
-      "group": "J",
-      "home": "Algeria",
-      "away": "Austria",
-      "date": "2026-06-27",
-      "kickoff": "2026-06-28T02:00:00Z",
-      "lambda_home": 1.04,
-      "lambda_away": 1.6,
-      "blend_wdl": [
-        0.264,
-        0.401,
-        0.334
-      ],
-      "model_wdl": [
-        0.254,
-        0.236,
-        0.511
-      ],
-      "market_wdl": [
-        0.269,
-        0.472,
-        0.259
-      ],
-      "pick": [
-        0,
-        0
-      ],
-      "pick_ev": 0.762,
-      "pick_class": "draw",
-      "pick_hit": 0.18,
-      "confidence": 0.401,
-      "modal": [
-        0,
-        0
-      ],
-      "modal_p": 0.18,
-      "modal_ev": 0.762,
-      "modal_class": "draw",
-      "modal_conf": 0.401,
-      "advance": {
-        "Algeria": 0.663,
-        "Austria": 0.888
-      }
-    },
-    {
-      "group": "J",
-      "home": "Jordan",
-      "away": "Argentina",
-      "date": "2026-06-27",
-      "kickoff": "2026-06-28T02:00:00Z",
-      "lambda_home": 0.18,
-      "lambda_away": 2.88,
-      "blend_wdl": [
-        0.034,
-        0.088,
-        0.878
-      ],
-      "model_wdl": [
-        0.013,
-        0.072,
-        0.914
-      ],
-      "market_wdl": [
-        0.043,
-        0.095,
-        0.862
-      ],
-      "pick": [
-        0,
-        4
-      ],
-      "pick_ev": 1.261,
-      "pick_class": "away",
-      "pick_hit": 0.128,
-      "confidence": 0.878,
-      "modal": [
-        0,
-        2
-      ],
-      "modal_p": 0.173,
-      "modal_ev": 1.225,
-      "modal_class": "away",
-      "modal_conf": 0.878,
-      "advance": {
-        "Jordan": 0.003,
-        "Argentina": 1.0
-      }
-    }
-  ],
+  "matches": [],
   "knockout": [
     {
       "group": "A",
@@ -193,9 +16,9 @@
       "lambda_home": 0.61,
       "lambda_away": 2.19,
       "blend_wdl": [
-        0.144,
-        0.243,
-        0.613
+        0.136,
+        0.227,
+        0.637
       ],
       "model_wdl": [
         0.094,
@@ -203,32 +26,32 @@
         0.741
       ],
       "market_wdl": [
-        0.166,
-        0.276,
-        0.558
+        0.154,
+        0.254,
+        0.592
       ],
       "pick": [
         0,
         1
       ],
-      "pick_ev": 0.904,
+      "pick_ev": 0.919,
       "pick_class": "away",
-      "pick_hit": 0.145,
-      "confidence": 0.613,
+      "pick_hit": 0.141,
+      "confidence": 0.637,
       "modal": [
         0,
         1
       ],
-      "modal_p": 0.145,
-      "modal_ev": 0.904,
+      "modal_p": 0.141,
+      "modal_ev": 0.919,
       "modal_class": "away",
-      "modal_conf": 0.613,
+      "modal_conf": 0.637,
       "stage": "Round of 32",
       "match": 73,
       "needs_advancer": false,
       "advance": {
-        "South Africa": 0.191,
-        "Canada": 0.809
+        "South Africa": 0.176,
+        "Canada": 0.824
       },
       "advancer": "Canada"
     },
@@ -241,9 +64,9 @@
       "lambda_home": 1.57,
       "lambda_away": 1.06,
       "blend_wdl": [
-        0.55,
-        0.242,
-        0.208
+        0.546,
+        0.247,
+        0.207
       ],
       "model_wdl": [
         0.499,
@@ -251,34 +74,82 @@
         0.263
       ],
       "market_wdl": [
-        0.572,
-        0.244,
-        0.184
+        0.566,
+        0.251,
+        0.182
       ],
       "pick": [
         1,
         0
       ],
-      "pick_ev": 0.823,
+      "pick_ev": 0.801,
       "pick_class": "home",
-      "pick_hit": 0.136,
-      "confidence": 0.55,
+      "pick_hit": 0.128,
+      "confidence": 0.546,
       "modal": [
         1,
         0
       ],
-      "modal_p": 0.136,
-      "modal_ev": 0.823,
+      "modal_p": 0.128,
+      "modal_ev": 0.801,
       "modal_class": "home",
-      "modal_conf": 0.55,
+      "modal_conf": 0.546,
       "stage": "Round of 32",
       "match": 76,
       "needs_advancer": false,
       "advance": {
-        "Brazil": 0.726,
-        "Japan": 0.274
+        "Brazil": 0.725,
+        "Japan": 0.275
       },
       "advancer": "Brazil"
+    },
+    {
+      "group": "E",
+      "home": "Germany",
+      "away": "Paraguay",
+      "date": "2026-06-29",
+      "kickoff": "2026-06-29T20:30:00Z",
+      "lambda_home": 1.75,
+      "lambda_away": 0.93,
+      "blend_wdl": [
+        0.683,
+        0.195,
+        0.121
+      ],
+      "model_wdl": [
+        0.572,
+        0.222,
+        0.206
+      ],
+      "market_wdl": [
+        0.731,
+        0.184,
+        0.085
+      ],
+      "pick": [
+        2,
+        0
+      ],
+      "pick_ev": 0.934,
+      "pick_class": "home",
+      "pick_hit": 0.125,
+      "confidence": 0.683,
+      "modal": [
+        2,
+        0
+      ],
+      "modal_p": 0.125,
+      "modal_ev": 0.934,
+      "modal_class": "home",
+      "modal_conf": 0.683,
+      "stage": "Round of 32",
+      "match": 74,
+      "needs_advancer": false,
+      "advance": {
+        "Germany": 0.849,
+        "Paraguay": 0.151
+      },
+      "advancer": "Germany"
     },
     {
       "group": "F",
@@ -289,9 +160,9 @@
       "lambda_home": 1.62,
       "lambda_away": 1.03,
       "blend_wdl": [
-        0.472,
-        0.283,
-        0.245
+        0.468,
+        0.285,
+        0.247
       ],
       "model_wdl": [
         0.518,
@@ -299,32 +170,32 @@
         0.248
       ],
       "market_wdl": [
-        0.453,
-        0.303,
-        0.244
+        0.447,
+        0.307,
+        0.246
       ],
       "pick": [
         1,
         0
       ],
-      "pick_ev": 0.713,
+      "pick_ev": 0.703,
       "pick_class": "home",
-      "pick_hit": 0.12,
-      "confidence": 0.472,
+      "pick_hit": 0.118,
+      "confidence": 0.468,
       "modal": [
         1,
         1
       ],
-      "modal_p": 0.131,
-      "modal_ev": 0.545,
+      "modal_p": 0.135,
+      "modal_ev": 0.555,
       "modal_class": "draw",
-      "modal_conf": 0.283,
+      "modal_conf": 0.285,
       "stage": "Round of 32",
       "match": 75,
       "needs_advancer": false,
       "advance": {
-        "Netherlands": 0.658,
-        "Morocco": 0.342
+        "Netherlands": 0.655,
+        "Morocco": 0.345
       },
       "advancer": "Netherlands"
     },
@@ -337,9 +208,9 @@
       "lambda_home": 0.53,
       "lambda_away": 2.3,
       "blend_wdl": [
-        0.208,
-        0.238,
-        0.554
+        0.201,
+        0.231,
+        0.568
       ],
       "model_wdl": [
         0.073,
@@ -347,34 +218,418 @@
         0.78
       ],
       "market_wdl": [
+        0.256,
         0.266,
-        0.276,
-        0.457
+        0.477
       ],
       "pick": [
         0,
         1
       ],
-      "pick_ev": 0.743,
+      "pick_ev": 0.785,
       "pick_class": "away",
-      "pick_hit": 0.094,
-      "confidence": 0.554,
+      "pick_hit": 0.108,
+      "confidence": 0.568,
       "modal": [
-        1,
+        0,
         1
       ],
-      "modal_p": 0.107,
-      "modal_ev": 0.451,
-      "modal_class": "draw",
-      "modal_conf": 0.238,
+      "modal_p": 0.108,
+      "modal_ev": 0.785,
+      "modal_class": "away",
+      "modal_conf": 0.568,
       "stage": "Round of 32",
       "match": 78,
       "needs_advancer": false,
       "advance": {
-        "Côte d'Ivoire": 0.273,
-        "Norway": 0.727
+        "Côte d'Ivoire": 0.261,
+        "Norway": 0.739
       },
       "advancer": "Norway"
+    },
+    {
+      "group": "I",
+      "home": "France",
+      "away": "Sweden",
+      "date": "2026-06-30",
+      "kickoff": "2026-06-30T21:00:00Z",
+      "lambda_home": 2.77,
+      "lambda_away": 0.19,
+      "blend_wdl": [
+        0.809,
+        0.133,
+        0.057
+      ],
+      "model_wdl": [
+        0.904,
+        0.08,
+        0.016
+      ],
+      "market_wdl": [
+        0.769,
+        0.156,
+        0.075
+      ],
+      "pick": [
+        4,
+        0
+      ],
+      "pick_ev": 1.128,
+      "pick_class": "home",
+      "pick_hit": 0.106,
+      "confidence": 0.809,
+      "modal": [
+        2,
+        0
+      ],
+      "modal_p": 0.151,
+      "modal_ev": 1.112,
+      "modal_class": "home",
+      "modal_conf": 0.809,
+      "stage": "Round of 32",
+      "match": 77,
+      "needs_advancer": false,
+      "advance": {
+        "France": 0.934,
+        "Sweden": 0.066
+      },
+      "advancer": "France"
+    },
+    {
+      "group": "A",
+      "home": "Mexico",
+      "away": "Ecuador",
+      "date": "2026-06-30",
+      "kickoff": "2026-07-01T01:00:00Z",
+      "lambda_home": 1.69,
+      "lambda_away": 0.98,
+      "blend_wdl": [
+        0.467,
+        0.295,
+        0.238
+      ],
+      "model_wdl": [
+        0.547,
+        0.228,
+        0.225
+      ],
+      "market_wdl": [
+        0.433,
+        0.323,
+        0.244
+      ],
+      "pick": [
+        1,
+        0
+      ],
+      "pick_ev": 0.749,
+      "pick_class": "home",
+      "pick_hit": 0.141,
+      "confidence": 0.467,
+      "modal": [
+        1,
+        0
+      ],
+      "modal_p": 0.141,
+      "modal_ev": 0.749,
+      "modal_class": "home",
+      "modal_conf": 0.467,
+      "stage": "Round of 32",
+      "match": 79,
+      "needs_advancer": false,
+      "advance": {
+        "Mexico": 0.662,
+        "Ecuador": 0.338
+      },
+      "advancer": "Mexico"
+    },
+    {
+      "group": "L",
+      "home": "England",
+      "away": "DR Congo",
+      "date": "2026-07-01",
+      "kickoff": "2026-07-01T16:00:00Z",
+      "lambda_home": 2.59,
+      "lambda_away": 0.32,
+      "blend_wdl": [
+        0.798,
+        0.146,
+        0.055
+      ],
+      "model_wdl": [
+        0.862,
+        0.105,
+        0.033
+      ],
+      "market_wdl": [
+        0.771,
+        0.164,
+        0.065
+      ],
+      "pick": [
+        2,
+        0
+      ],
+      "pick_ev": 1.144,
+      "pick_class": "home",
+      "pick_hit": 0.173,
+      "confidence": 0.798,
+      "modal": [
+        2,
+        0
+      ],
+      "modal_p": 0.173,
+      "modal_ev": 1.144,
+      "modal_class": "home",
+      "modal_conf": 0.798,
+      "stage": "Round of 32",
+      "match": 80,
+      "needs_advancer": false,
+      "advance": {
+        "England": 0.935,
+        "DR Congo": 0.065
+      },
+      "advancer": "England"
+    },
+    {
+      "group": "G",
+      "home": "Belgium",
+      "away": "Senegal",
+      "date": "2026-07-01",
+      "kickoff": "2026-07-01T20:00:00Z",
+      "lambda_home": 1.29,
+      "lambda_away": 1.26,
+      "blend_wdl": [
+        0.424,
+        0.288,
+        0.288
+      ],
+      "model_wdl": [
+        0.381,
+        0.251,
+        0.367
+      ],
+      "market_wdl": [
+        0.443,
+        0.304,
+        0.254
+      ],
+      "pick": [
+        1,
+        0
+      ],
+      "pick_ev": 0.674,
+      "pick_class": "home",
+      "pick_hit": 0.125,
+      "confidence": 0.424,
+      "modal": [
+        1,
+        1
+      ],
+      "modal_p": 0.133,
+      "modal_ev": 0.554,
+      "modal_class": "draw",
+      "modal_conf": 0.288,
+      "stage": "Round of 32",
+      "match": 82,
+      "needs_advancer": false,
+      "advance": {
+        "Belgium": 0.596,
+        "Senegal": 0.404
+      },
+      "advancer": "Belgium"
+    },
+    {
+      "group": "D",
+      "home": "United States",
+      "away": "Bosnia and Herzegovina",
+      "date": "2026-07-01",
+      "kickoff": "2026-07-02T00:00:00Z",
+      "lambda_home": 1.71,
+      "lambda_away": 0.96,
+      "blend_wdl": [
+        0.67,
+        0.198,
+        0.132
+      ],
+      "model_wdl": [
+        0.556,
+        0.226,
+        0.219
+      ],
+      "market_wdl": [
+        0.719,
+        0.186,
+        0.095
+      ],
+      "pick": [
+        1,
+        0
+      ],
+      "pick_ev": 0.952,
+      "pick_class": "home",
+      "pick_hit": 0.141,
+      "confidence": 0.67,
+      "modal": [
+        1,
+        0
+      ],
+      "modal_p": 0.141,
+      "modal_ev": 0.952,
+      "modal_class": "home",
+      "modal_conf": 0.67,
+      "stage": "Round of 32",
+      "match": 81,
+      "needs_advancer": false,
+      "advance": {
+        "United States": 0.835,
+        "Bosnia and Herzegovina": 0.165
+      },
+      "advancer": "United States"
+    },
+    {
+      "group": "H",
+      "home": "Spain",
+      "away": "Austria",
+      "date": "2026-07-02",
+      "kickoff": "2026-07-02T19:00:00Z",
+      "lambda_home": 2.36,
+      "lambda_away": 0.48,
+      "blend_wdl": [
+        0.775,
+        0.164,
+        0.061
+      ],
+      "model_wdl": [
+        0.799,
+        0.138,
+        0.063
+      ],
+      "market_wdl": [
+        0.765,
+        0.175,
+        0.06
+      ],
+      "pick": [
+        2,
+        0
+      ],
+      "pick_ev": 1.088,
+      "pick_class": "home",
+      "pick_hit": 0.156,
+      "confidence": 0.775,
+      "modal": [
+        2,
+        0
+      ],
+      "modal_p": 0.156,
+      "modal_ev": 1.088,
+      "modal_class": "home",
+      "modal_conf": 0.775,
+      "stage": "Round of 32",
+      "match": 84,
+      "needs_advancer": false,
+      "advance": {
+        "Spain": 0.927,
+        "Austria": 0.073
+      },
+      "advancer": "Spain"
+    },
+    {
+      "group": "K",
+      "home": "Portugal",
+      "away": "Croatia",
+      "date": "2026-07-02",
+      "kickoff": "2026-07-02T23:00:00Z",
+      "lambda_home": 1.62,
+      "lambda_away": 1.02,
+      "blend_wdl": [
+        0.529,
+        0.262,
+        0.209
+      ],
+      "model_wdl": [
+        0.521,
+        0.234,
+        0.245
+      ],
+      "market_wdl": [
+        0.532,
+        0.274,
+        0.194
+      ],
+      "pick": [
+        1,
+        0
+      ],
+      "pick_ev": 0.774,
+      "pick_class": "home",
+      "pick_hit": 0.122,
+      "confidence": 0.529,
+      "modal": [
+        1,
+        0
+      ],
+      "modal_p": 0.122,
+      "modal_ev": 0.774,
+      "modal_class": "home",
+      "modal_conf": 0.529,
+      "stage": "Round of 32",
+      "match": 83,
+      "needs_advancer": false,
+      "advance": {
+        "Portugal": 0.716,
+        "Croatia": 0.284
+      },
+      "advancer": "Portugal"
+    },
+    {
+      "group": "B",
+      "home": "Switzerland",
+      "away": "Algeria",
+      "date": "2026-07-02",
+      "kickoff": "2026-07-03T03:00:00Z",
+      "lambda_home": 1.94,
+      "lambda_away": 0.79,
+      "blend_wdl": [
+        0.556,
+        0.25,
+        0.194
+      ],
+      "model_wdl": [
+        0.651,
+        0.198,
+        0.15
+      ],
+      "market_wdl": [
+        0.515,
+        0.272,
+        0.213
+      ],
+      "pick": [
+        1,
+        0
+      ],
+      "pick_ev": 0.782,
+      "pick_class": "home",
+      "pick_hit": 0.113,
+      "confidence": 0.556,
+      "modal": [
+        1,
+        1
+      ],
+      "modal_p": 0.118,
+      "modal_ev": 0.487,
+      "modal_class": "draw",
+      "modal_conf": 0.25,
+      "stage": "Round of 32",
+      "match": 85,
+      "needs_advancer": false,
+      "advance": {
+        "Switzerland": 0.741,
+        "Algeria": 0.259
+      },
+      "advancer": "Switzerland"
     },
     {
       "group": "D",
@@ -385,8 +640,8 @@
       "lambda_home": 1.63,
       "lambda_away": 1.01,
       "blend_wdl": [
-        0.363,
-        0.296,
+        0.356,
+        0.303,
         0.341
       ],
       "model_wdl": [
@@ -395,40 +650,402 @@
         0.242
       ],
       "market_wdl": [
-        0.294,
-        0.323,
+        0.284,
+        0.333,
         0.383
       ],
       "pick": [
         0,
         1
       ],
-      "pick_ev": 0.565,
+      "pick_ev": 0.591,
       "pick_class": "away",
-      "pick_hit": 0.112,
+      "pick_hit": 0.125,
       "confidence": 0.341,
       "modal": [
         1,
         1
       ],
-      "modal_p": 0.124,
-      "modal_ev": 0.544,
+      "modal_p": 0.132,
+      "modal_ev": 0.567,
       "modal_class": "draw",
-      "modal_conf": 0.296,
+      "modal_conf": 0.303,
       "stage": "Round of 32",
       "match": 88,
       "needs_advancer": false,
       "advance": {
-        "Australia": 0.516,
-        "Egypt": 0.484
+        "Australia": 0.511,
+        "Egypt": 0.489
       },
       "advancer": "Australia"
+    },
+    {
+      "group": "J",
+      "home": "Argentina",
+      "away": "Cabo Verde",
+      "date": "2026-07-03",
+      "kickoff": "2026-07-03T22:00:00Z",
+      "lambda_home": 3.26,
+      "lambda_away": 0.18,
+      "blend_wdl": [
+        0.881,
+        0.089,
+        0.03
+      ],
+      "model_wdl": [
+        0.938,
+        0.052,
+        0.01
+      ],
+      "market_wdl": [
+        0.857,
+        0.105,
+        0.038
+      ],
+      "pick": [
+        2,
+        0
+      ],
+      "pick_ev": 1.224,
+      "pick_class": "home",
+      "pick_hit": 0.171,
+      "confidence": 0.881,
+      "modal": [
+        2,
+        0
+      ],
+      "modal_p": 0.171,
+      "modal_ev": 1.224,
+      "modal_class": "home",
+      "modal_conf": 0.881,
+      "stage": "Round of 32",
+      "match": 86,
+      "needs_advancer": false,
+      "advance": {
+        "Argentina": 0.967,
+        "Cabo Verde": 0.033
+      },
+      "advancer": "Argentina"
+    },
+    {
+      "group": "K",
+      "home": "Colombia",
+      "away": "Ghana",
+      "date": "2026-07-03",
+      "kickoff": "2026-07-04T01:30:00Z",
+      "lambda_home": 2.95,
+      "lambda_away": 0.18,
+      "blend_wdl": [
+        0.704,
+        0.198,
+        0.098
+      ],
+      "model_wdl": [
+        0.919,
+        0.068,
+        0.013
+      ],
+      "market_wdl": [
+        0.612,
+        0.254,
+        0.134
+      ],
+      "pick": [
+        4,
+        0
+      ],
+      "pick_ev": 1.024,
+      "pick_class": "home",
+      "pick_hit": 0.107,
+      "confidence": 0.704,
+      "modal": [
+        2,
+        0
+      ],
+      "modal_p": 0.148,
+      "modal_ev": 0.999,
+      "modal_class": "home",
+      "modal_conf": 0.704,
+      "stage": "Round of 32",
+      "match": 87,
+      "needs_advancer": false,
+      "advance": {
+        "Colombia": 0.878,
+        "Ghana": 0.122
+      },
+      "advancer": "Colombia"
     }
   ],
-  "title_odds": [],
+  "title_odds": [
+    {
+      "team": "Argentina",
+      "reach_r16": 0.967,
+      "reach_qf": 0.942,
+      "reach_sf": 0.747,
+      "reach_final": 0.567,
+      "champion": 0.353
+    },
+    {
+      "team": "Spain",
+      "reach_r16": 0.926,
+      "reach_qf": 0.717,
+      "reach_sf": 0.648,
+      "reach_final": 0.437,
+      "champion": 0.251
+    },
+    {
+      "team": "France",
+      "reach_r16": 0.934,
+      "reach_qf": 0.706,
+      "reach_sf": 0.554,
+      "reach_final": 0.307,
+      "champion": 0.157
+    },
+    {
+      "team": "England",
+      "reach_r16": 0.934,
+      "reach_qf": 0.65,
+      "reach_sf": 0.38,
+      "reach_final": 0.142,
+      "champion": 0.06
+    },
+    {
+      "team": "Brazil",
+      "reach_r16": 0.723,
+      "reach_qf": 0.516,
+      "reach_sf": 0.283,
+      "reach_final": 0.097,
+      "champion": 0.04
+    },
+    {
+      "team": "Colombia",
+      "reach_r16": 0.874,
+      "reach_qf": 0.626,
+      "reach_sf": 0.183,
+      "reach_final": 0.094,
+      "champion": 0.038
+    },
+    {
+      "team": "Netherlands",
+      "reach_r16": 0.655,
+      "reach_qf": 0.542,
+      "reach_sf": 0.199,
+      "reach_final": 0.072,
+      "champion": 0.023
+    },
+    {
+      "team": "Portugal",
+      "reach_r16": 0.714,
+      "reach_qf": 0.213,
+      "reach_sf": 0.159,
+      "reach_final": 0.068,
+      "champion": 0.023
+    },
+    {
+      "team": "Germany",
+      "reach_r16": 0.846,
+      "reach_qf": 0.263,
+      "reach_sf": 0.152,
+      "reach_final": 0.052,
+      "champion": 0.015
+    },
+    {
+      "team": "Norway",
+      "reach_r16": 0.744,
+      "reach_qf": 0.309,
+      "reach_sf": 0.131,
+      "reach_final": 0.03,
+      "champion": 0.009
+    },
+    {
+      "team": "Mexico",
+      "reach_r16": 0.664,
+      "reach_qf": 0.257,
+      "reach_sf": 0.116,
+      "reach_final": 0.03,
+      "champion": 0.009
+    },
+    {
+      "team": "Switzerland",
+      "reach_r16": 0.738,
+      "reach_qf": 0.314,
+      "reach_sf": 0.058,
+      "reach_final": 0.021,
+      "champion": 0.005
+    },
+    {
+      "team": "Belgium",
+      "reach_r16": 0.595,
+      "reach_qf": 0.407,
+      "reach_sf": 0.076,
+      "reach_final": 0.019,
+      "champion": 0.004
+    },
+    {
+      "team": "Japan",
+      "reach_r16": 0.277,
+      "reach_qf": 0.161,
+      "reach_sf": 0.062,
+      "reach_final": 0.014,
+      "champion": 0.004
+    },
+    {
+      "team": "Morocco",
+      "reach_r16": 0.345,
+      "reach_qf": 0.239,
+      "reach_sf": 0.053,
+      "reach_final": 0.012,
+      "champion": 0.003
+    },
+    {
+      "team": "Senegal",
+      "reach_r16": 0.405,
+      "reach_qf": 0.269,
+      "reach_sf": 0.047,
+      "reach_final": 0.011,
+      "champion": 0.002
+    },
+    {
+      "team": "Croatia",
+      "reach_r16": 0.286,
+      "reach_qf": 0.05,
+      "reach_sf": 0.029,
+      "reach_final": 0.009,
+      "champion": 0.001
+    },
+    {
+      "team": "Canada",
+      "reach_r16": 0.823,
+      "reach_qf": 0.215,
+      "reach_sf": 0.031,
+      "reach_final": 0.006,
+      "champion": 0.001
+    },
+    {
+      "team": "United States",
+      "reach_r16": 0.836,
+      "reach_qf": 0.289,
+      "reach_sf": 0.029,
+      "reach_final": 0.005,
+      "champion": 0.001
+    },
+    {
+      "team": "Ecuador",
+      "reach_r16": 0.336,
+      "reach_qf": 0.086,
+      "reach_sf": 0.027,
+      "reach_final": 0.004,
+      "champion": 0.001
+    },
+    {
+      "team": "Austria",
+      "reach_r16": 0.074,
+      "reach_qf": 0.019,
+      "reach_sf": 0.01,
+      "reach_final": 0.002,
+      "champion": 0.0
+    },
+    {
+      "team": "Australia",
+      "reach_r16": 0.512,
+      "reach_qf": 0.034,
+      "reach_sf": 0.008,
+      "reach_final": 0.001,
+      "champion": 0.0
+    },
+    {
+      "team": "Paraguay",
+      "reach_r16": 0.154,
+      "reach_qf": 0.024,
+      "reach_sf": 0.008,
+      "reach_final": 0.001,
+      "champion": 0.0
+    },
+    {
+      "team": "Algeria",
+      "reach_r16": 0.262,
+      "reach_qf": 0.051,
+      "reach_sf": 0.003,
+      "reach_final": 0.0,
+      "champion": 0.0
+    },
+    {
+      "team": "Bosnia and Herzegovina",
+      "reach_r16": 0.164,
+      "reach_qf": 0.035,
+      "reach_sf": 0.002,
+      "reach_final": 0.0,
+      "champion": 0.0
+    },
+    {
+      "team": "Egypt",
+      "reach_r16": 0.488,
+      "reach_qf": 0.016,
+      "reach_sf": 0.002,
+      "reach_final": 0.0,
+      "champion": 0.0
+    },
+    {
+      "team": "Côte d'Ivoire",
+      "reach_r16": 0.256,
+      "reach_qf": 0.014,
+      "reach_sf": 0.001,
+      "reach_final": 0.0,
+      "champion": 0.0
+    },
+    {
+      "team": "Sweden",
+      "reach_r16": 0.066,
+      "reach_qf": 0.007,
+      "reach_sf": 0.001,
+      "reach_final": 0.0,
+      "champion": 0.0
+    },
+    {
+      "team": "DR Congo",
+      "reach_r16": 0.066,
+      "reach_qf": 0.007,
+      "reach_sf": 0.001,
+      "reach_final": 0.0,
+      "champion": 0.0
+    },
+    {
+      "team": "South Africa",
+      "reach_r16": 0.177,
+      "reach_qf": 0.004,
+      "reach_sf": 0.0,
+      "reach_final": 0.0,
+      "champion": 0.0
+    },
+    {
+      "team": "Cabo Verde",
+      "reach_r16": 0.033,
+      "reach_qf": 0.008,
+      "reach_sf": 0.0,
+      "reach_final": 0.0,
+      "champion": 0.0
+    },
+    {
+      "team": "Ghana",
+      "reach_r16": 0.126,
+      "reach_qf": 0.009,
+      "reach_sf": 0.0,
+      "reach_final": 0.0,
+      "champion": 0.0
+    }
+  ],
   "bracket": {
-    "group_stage_complete": false,
-    "qualified_thirds": [],
+    "group_stage_complete": true,
+    "qualified_thirds": [
+      "DR Congo",
+      "Sweden",
+      "Ecuador",
+      "Ghana",
+      "Bosnia and Herzegovina",
+      "Algeria",
+      "Paraguay",
+      "Senegal"
+    ],
     "rounds": [
       {
         "name": "Round of 32",
@@ -457,9 +1074,9 @@
                 "label": "Winner E"
               },
               {
-                "team": null,
-                "status": "open",
-                "label": "3rd place · Group A/B/C/D/F"
+                "team": "Paraguay",
+                "status": "confirmed",
+                "label": "3rd A/B/C/D/F"
               }
             ]
           },
@@ -502,9 +1119,9 @@
                 "label": "Winner I"
               },
               {
-                "team": null,
-                "status": "open",
-                "label": "3rd place · Group C/D/F/G/H"
+                "team": "Sweden",
+                "status": "confirmed",
+                "label": "3rd C/D/F/G/H"
               }
             ]
           },
@@ -532,9 +1149,9 @@
                 "label": "Winner A"
               },
               {
-                "team": null,
-                "status": "open",
-                "label": "3rd place · Group C/E/F/H/I"
+                "team": "Ecuador",
+                "status": "confirmed",
+                "label": "3rd C/E/F/H/I"
               }
             ]
           },
@@ -542,14 +1159,14 @@
             "m": 80,
             "slots": [
               {
-                "team": null,
-                "status": "pending",
-                "label": "Winner Group L"
+                "team": "England",
+                "status": "confirmed",
+                "label": "Winner L"
               },
               {
-                "team": null,
-                "status": "open",
-                "label": "3rd place · Group E/H/I/J/K"
+                "team": "DR Congo",
+                "status": "confirmed",
+                "label": "3rd E/H/I/J/K"
               }
             ]
           },
@@ -562,9 +1179,9 @@
                 "label": "Winner D"
               },
               {
-                "team": null,
-                "status": "open",
-                "label": "3rd place · Group B/E/F/I/J"
+                "team": "Bosnia and Herzegovina",
+                "status": "confirmed",
+                "label": "3rd B/E/F/I/J"
               }
             ]
           },
@@ -577,9 +1194,9 @@
                 "label": "Winner G"
               },
               {
-                "team": null,
-                "status": "open",
-                "label": "3rd place · Group A/E/H/I/J"
+                "team": "Senegal",
+                "status": "confirmed",
+                "label": "3rd A/E/H/I/J"
               }
             ]
           },
@@ -587,14 +1204,14 @@
             "m": 83,
             "slots": [
               {
-                "team": null,
-                "status": "pending",
-                "label": "Runner-up Group K"
+                "team": "Portugal",
+                "status": "confirmed",
+                "label": "Runner-up K"
               },
               {
-                "team": null,
-                "status": "pending",
-                "label": "Runner-up Group L"
+                "team": "Croatia",
+                "status": "confirmed",
+                "label": "Runner-up L"
               }
             ]
           },
@@ -607,9 +1224,9 @@
                 "label": "Winner H"
               },
               {
-                "team": null,
-                "status": "pending",
-                "label": "Runner-up Group J"
+                "team": "Austria",
+                "status": "confirmed",
+                "label": "Runner-up J"
               }
             ]
           },
@@ -622,9 +1239,9 @@
                 "label": "Winner B"
               },
               {
-                "team": null,
-                "status": "open",
-                "label": "3rd place · Group E/F/G/I/J"
+                "team": "Algeria",
+                "status": "confirmed",
+                "label": "3rd E/F/G/I/J"
               }
             ]
           },
@@ -632,9 +1249,9 @@
             "m": 86,
             "slots": [
               {
-                "team": null,
-                "status": "pending",
-                "label": "Winner Group J"
+                "team": "Argentina",
+                "status": "confirmed",
+                "label": "Winner J"
               },
               {
                 "team": "Cabo Verde",
@@ -647,14 +1264,14 @@
             "m": 87,
             "slots": [
               {
-                "team": null,
-                "status": "pending",
-                "label": "Winner Group K"
+                "team": "Colombia",
+                "status": "confirmed",
+                "label": "Winner K"
               },
               {
-                "team": null,
-                "status": "open",
-                "label": "3rd place · Group D/E/I/J/L"
+                "team": "Ghana",
+                "status": "confirmed",
+                "label": "3rd D/E/I/J/L"
               }
             ]
           },
@@ -991,7 +1608,7 @@
           "pts": 3,
           "gd": -1,
           "win_group": 0.0,
-          "advance": 0.217
+          "advance": 0.0
         },
         {
           "team": "Czechia",
@@ -1189,7 +1806,7 @@
           "pts": 3,
           "gd": 0,
           "win_group": 0.0,
-          "advance": 1.0
+          "advance": 0.0
         },
         {
           "team": "New Zealand",
@@ -1271,31 +1888,31 @@
       "teams": [
         {
           "team": "Argentina",
-          "pts": 6,
-          "gd": 5,
-          "win_group": 0.999,
+          "pts": 9,
+          "gd": 7,
+          "win_group": 1.0,
           "advance": 1.0
         },
         {
           "team": "Austria",
-          "pts": 3,
+          "pts": 4,
           "gd": 0,
-          "win_group": 0.001,
-          "advance": 0.888
+          "win_group": 0.0,
+          "advance": 1.0
         },
         {
           "team": "Algeria",
-          "pts": 3,
+          "pts": 4,
           "gd": -2,
           "win_group": 0.0,
-          "advance": 0.663
+          "advance": 1.0
         },
         {
           "team": "Jordan",
           "pts": 0,
-          "gd": -3,
+          "gd": -5,
           "win_group": 0.0,
-          "advance": 0.003
+          "advance": 0.0
         }
       ]
     },
@@ -1304,31 +1921,31 @@
       "teams": [
         {
           "team": "Colombia",
-          "pts": 6,
+          "pts": 7,
           "gd": 3,
-          "win_group": 0.566,
+          "win_group": 1.0,
           "advance": 1.0
         },
         {
           "team": "Portugal",
-          "pts": 4,
+          "pts": 5,
           "gd": 5,
-          "win_group": 0.434,
+          "win_group": 0.0,
           "advance": 1.0
         },
         {
           "team": "DR Congo",
-          "pts": 1,
-          "gd": -1,
+          "pts": 4,
+          "gd": 1,
           "win_group": 0.0,
-          "advance": 0.484
+          "advance": 1.0
         },
         {
           "team": "Uzbekistan",
           "pts": 0,
-          "gd": -7,
+          "gd": -9,
           "win_group": 0.0,
-          "advance": 0.001
+          "advance": 0.0
         }
       ]
     },
@@ -1337,29 +1954,29 @@
       "teams": [
         {
           "team": "England",
-          "pts": 4,
-          "gd": 2,
+          "pts": 7,
+          "gd": 4,
           "win_group": 1.0,
+          "advance": 1.0
+        },
+        {
+          "team": "Croatia",
+          "pts": 6,
+          "gd": 0,
+          "win_group": 0.0,
           "advance": 1.0
         },
         {
           "team": "Ghana",
           "pts": 4,
-          "gd": 1,
+          "gd": 0,
           "win_group": 0.0,
           "advance": 1.0
         },
         {
-          "team": "Croatia",
-          "pts": 3,
-          "gd": -1,
-          "win_group": 0.0,
-          "advance": 0.743
-        },
-        {
           "team": "Panama",
           "pts": 0,
-          "gd": -2,
+          "gd": -4,
           "win_group": 0.0,
           "advance": 0.0
         }

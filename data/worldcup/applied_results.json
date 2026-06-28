@@ -95,6 +95,54 @@
     1,
     5
    ]
+  },
+  "fifwc-col-prt-2026-06-27": {
+   "home": "Colombia",
+   "away": "Portugal",
+   "score": [
+    0,
+    0
+   ]
+  },
+  "fifwc-hrv-gha-2026-06-27": {
+   "home": "Croatia",
+   "away": "Ghana",
+   "score": [
+    2,
+    1
+   ]
+  },
+  "fifwc-alg-aut-2026-06-27": {
+   "home": "Algeria",
+   "away": "Austria",
+   "score": [
+    3,
+    3
+   ]
+  },
+  "fifwc-cdr-uzb-2026-06-27": {
+   "home": "DR Congo",
+   "away": "Uzbekistan",
+   "score": [
+    3,
+    1
+   ]
+  },
+  "fifwc-jor-arg-2026-06-27": {
+   "home": "Jordan",
+   "away": "Argentina",
+   "score": [
+    1,
+    3
+   ]
+  },
+  "fifwc-pan-eng-2026-06-27": {
+   "home": "Panama",
+   "away": "England",
+   "score": [
+    0,
+    2
+   ]
   }
  }
 }
