@@ -1,13 +1,14 @@
 window.WC_DATA = {
   "meta": {
     "snapshot": "2026-06-25",
-    "generated": "2026-06-28T18:08:44+00:00",
+    "generated": "2026-06-28T18:39:24+00:00",
     "w_market": 0.7,
     "n_sims": 40000
   },
   "matches": [],
   "knockout": [
     {
+      "slug": "fifwc-rsa-can-2026-06-28",
       "group": "A",
       "home": "South Africa",
       "away": "Canada",
@@ -56,6 +57,7 @@ window.WC_DATA = {
       "advancer": "Canada"
     },
     {
+      "slug": "fifwc-bra-jpn-2026-06-29",
       "group": "C",
       "home": "Brazil",
       "away": "Japan",
@@ -104,6 +106,7 @@ window.WC_DATA = {
       "advancer": "Brazil"
     },
     {
+      "slug": "fifwc-ger-par-2026-06-29",
       "group": "E",
       "home": "Germany",
       "away": "Paraguay",
@@ -152,6 +155,7 @@ window.WC_DATA = {
       "advancer": "Germany"
     },
     {
+      "slug": "fifwc-nld-mar-2026-06-29",
       "group": "F",
       "home": "Netherlands",
       "away": "Morocco",
@@ -200,6 +204,7 @@ window.WC_DATA = {
       "advancer": "Netherlands"
     },
     {
+      "slug": "fifwc-civ-nor-2026-06-30",
       "group": "E",
       "home": "Côte d'Ivoire",
       "away": "Norway",
@@ -248,6 +253,7 @@ window.WC_DATA = {
       "advancer": "Norway"
     },
     {
+      "slug": "fifwc-fra-swe-2026-06-30",
       "group": "I",
       "home": "France",
       "away": "Sweden",
@@ -296,6 +302,7 @@ window.WC_DATA = {
       "advancer": "France"
     },
     {
+      "slug": "fifwc-mex-ecu-2026-06-30",
       "group": "A",
       "home": "Mexico",
       "away": "Ecuador",
@@ -344,6 +351,7 @@ window.WC_DATA = {
       "advancer": "Mexico"
     },
     {
+      "slug": "fifwc-eng-cdr-2026-07-01",
       "group": "L",
       "home": "England",
       "away": "DR Congo",
@@ -392,6 +400,7 @@ window.WC_DATA = {
       "advancer": "England"
     },
     {
+      "slug": "fifwc-bel-sen-2026-07-01",
       "group": "G",
       "home": "Belgium",
       "away": "Senegal",
@@ -440,6 +449,7 @@ window.WC_DATA = {
       "advancer": "Belgium"
     },
     {
+      "slug": "fifwc-usa-bih-2026-07-01",
       "group": "D",
       "home": "United States",
       "away": "Bosnia and Herzegovina",
@@ -488,6 +498,7 @@ window.WC_DATA = {
       "advancer": "United States"
     },
     {
+      "slug": "fifwc-esp-aut-2026-07-02",
       "group": "H",
       "home": "Spain",
       "away": "Austria",
@@ -536,6 +547,7 @@ window.WC_DATA = {
       "advancer": "Spain"
     },
     {
+      "slug": "fifwc-prt-hrv-2026-07-02",
       "group": "K",
       "home": "Portugal",
       "away": "Croatia",
@@ -584,6 +596,7 @@ window.WC_DATA = {
       "advancer": "Portugal"
     },
     {
+      "slug": "fifwc-che-alg-2026-07-02",
       "group": "B",
       "home": "Switzerland",
       "away": "Algeria",
@@ -632,6 +645,7 @@ window.WC_DATA = {
       "advancer": "Switzerland"
     },
     {
+      "slug": "fifwc-aus-egy-2026-07-03",
       "group": "D",
       "home": "Australia",
       "away": "Egypt",
@@ -680,6 +694,7 @@ window.WC_DATA = {
       "advancer": "Australia"
     },
     {
+      "slug": "fifwc-arg-cvi-2026-07-03",
       "group": "J",
       "home": "Argentina",
       "away": "Cabo Verde",
@@ -728,6 +743,7 @@ window.WC_DATA = {
       "advancer": "Argentina"
     },
     {
+      "slug": "fifwc-col-gha-2026-07-03",
       "group": "K",
       "home": "Colombia",
       "away": "Ghana",

@@ -1,0 +1,610 @@
+{
+  "fifwc-rsa-can-2026-06-28": {
+    "slug": "fifwc-rsa-can-2026-06-28",
+    "home": "South Africa",
+    "away": "Canada",
+    "group": "A",
+    "stage": "Round of 32",
+    "match": 73,
+    "kickoff": "2026-06-28T19:00:00Z",
+    "date": "2026-06-28",
+    "pick": [
+      0,
+      1
+    ],
+    "pick_ev": 0.866,
+    "pick_class": "away",
+    "modal": [
+      0,
+      1
+    ],
+    "modal_p": 0.135,
+    "modal_class": "away",
+    "blend_wdl": [
+      0.153,
+      0.252,
+      0.595
+    ],
+    "market_wdl": [
+      0.178,
+      0.289,
+      0.533
+    ],
+    "model_wdl": [
+      0.094,
+      0.164,
+      0.741
+    ],
+    "logged_at": "2026-06-28T18:39:24+00:00"
+  },
+  "fifwc-bra-jpn-2026-06-29": {
+    "slug": "fifwc-bra-jpn-2026-06-29",
+    "home": "Brazil",
+    "away": "Japan",
+    "group": "C",
+    "stage": "Round of 32",
+    "match": 76,
+    "kickoff": "2026-06-29T17:00:00Z",
+    "date": "2026-06-29",
+    "pick": [
+      1,
+      0
+    ],
+    "pick_ev": 0.804,
+    "pick_class": "home",
+    "modal": [
+      1,
+      0
+    ],
+    "modal_p": 0.129,
+    "modal_class": "home",
+    "blend_wdl": [
+      0.546,
+      0.247,
+      0.207
+    ],
+    "market_wdl": [
+      0.567,
+      0.251,
+      0.182
+    ],
+    "model_wdl": [
+      0.499,
+      0.238,
+      0.263
+    ],
+    "logged_at": "2026-06-28T18:39:24+00:00"
+  },
+  "fifwc-ger-par-2026-06-29": {
+    "slug": "fifwc-ger-par-2026-06-29",
+    "home": "Germany",
+    "away": "Paraguay",
+    "group": "E",
+    "stage": "Round of 32",
+    "match": 74,
+    "kickoff": "2026-06-29T20:30:00Z",
+    "date": "2026-06-29",
+    "pick": [
+      2,
+      0
+    ],
+    "pick_ev": 0.951,
+    "pick_class": "home",
+    "modal": [
+      2,
+      0
+    ],
+    "modal_p": 0.131,
+    "modal_class": "home",
+    "blend_wdl": [
+      0.689,
+      0.19,
+      0.122
+    ],
+    "market_wdl": [
+      0.739,
+      0.176,
+      0.085
+    ],
+    "model_wdl": [
+      0.572,
+      0.222,
+      0.206
+    ],
+    "logged_at": "2026-06-28T18:39:24+00:00"
+  },
+  "fifwc-nld-mar-2026-06-29": {
+    "slug": "fifwc-nld-mar-2026-06-29",
+    "home": "Netherlands",
+    "away": "Morocco",
+    "group": "F",
+    "stage": "Round of 32",
+    "match": 75,
+    "kickoff": "2026-06-30T01:00:00Z",
+    "date": "2026-06-29",
+    "pick": [
+      1,
+      0
+    ],
+    "pick_ev": 0.697,
+    "pick_class": "home",
+    "modal": [
+      1,
+      1
+    ],
+    "modal_p": 0.136,
+    "modal_class": "draw",
+    "blend_wdl": [
+      0.464,
+      0.287,
+      0.249
+    ],
+    "market_wdl": [
+      0.442,
+      0.31,
+      0.249
+    ],
+    "model_wdl": [
+      0.518,
+      0.234,
+      0.248
+    ],
+    "logged_at": "2026-06-28T18:39:24+00:00"
+  },
+  "fifwc-civ-nor-2026-06-30": {
+    "slug": "fifwc-civ-nor-2026-06-30",
+    "home": "Côte d'Ivoire",
+    "away": "Norway",
+    "group": "E",
+    "stage": "Round of 32",
+    "match": 78,
+    "kickoff": "2026-06-30T17:00:00Z",
+    "date": "2026-06-30",
+    "pick": [
+      0,
+      1
+    ],
+    "pick_ev": 0.783,
+    "pick_class": "away",
+    "modal": [
+      0,
+      1
+    ],
+    "modal_p": 0.107,
+    "modal_class": "away",
+    "blend_wdl": [
+      0.201,
+      0.231,
+      0.568
+    ],
+    "market_wdl": [
+      0.256,
+      0.266,
+      0.477
+    ],
+    "model_wdl": [
+      0.073,
+      0.147,
+      0.78
+    ],
+    "logged_at": "2026-06-28T18:39:24+00:00"
+  },
+  "fifwc-fra-swe-2026-06-30": {
+    "slug": "fifwc-fra-swe-2026-06-30",
+    "home": "France",
+    "away": "Sweden",
+    "group": "I",
+    "stage": "Round of 32",
+    "match": 77,
+    "kickoff": "2026-06-30T21:00:00Z",
+    "date": "2026-06-30",
+    "pick": [
+      4,
+      0
+    ],
+    "pick_ev": 1.14,
+    "pick_class": "home",
+    "modal": [
+      2,
+      0
+    ],
+    "modal_p": 0.149,
+    "modal_class": "home",
+    "blend_wdl": [
+      0.811,
+      0.132,
+      0.057
+    ],
+    "market_wdl": [
+      0.771,
+      0.154,
+      0.075
+    ],
+    "model_wdl": [
+      0.904,
+      0.08,
+      0.016
+    ],
+    "logged_at": "2026-06-28T18:39:24+00:00"
+  },
+  "fifwc-mex-ecu-2026-06-30": {
+    "slug": "fifwc-mex-ecu-2026-06-30",
+    "home": "Mexico",
+    "away": "Ecuador",
+    "group": "A",
+    "stage": "Round of 32",
+    "match": 79,
+    "kickoff": "2026-07-01T01:00:00Z",
+    "date": "2026-06-30",
+    "pick": [
+      1,
+      0
+    ],
+    "pick_ev": 0.74,
+    "pick_class": "home",
+    "modal": [
+      1,
+      0
+    ],
+    "modal_p": 0.14,
+    "modal_class": "home",
+    "blend_wdl": [
+      0.46,
+      0.295,
+      0.245
+    ],
+    "market_wdl": [
+      0.423,
+      0.323,
+      0.254
+    ],
+    "model_wdl": [
+      0.547,
+      0.228,
+      0.225
+    ],
+    "logged_at": "2026-06-28T18:39:24+00:00"
+  },
+  "fifwc-eng-cdr-2026-07-01": {
+    "slug": "fifwc-eng-cdr-2026-07-01",
+    "home": "England",
+    "away": "DR Congo",
+    "group": "L",
+    "stage": "Round of 32",
+    "match": 80,
+    "kickoff": "2026-07-01T16:00:00Z",
+    "date": "2026-07-01",
+    "pick": [
+      2,
+      0
+    ],
+    "pick_ev": 1.154,
+    "pick_class": "home",
+    "modal": [
+      2,
+      0
+    ],
+    "modal_p": 0.178,
+    "modal_class": "home",
+    "blend_wdl": [
+      0.798,
+      0.146,
+      0.055
+    ],
+    "market_wdl": [
+      0.771,
+      0.164,
+      0.065
+    ],
+    "model_wdl": [
+      0.862,
+      0.105,
+      0.033
+    ],
+    "logged_at": "2026-06-28T18:39:24+00:00"
+  },
+  "fifwc-bel-sen-2026-07-01": {
+    "slug": "fifwc-bel-sen-2026-07-01",
+    "home": "Belgium",
+    "away": "Senegal",
+    "group": "G",
+    "stage": "Round of 32",
+    "match": 82,
+    "kickoff": "2026-07-01T20:00:00Z",
+    "date": "2026-07-01",
+    "pick": [
+      1,
+      0
+    ],
+    "pick_ev": 0.674,
+    "pick_class": "home",
+    "modal": [
+      1,
+      1
+    ],
+    "modal_p": 0.135,
+    "modal_class": "draw",
+    "blend_wdl": [
+      0.424,
+      0.288,
+      0.288
+    ],
+    "market_wdl": [
+      0.443,
+      0.304,
+      0.254
+    ],
+    "model_wdl": [
+      0.381,
+      0.251,
+      0.367
+    ],
+    "logged_at": "2026-06-28T18:39:24+00:00"
+  },
+  "fifwc-usa-bih-2026-07-01": {
+    "slug": "fifwc-usa-bih-2026-07-01",
+    "home": "United States",
+    "away": "Bosnia and Herzegovina",
+    "group": "D",
+    "stage": "Round of 32",
+    "match": 81,
+    "kickoff": "2026-07-02T00:00:00Z",
+    "date": "2026-07-01",
+    "pick": [
+      1,
+      0
+    ],
+    "pick_ev": 0.935,
+    "pick_class": "home",
+    "modal": [
+      1,
+      0
+    ],
+    "modal_p": 0.133,
+    "modal_class": "home",
+    "blend_wdl": [
+      0.67,
+      0.198,
+      0.132
+    ],
+    "market_wdl": [
+      0.719,
+      0.186,
+      0.095
+    ],
+    "model_wdl": [
+      0.556,
+      0.226,
+      0.219
+    ],
+    "logged_at": "2026-06-28T18:39:24+00:00"
+  },
+  "fifwc-esp-aut-2026-07-02": {
+    "slug": "fifwc-esp-aut-2026-07-02",
+    "home": "Spain",
+    "away": "Austria",
+    "group": "H",
+    "stage": "Round of 32",
+    "match": 84,
+    "kickoff": "2026-07-02T19:00:00Z",
+    "date": "2026-07-02",
+    "pick": [
+      2,
+      0
+    ],
+    "pick_ev": 1.098,
+    "pick_class": "home",
+    "modal": [
+      2,
+      0
+    ],
+    "modal_p": 0.164,
+    "modal_class": "home",
+    "blend_wdl": [
+      0.771,
+      0.165,
+      0.065
+    ],
+    "market_wdl": [
+      0.759,
+      0.176,
+      0.065
+    ],
+    "model_wdl": [
+      0.799,
+      0.138,
+      0.063
+    ],
+    "logged_at": "2026-06-28T18:39:24+00:00"
+  },
+  "fifwc-prt-hrv-2026-07-02": {
+    "slug": "fifwc-prt-hrv-2026-07-02",
+    "home": "Portugal",
+    "away": "Croatia",
+    "group": "K",
+    "stage": "Round of 32",
+    "match": 83,
+    "kickoff": "2026-07-02T23:00:00Z",
+    "date": "2026-07-02",
+    "pick": [
+      1,
+      0
+    ],
+    "pick_ev": 0.777,
+    "pick_class": "home",
+    "modal": [
+      1,
+      0
+    ],
+    "modal_p": 0.124,
+    "modal_class": "home",
+    "blend_wdl": [
+      0.529,
+      0.262,
+      0.209
+    ],
+    "market_wdl": [
+      0.532,
+      0.274,
+      0.194
+    ],
+    "model_wdl": [
+      0.521,
+      0.234,
+      0.245
+    ],
+    "logged_at": "2026-06-28T18:39:24+00:00"
+  },
+  "fifwc-che-alg-2026-07-02": {
+    "slug": "fifwc-che-alg-2026-07-02",
+    "home": "Switzerland",
+    "away": "Algeria",
+    "group": "B",
+    "stage": "Round of 32",
+    "match": 85,
+    "kickoff": "2026-07-03T03:00:00Z",
+    "date": "2026-07-02",
+    "pick": [
+      1,
+      0
+    ],
+    "pick_ev": 0.809,
+    "pick_class": "home",
+    "modal": [
+      1,
+      0
+    ],
+    "modal_p": 0.129,
+    "modal_class": "home",
+    "blend_wdl": [
+      0.551,
+      0.253,
+      0.196
+    ],
+    "market_wdl": [
+      0.508,
+      0.276,
+      0.216
+    ],
+    "model_wdl": [
+      0.651,
+      0.198,
+      0.15
+    ],
+    "logged_at": "2026-06-28T18:39:24+00:00"
+  },
+  "fifwc-aus-egy-2026-07-03": {
+    "slug": "fifwc-aus-egy-2026-07-03",
+    "home": "Australia",
+    "away": "Egypt",
+    "group": "D",
+    "stage": "Round of 32",
+    "match": 88,
+    "kickoff": "2026-07-03T18:00:00Z",
+    "date": "2026-07-03",
+    "pick": [
+      0,
+      1
+    ],
+    "pick_ev": 0.589,
+    "pick_class": "away",
+    "modal": [
+      1,
+      1
+    ],
+    "modal_p": 0.132,
+    "modal_class": "draw",
+    "blend_wdl": [
+      0.356,
+      0.303,
+      0.341
+    ],
+    "market_wdl": [
+      0.284,
+      0.333,
+      0.383
+    ],
+    "model_wdl": [
+      0.526,
+      0.233,
+      0.242
+    ],
+    "logged_at": "2026-06-28T18:39:24+00:00"
+  },
+  "fifwc-arg-cvi-2026-07-03": {
+    "slug": "fifwc-arg-cvi-2026-07-03",
+    "home": "Argentina",
+    "away": "Cabo Verde",
+    "group": "J",
+    "stage": "Round of 32",
+    "match": 86,
+    "kickoff": "2026-07-03T22:00:00Z",
+    "date": "2026-07-03",
+    "pick": [
+      2,
+      0
+    ],
+    "pick_ev": 1.217,
+    "pick_class": "home",
+    "modal": [
+      2,
+      0
+    ],
+    "modal_p": 0.169,
+    "modal_class": "home",
+    "blend_wdl": [
+      0.88,
+      0.089,
+      0.031
+    ],
+    "market_wdl": [
+      0.855,
+      0.105,
+      0.04
+    ],
+    "model_wdl": [
+      0.938,
+      0.052,
+      0.01
+    ],
+    "logged_at": "2026-06-28T18:39:24+00:00"
+  },
+  "fifwc-col-gha-2026-07-03": {
+    "slug": "fifwc-col-gha-2026-07-03",
+    "home": "Colombia",
+    "away": "Ghana",
+    "group": "K",
+    "stage": "Round of 32",
+    "match": 87,
+    "kickoff": "2026-07-04T01:30:00Z",
+    "date": "2026-07-03",
+    "pick": [
+      2,
+      0
+    ],
+    "pick_ev": 1.023,
+    "pick_class": "home",
+    "modal": [
+      2,
+      0
+    ],
+    "modal_p": 0.154,
+    "modal_class": "home",
+    "blend_wdl": [
+      0.715,
+      0.193,
+      0.092
+    ],
+    "market_wdl": [
+      0.628,
+      0.246,
+      0.126
+    ],
+    "model_wdl": [
+      0.919,
+      0.068,
+      0.013
+    ],
+    "logged_at": "2026-06-28T18:39:24+00:00"
+  }
+}

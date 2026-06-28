@@ -41,6 +41,11 @@ WEB_DIR = ROOT / "web"
 OUT_JSON = WC / "predictions.json"
 KO_RESULTS = WC / "knockout_results.json"   # {match_no: {"winner": team, "score": [h, a]}}
 GOLDEN_BOOT = WC / "golden_boot.json"       # de-vigged top-scorer market (from worldcup_fetch)
+PRED_LOG = WC / "pred_log.json"             # forward-log: slug -> last PRE-KICKOFF prediction
+WEB_PRED_LOG = WEB_DIR / "pred_log.json"    # deployed copy (the cross-run accumulation store)
+# CI never commits data back, so the log is persisted by being part of the deployed site:
+# each run seeds from the live copy, upserts the current pre-kickoff picks, and redeploys it.
+PAGES_PRED_LOG_URL = "https://yaronlasko.github.io/web/pred_log.json"
 OUT_MD = ROOT / "models" / "worldcup_predictions.md"
 OUT_MD_SAFE = ROOT / "models" / "worldcup_predictions_safe.md"
 
@@ -230,6 +235,7 @@ def predict_match(m: dict, teams: dict, tie_bonus: float = 0.0) -> dict:
     pick_cls, pick_conf, _ = stats_for(*pick)
     modal_cls, modal_conf, modal_ev = stats_for(*modal)
     return {
+        "slug": m.get("slug"),
         "group": m["group"], "home": h, "away": a, "date": m["date"],
         "kickoff": m.get("kickoff"),
         "lambda_home": round(lh, 2), "lambda_away": round(la, 2),
@@ -466,11 +472,69 @@ def fmt_pct(x):
     return f"{100*x:4.0f}%"
 
 
+# ----------------------------------------------------------------------------
+# Forward-logging (leakage-free scorecard input)
+# ----------------------------------------------------------------------------
+# Snapshot each game's prediction at the LAST refresh before kickoff. predict only emits
+# games whose kickoff is still in the future, so every logged entry is pre-kickoff by
+# construction (no leakage). Once a game starts it drops out of the picks and its log entry
+# freezes. src.worldcup_score grades these against the actual results.
+def _fetch_remote_log(url: str) -> dict:
+    """Best-effort fetch of the live (deployed) pred_log so CI runs accumulate across runs
+    without committing data back. Any failure -> empty (we still have the committed copy)."""
+    import urllib.request
+    try:
+        bust = f"{url}?cb={int(_dt.datetime.now().timestamp())}"
+        req = urllib.request.Request(bust, headers={"User-Agent": "wc-predict-log/1.0"})
+        with urllib.request.urlopen(req, timeout=10) as r:
+            data = json.load(r)
+            return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+def _merge_logs(*logs: dict) -> dict:
+    """Union of slug->entry maps, keeping the snapshot with the latest `logged_at`."""
+    out: dict = {}
+    for log in logs:
+        for slug, e in (log or {}).items():
+            if slug not in out or e.get("logged_at", "") > out[slug].get("logged_at", ""):
+                out[slug] = e
+    return out
+
+
+def _log_entry(p: dict, now_iso: str) -> dict:
+    """The slim, gradeable snapshot kept per game (drops the matrix and sim fields)."""
+    keep = ("slug", "home", "away", "group", "stage", "match", "kickoff", "date",
+            "pick", "pick_ev", "pick_class", "modal", "modal_p", "modal_class",
+            "blend_wdl", "market_wdl", "model_wdl")
+    e = {k: p.get(k) for k in keep}
+    e["logged_at"] = now_iso
+    return e
+
+
+def update_pred_log(allp: list, now_iso: str) -> dict:
+    """Upsert the current pre-kickoff picks into the forward-log and persist it to both the
+    committed file and the deployed web copy. Returns the merged log."""
+    committed = json.load(open(PRED_LOG, encoding="utf-8")) if PRED_LOG.exists() else {}
+    remote = _fetch_remote_log(PAGES_PRED_LOG_URL)
+    log = _merge_logs(committed, remote)                  # everything seen so far
+    for p in allp:                                        # all of allp are pre-kickoff
+        slug = p.get("slug") or f"{p['home']}|{p['away']}|{p.get('date')}"
+        log[slug] = _log_entry(p, now_iso)               # freshest pre-kickoff snapshot wins
+    blob = json.dumps(log, ensure_ascii=False, indent=2)
+    PRED_LOG.write_text(blob, encoding="utf-8")
+    WEB_DIR.mkdir(parents=True, exist_ok=True)
+    WEB_PRED_LOG.write_text(blob, encoding="utf-8")
+    return log
+
+
 def main(safe: bool = False):
     teams, preds, ko_preds, bracket = build_predictions()
     adv, win, pos = simulate(teams, preds)
     title_odds = simulate_bracket(teams, bracket, ko_preds)
     allp = preds + ko_preds                 # every upcoming game (group + knockout)
+    now_iso = _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds")
     out_md = OUT_MD_SAFE if safe else OUT_MD
 
     lines = []
@@ -657,6 +721,13 @@ def main(safe: bool = False):
     json.dump(group_dump + ko_dump, open(OUT_JSON, "w", encoding="utf-8"),
               indent=2, ensure_ascii=False)
 
+    # forward-log: freeze each upcoming game's pre-kickoff pick for later scoring
+    try:
+        log = update_pred_log(allp, now_iso)
+        print(f"[pred-log] {len(log)} games tracked -> {PRED_LOG.name} (+ web copy)")
+    except Exception as e:                              # never let logging break the build
+        print(f"[pred-log] skipped: {e}")
+
     # ---- website data bundle (single source for the static site) -------------
     # `groups` (built above for the markdown qualification section) is still in
     # scope; reuse it so the site carries the full per-team standings, not just
@@ -666,7 +737,7 @@ def main(safe: bool = False):
     web = {
         "meta": {
             "snapshot": "2026-06-25",
-            "generated": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
+            "generated": now_iso,
             "w_market": W_MARKET,
             "n_sims": N_SIMS,
         },

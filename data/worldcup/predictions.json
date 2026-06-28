@@ -1,5 +1,6 @@
 [
   {
+    "slug": "fifwc-rsa-can-2026-06-28",
     "group": "A",
     "home": "South Africa",
     "away": "Canada",
@@ -48,6 +49,7 @@
     "advancer": "Canada"
   },
   {
+    "slug": "fifwc-bra-jpn-2026-06-29",
     "group": "C",
     "home": "Brazil",
     "away": "Japan",
@@ -96,6 +98,7 @@
     "advancer": "Brazil"
   },
   {
+    "slug": "fifwc-ger-par-2026-06-29",
     "group": "E",
     "home": "Germany",
     "away": "Paraguay",
@@ -144,6 +147,7 @@
     "advancer": "Germany"
   },
   {
+    "slug": "fifwc-nld-mar-2026-06-29",
     "group": "F",
     "home": "Netherlands",
     "away": "Morocco",
@@ -192,6 +196,7 @@
     "advancer": "Netherlands"
   },
   {
+    "slug": "fifwc-civ-nor-2026-06-30",
     "group": "E",
     "home": "Côte d'Ivoire",
     "away": "Norway",
@@ -240,6 +245,7 @@
     "advancer": "Norway"
   },
   {
+    "slug": "fifwc-fra-swe-2026-06-30",
     "group": "I",
     "home": "France",
     "away": "Sweden",
@@ -288,6 +294,7 @@
     "advancer": "France"
   },
   {
+    "slug": "fifwc-mex-ecu-2026-06-30",
     "group": "A",
     "home": "Mexico",
     "away": "Ecuador",
@@ -336,6 +343,7 @@
     "advancer": "Mexico"
   },
   {
+    "slug": "fifwc-eng-cdr-2026-07-01",
     "group": "L",
     "home": "England",
     "away": "DR Congo",
@@ -384,6 +392,7 @@
     "advancer": "England"
   },
   {
+    "slug": "fifwc-bel-sen-2026-07-01",
     "group": "G",
     "home": "Belgium",
     "away": "Senegal",
@@ -432,6 +441,7 @@
     "advancer": "Belgium"
   },
   {
+    "slug": "fifwc-usa-bih-2026-07-01",
     "group": "D",
     "home": "United States",
     "away": "Bosnia and Herzegovina",
@@ -480,6 +490,7 @@
     "advancer": "United States"
   },
   {
+    "slug": "fifwc-esp-aut-2026-07-02",
     "group": "H",
     "home": "Spain",
     "away": "Austria",
@@ -528,6 +539,7 @@
     "advancer": "Spain"
   },
   {
+    "slug": "fifwc-prt-hrv-2026-07-02",
     "group": "K",
     "home": "Portugal",
     "away": "Croatia",
@@ -576,6 +588,7 @@
     "advancer": "Portugal"
   },
   {
+    "slug": "fifwc-che-alg-2026-07-02",
     "group": "B",
     "home": "Switzerland",
     "away": "Algeria",
@@ -624,6 +637,7 @@
     "advancer": "Switzerland"
   },
   {
+    "slug": "fifwc-aus-egy-2026-07-03",
     "group": "D",
     "home": "Australia",
     "away": "Egypt",
@@ -672,6 +686,7 @@
     "advancer": "Australia"
   },
   {
+    "slug": "fifwc-arg-cvi-2026-07-03",
     "group": "J",
     "home": "Argentina",
     "away": "Cabo Verde",
@@ -720,6 +735,7 @@
     "advancer": "Argentina"
   },
   {
+    "slug": "fifwc-col-gha-2026-07-03",
     "group": "K",
     "home": "Colombia",
     "away": "Ghana",
