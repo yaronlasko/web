@@ -86,10 +86,13 @@
   .advbar > span{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#1f6b3f,#37d67a)}
   .advbar em{position:relative;font-style:normal;font-size:11px;padding-left:6px;line-height:16px;color:#dff6e7}
   /* knockout bracket */
-  .bracket{display:flex;gap:16px;overflow-x:auto;padding:4px 0 12px}
-  .bround{min-width:178px;flex:0 0 auto}
+  .bracket{display:flex;gap:16px;overflow-x:auto;padding:4px 0 12px;align-items:stretch}
+  .bround{min-width:186px;flex:0 0 auto;display:flex;flex-direction:column}
   .bround h4{margin:0 0 10px;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
-  .bmatch{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin-bottom:10px;overflow:hidden}
+  /* matches fill the column and spread evenly, so each later-round match sits centred
+     between its two feeder matches above (JS lists them in bracket-tree order). */
+  .bmatches{flex:1 1 auto;display:flex;flex-direction:column;justify-content:space-around;gap:10px}
+  .bmatch{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
   .bmatch .bm{font-size:9.5px;color:var(--muted);padding:3px 9px;background:var(--panel2);letter-spacing:.05em}
   .bslot{padding:8px 10px;font-size:12.5px;border-top:1px solid var(--line);display:flex;align-items:center;gap:6px;min-height:34px}
   .bslot:first-of-type{border-top:0}
@@ -147,6 +150,7 @@
 
   <nav class="tabs" id="tabs">
     <button data-tab="predictions" class="on">⚽ Predictions</button>
+    <button data-tab="bracket">🏆 Bracket</button>
     <button data-tab="invest">💰 Invest</button>
   </nav>
 
@@ -191,10 +195,6 @@
     <div id="scorer" style="margin-top:14px"></div>
   </div>
 
-  <h2 class="section">Knockout bracket</h2>
-  <div class="legend" id="bracket-legend"></div>
-  <div class="bracket" id="bracket"></div>
-
   <h2 class="section">Group standings</h2>
   <div class="legend">
     <span><i style="background:var(--good)"></i>advanced (top-2 + best thirds)</span>
@@ -203,6 +203,12 @@
   <div class="groups" id="groups" style="margin-top:14px"></div>
 
   </div><!-- /tab-predictions -->
+
+  <div id="tab-bracket" class="tabpane" style="display:none">
+    <h2 class="section">Knockout bracket</h2>
+    <div class="legend" id="bracket-legend"></div>
+    <div class="bracket" id="bracket"></div>
+  </div>
 
   <div id="tab-invest" class="tabpane" style="display:none">
     <h2 class="section">Where to invest · bankroll allocator</h2>
@@ -486,18 +492,43 @@
   }
 
   // ---- knockout bracket -------------------------------------------------
+  // Vertical ordering: each later-round match should sit between its two feeders.
+  // The official match NUMBERS aren't in bracket-tree order (Match 89 feeds from 74 & 77,
+  // not from adjacent matches), so we derive a position for every match from the feeder
+  // ('from') links — a leaf gets the next in-order index, a parent the mean of its kids —
+  // then sort each round by it. Combined with the `space-around` column CSS this lines the
+  // rounds up into a real bracket.
+  function bracketOrder(rounds){
+    var kids = {};                                  // match -> [feeder match numbers]
+    rounds.forEach(function(r){ r.matches.forEach(function(mt){
+      var c = mt.slots.map(function(s){return s.from;}).filter(function(x){return x!=null;});
+      if(c.length) kids[mt.m] = c;
+    });});
+    var pos = {}, next = 0;
+    (function dfs(m){
+      var c = kids[m];
+      if(!c){ return (pos[m] = next++); }           // leaf (Round of 32)
+      var s = 0; c.forEach(function(ch){ s += dfs(ch); });
+      return (pos[m] = s / c.length);
+    })(rounds[rounds.length-1].matches[0].m);       // root = the Final
+    return pos;
+  }
   function renderBracket(){
     var bk = D.bracket;
     var host = document.getElementById('bracket');
     var leg = document.getElementById('bracket-legend');
     if(!bk || !host){ if(host) host.innerHTML=''; return; }
     leg.innerHTML =
-      '<span><i style="background:var(--good)"></i>confirmed — team has qualified</span>'+
-      '<span>otherwise = the group position that feeds the slot (e.g. “Winner Group I”)</span>'+
+      '<span><i style="background:var(--good)"></i>confirmed — team has qualified or advanced</span>'+
+      '<span>otherwise = the group position or feeder match that feeds the slot</span>'+
       '<span>'+(bk.group_stage_complete ? 'bracket set' :
                 '3rd-place slots lock once the group stage ends')+'</span>';
+    var pos = bracketOrder(bk.rounds);
     host.innerHTML = bk.rounds.map(function(r){
-      var cards = r.matches.map(function(mt){
+      var matches = r.matches.slice().sort(function(a,b){
+        return (pos[a.m]==null?0:pos[a.m]) - (pos[b.m]==null?0:pos[b.m]);
+      });
+      var cards = matches.map(function(mt){
         var slots = mt.slots.map(function(s){
           if(s.team){
             var sub = s.label;                       // group position, e.g. "Runner-up A"
@@ -515,7 +546,8 @@
         }).join('');
         return '<div class="bmatch"><div class="bm">Match '+mt.m+'</div>'+slots+'</div>';
       }).join('');
-      return '<div class="bround"><h4>'+esc(r.name)+'</h4>'+cards+'</div>';
+      return '<div class="bround"><h4>'+esc(r.name)+'</h4>'+
+             '<div class="bmatches">'+cards+'</div></div>';
     }).join('');
   }
 
@@ -744,7 +776,8 @@
       Array.prototype.forEach.call(document.querySelectorAll('#tabs button'),function(b){
         b.classList.toggle('on', b===btn);});
       document.getElementById('tab-predictions').style.display = tab==='predictions' ? '' : 'none';
-      document.getElementById('tab-invest').style.display     = tab==='invest'      ? '' : 'none';
+      document.getElementById('tab-bracket').style.display      = tab==='bracket'      ? '' : 'none';
+      document.getElementById('tab-invest').style.display       = tab==='invest'       ? '' : 'none';
       window.scrollTo(0,0);
     });
   });
