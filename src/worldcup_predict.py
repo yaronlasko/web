@@ -734,6 +734,17 @@ def main(safe: bool = False):
     # the two teams per match that predictions.json keeps.
     golden_boot = (json.load(open(GOLDEN_BOOT, encoding="utf-8"))
                    if GOLDEN_BOOT.exists() else None)
+
+    # Attach the live tradeable price (raw, vigged Polymarket moneyline) to every
+    # upcoming game so the site's investment panel can size bets client-side:
+    # edge = our blend_wdl - what you actually pay. blend_wdl/market_wdl are already
+    # on each entry; price is the only missing ingredient.
+    market = json.load(open(WC / "market.json", encoding="utf-8"))
+    for q in group_dump + ko_dump:
+        mk = market.get(q.get("slug"))
+        if mk and "moneyline_raw" in mk:
+            q["price"] = mk["moneyline_raw"]               # {home, draw, away}
+
     web = {
         "meta": {
             "snapshot": "2026-06-25",

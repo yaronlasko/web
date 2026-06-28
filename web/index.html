@@ -104,6 +104,22 @@
   footer ul{margin:8px 0 0;padding-left:18px} footer li{margin:4px 0}
   .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-top:10px}
   .legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+  /* investment panel */
+  .invctl{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+  .invctl label{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+  .invctl .ip{display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--line);
+    border-radius:10px;padding:6px 12px}
+  .invctl .ip span{font-size:18px;font-weight:700;color:var(--muted)}
+  .invctl input{appearance:none;background:transparent;border:0;color:var(--txt);font:700 18px/1 inherit;width:96px;outline:none}
+  .invsum{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+  .invsum .box{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 13px}
+  .invsum .k{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .invsum .v{font-size:19px;font-weight:800;margin-top:4px;letter-spacing:-.01em}
+  .invsum .v.good{color:var(--accent)} .invsum .v.bad{color:var(--away)}
+  .invsum .sub{font-size:11px;color:var(--muted);margin-top:2px}
+  td.pick b{color:var(--txt)} td .side-h{color:var(--home)} td .side-a{color:var(--away)} td .side-d{color:var(--draw)}
+  .disclaimer{font-size:11.5px;color:var(--muted);margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+  .disclaimer b{color:var(--accent2)}
   @media (max-width:560px){.strip{grid-template-columns:1fr}.meta{text-align:left}}
 </style>
 </head>
@@ -129,6 +145,27 @@
   <div class="strip">
     <div class="card"><h3 id="strip1-h">Bank these first</h3><div id="strip1"></div></div>
     <div class="card"><h3>Coin-flips — don't overthink</h3><div id="strip2"></div></div>
+  </div>
+
+  <div id="invest-section">
+    <h2 class="section">Where to invest · bankroll allocator</h2>
+    <div class="legend">
+      <span>Type a bankroll; this sizes bets where our blend disagrees with the live Polymarket price.</span>
+      <span>Kelly-sized, risk-capped, simulated. <b style="color:var(--accent2)">Not financial advice.</b></span>
+    </div>
+    <div class="card" style="padding:16px 18px;margin-top:10px">
+      <div class="invctl">
+        <label for="inv-bank">Bankroll</label>
+        <div class="ip"><span>$</span><input id="inv-bank" type="number" min="1" step="10" value="100" /></div>
+        <label>Risk</label>
+        <div class="toggle" id="inv-risk">
+          <button data-risk="conservative" class="on">Conservative</button>
+          <button data-risk="moderate">Moderate</button>
+          <button data-risk="aggressive">Aggressive</button>
+        </div>
+      </div>
+      <div id="inv-out"></div>
+    </div>
   </div>
 
   <div id="ko-section" style="display:none">
@@ -479,6 +516,128 @@
       're-run the pipeline before kickoff for the freshest odds.</li>'+
     '</ul>';
 
+  // ---- investment / bankroll allocator ---------------------------------
+  // Mirrors src/worldcup_invest.py: edge = our blend_wdl - (price + slippage);
+  // size with fractional Kelly f*=(p-c)/(1-c), cap per bet, keep best +EV side
+  // per match, scale to <= bankroll, then Monte-Carlo the P&L for risk numbers.
+  var INV_RISK = {
+    conservative:{kelly:.25,maxBet:.10,minEdge:.04,slip:.02},
+    moderate:    {kelly:.50,maxBet:.20,minEdge:.03,slip:.015},
+    aggressive:  {kelly:1.0,maxBet:.35,minEdge:.02,slip:.01}
+  };
+  var invRisk = 'conservative';
+  var INV_SIDES = ['home','draw','away'];
+  var money = function(x){return (x<0?'-$':'$')+Math.abs(x).toFixed(2);};
+  var sideLabel = function(b){
+    if(b.side==='home') return '<span class="side-h">'+esc(b.home)+' win</span>';
+    if(b.side==='away') return '<span class="side-a">'+esc(b.away)+' win</span>';
+    return '<span class="side-d">Draw</span>';
+  };
+
+  function invBets(bankroll, rp){
+    var cands = (D.matches||[]).concat(D.knockout||[]);
+    var bets = [];
+    cands.forEach(function(g){
+      if(!g.price || !g.blend_wdl) return;
+      var best = null;
+      INV_SIDES.forEach(function(side,i){
+        var p = g.blend_wdl[i];
+        var c = Math.min(.99, (g.price[side]||0) + rp.slip);  // pay the mid + slippage
+        if(c <= 0) return;
+        var edge = p - c;
+        if(edge < rp.minEdge) return;
+        var ev = p/c - 1;                                     // expected profit per $1
+        var cand = {side:side, p:p, c:c, edge:edge, ev:ev,
+                    kf:(p-c)/(1-c), mf:(g.market_wdl? g.market_wdl[i] : null)};
+        if(!best || cand.ev > best.ev) best = cand;
+      });
+      if(!best) return;
+      best.home=g.home; best.away=g.away;
+      best.stake = Math.min(rp.kelly*best.kf*bankroll, rp.maxBet*bankroll);
+      bets.push(best);
+    });
+    bets.sort(function(a,b){return b.stake-a.stake;});
+    var total = bets.reduce(function(s,b){return s+b.stake;},0);
+    if(total > bankroll && total > 0) bets.forEach(function(b){b.stake *= bankroll/total;});
+    bets.forEach(function(b){ b.shares=b.stake/b.c; b.win=b.shares-b.stake; b.exp=b.stake*b.ev; });
+    return bets;
+  }
+
+  function invSim(bets, bankroll){            // Monte-Carlo P&L under our probabilities
+    if(!bets.length) return null;
+    var n=8000, pr=new Float64Array(n), k, sum=0, nLoss=0;
+    for(k=0;k<n;k++){
+      var t=0;
+      for(var j=0;j<bets.length;j++) t += (Math.random()<bets[j].p)? bets[j].win : -bets[j].stake;
+      pr[k]=t; sum+=t; if(t<0) nLoss++;
+    }
+    var sorted=Array.prototype.slice.call(pr).sort(function(a,b){return a-b;});
+    var pctl=function(q){return sorted[Math.min(n-1,Math.floor(q*n))];};
+    return {mean:sum/n, pLoss:nLoss/n, p05:pctl(.05), p95:pctl(.95), worst:sorted[0]};
+  }
+
+  function renderInvest(){
+    var out = document.getElementById('inv-out');
+    var bankroll = parseFloat(document.getElementById('inv-bank').value);
+    if(!(bankroll>0)){ out.innerHTML='<p style="color:var(--muted)">Enter a bankroll above.</p>'; return; }
+    var rp = INV_RISK[invRisk];
+    var nMarkets = (D.matches||[]).concat(D.knockout||[]).filter(function(g){return g.price;}).length;
+    var bets = invBets(bankroll, rp);
+
+    if(!bets.length){
+      var msg = nMarkets
+        ? 'Our model doesn\'t disagree with the market enough to justify the risk right now '+
+          '— the efficient-market outcome. Try a higher risk level, or check back after a refresh.'
+        : 'No upcoming World Cup markets are open right now. Check back when the next round\'s odds post.';
+      out.innerHTML =
+        '<div class="invsum"><div class="box" style="grid-column:1/-1">'+
+        '<div class="k">No bets</div><div class="v">Hold cash</div>'+
+        '<div class="sub">'+msg+'</div></div></div>';
+      return;
+    }
+
+    var staked = bets.reduce(function(s,b){return s+b.stake;},0);
+    var exp = bets.reduce(function(s,b){return s+b.exp;},0);
+    var floor = bets.every(function(b){return b.mf!=null;})
+      ? bets.reduce(function(s,b){return s + b.stake*(b.mf/b.c - 1);},0) : null;
+    var sim = invSim(bets, bankroll);
+    var retStake = exp/staked*100;
+
+    var rows = bets.map(function(b){
+      return '<tr><td class="pick">'+sideLabel(b)+'<div class="sub" style="font-size:10.5px">'+
+        esc(b.home)+' v '+esc(b.away)+'</div></td>'+
+        '<td class="num">'+pct(b.p)+'</td>'+
+        '<td class="num">'+Math.round(b.c*100)+'¢</td>'+
+        '<td class="num" style="color:var(--accent)">+'+Math.round(b.edge*100)+'%</td>'+
+        '<td class="num"><b>'+money(b.stake)+'</b></td>'+
+        '<td class="num">'+money(b.shares)+'</td></tr>';
+    }).join('');
+
+    out.innerHTML =
+      '<div class="invsum">'+
+        '<div class="box"><div class="k">Deployed</div><div class="v">'+money(staked)+'</div>'+
+          '<div class="sub">'+Math.round(staked/bankroll*100)+'% of bankroll · '+money(bankroll-staked)+' cash · '+bets.length+' bets</div></div>'+
+        '<div class="box"><div class="k">Expected profit</div><div class="v '+(exp>=0?'good':'bad')+'">'+money(exp)+'</div>'+
+          '<div class="sub">if our model is right</div></div>'+
+        '<div class="box"><div class="k">Return on staked $</div><div class="v '+(retStake>=0?'good':'bad')+'">'+
+          (retStake>=0?'+':'')+retStake.toFixed(1)+'%</div><div class="sub">'+
+          (exp/bankroll*100>=0?'+':'')+(exp/bankroll*100).toFixed(1)+'% on full bankroll</div></div>'+
+        (sim? '<div class="box"><div class="k">Risk</div><div class="v">'+Math.round((1-sim.pLoss)*100)+'% win-chance</div>'+
+          '<div class="sub">5th pct '+money(sim.p05)+' · worst '+money(sim.worst)+'</div></div>' : '')+
+      '</div>'+
+      '<div style="overflow-x:auto"><table><thead><tr>'+
+        '<th>Bet</th><th class="num">Our P</th><th class="num">Price</th><th class="num">Edge</th>'+
+        '<th class="num">Stake</th><th class="num">Shares</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
+      '<div class="disclaimer">'+
+        'Each "edge" exists only because our 70/30 blend disagrees with the market — and Polymarket sports '+
+        'markets are well-calibrated, so this upside is <b>unproven</b>. '+
+        (floor!=null? 'If the market is actually right, this set returns about <b>'+(floor/staked*100).toFixed(1)+
+          '%</b> on staked money (≈ the spread you cross) — the honest downside. ' : '')+
+        'Prices are mids + a slippage cushion; real fills can be worse and big stakes move thin markets. '+
+        '<b>Bet only what you can afford to lose. Not financial advice.</b>'+
+      '</div>';
+  }
+
   // ---- mode toggle ------------------------------------------------------
   var hints = {
     ev:'Headlines the expected-points-maximising score (chases high scores on lop-sided games).',
@@ -497,7 +656,18 @@
     });
   });
 
-  renderAll(); renderTitleOdds(); renderScorer(); renderGroups(); renderBracket();
+  // ---- investment panel wiring -----------------------------------------
+  document.getElementById('inv-bank').addEventListener('input', renderInvest);
+  Array.prototype.forEach.call(document.querySelectorAll('#inv-risk button'),function(btn){
+    btn.addEventListener('click',function(){
+      invRisk = btn.getAttribute('data-risk');
+      Array.prototype.forEach.call(document.querySelectorAll('#inv-risk button'),function(b){
+        b.classList.toggle('on', b===btn);});
+      renderInvest();
+    });
+  });
+
+  renderAll(); renderInvest(); renderTitleOdds(); renderScorer(); renderGroups(); renderBracket();
 })();
 </script>
 </body>

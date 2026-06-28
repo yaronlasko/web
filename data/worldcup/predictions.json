@@ -1,54 +1,5 @@
 [
   {
-    "slug": "fifwc-rsa-can-2026-06-28",
-    "group": "A",
-    "home": "South Africa",
-    "away": "Canada",
-    "date": "2026-06-28",
-    "kickoff": "2026-06-28T19:00:00Z",
-    "lambda_home": 0.61,
-    "lambda_away": 2.19,
-    "blend_wdl": [
-      0.153,
-      0.252,
-      0.595
-    ],
-    "model_wdl": [
-      0.094,
-      0.164,
-      0.741
-    ],
-    "market_wdl": [
-      0.178,
-      0.289,
-      0.533
-    ],
-    "pick": [
-      0,
-      1
-    ],
-    "pick_ev": 0.866,
-    "pick_class": "away",
-    "pick_hit": 0.135,
-    "confidence": 0.595,
-    "modal": [
-      0,
-      1
-    ],
-    "modal_p": 0.135,
-    "modal_ev": 0.866,
-    "modal_class": "away",
-    "modal_conf": 0.595,
-    "stage": "Round of 32",
-    "match": 73,
-    "needs_advancer": false,
-    "advance": {
-      "South Africa": 0.204,
-      "Canada": 0.796
-    },
-    "advancer": "Canada"
-  },
-  {
     "slug": "fifwc-bra-jpn-2026-06-29",
     "group": "C",
     "home": "Brazil",
