@@ -86,18 +86,32 @@
   .advbar > span{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#1f6b3f,#37d67a)}
   .advbar em{position:relative;font-style:normal;font-size:11px;padding-left:6px;line-height:16px;color:#dff6e7}
   /* knockout bracket */
-  .bracket{display:flex;gap:16px;overflow-x:auto;padding:4px 0 12px;align-items:stretch}
-  .bround{min-width:186px;flex:0 0 auto;display:flex;flex-direction:column}
+  .bracket{position:relative;display:flex;gap:16px;overflow-x:auto;padding:4px 0 12px;align-items:stretch}
+  .bracket svg.blines{position:absolute;top:0;left:0;pointer-events:none;z-index:0;overflow:visible}
+  .bracket svg.blines .bline{fill:none;stroke:var(--line);stroke-width:1.5}
+  .bracket svg.blines .bline.dec{stroke:rgba(55,214,122,.5);stroke-width:2}   /* a decided path */
+  .bround{position:relative;z-index:1;min-width:186px;flex:0 0 auto;display:flex;flex-direction:column}
   .bround h4{margin:0 0 10px;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
   /* matches fill the column and spread evenly, so each later-round match sits centred
-     between its two feeder matches above (JS lists them in bracket-tree order). */
+     between its two feeder matches above (JS lists them in bracket-tree order). SVG
+     connector lines (drawn from real card positions) make the feeder links explicit. */
   .bmatches{flex:1 1 auto;display:flex;flex-direction:column;justify-content:space-around;gap:10px}
   .bmatch{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-  .bmatch .bm{font-size:9.5px;color:var(--muted);padding:3px 9px;background:var(--panel2);letter-spacing:.05em}
+  .bmatch.played{border-color:#33506a}
+  .bmatch .bm{font-size:9.5px;color:var(--muted);padding:3px 9px;background:var(--panel2);letter-spacing:.05em;
+    display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .bmatch .bm .bscore{color:var(--txt);font-weight:700;letter-spacing:.02em}
   .bslot{padding:8px 10px;font-size:12.5px;border-top:1px solid var(--line);display:flex;align-items:center;gap:6px;min-height:34px}
   .bslot:first-of-type{border-top:0}
   .bslot.confirmed{color:var(--txt);font-weight:600}
   .bslot.confirmed::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--good);flex:0 0 auto}
+  .bslot .bteam{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bslot.won::before{background:var(--good)}
+  .bslot.lost{color:var(--muted);font-weight:400}
+  .bslot.lost::before{background:var(--muted);opacity:.6}
+  .bslot.lost .bteam{text-decoration:line-through;opacity:.75}
+  .bslot .bgoal{margin-left:auto;font-size:14px;font-weight:800;color:var(--txt);flex:0 0 auto;min-width:12px;text-align:right}
+  .bslot.lost .bgoal{color:var(--muted);font-weight:700}
   .bslot.ph{flex-direction:column;align-items:flex-start;gap:2px}
   .bslot.pending{color:#b8c4d0}
   .bslot.open{color:var(--muted);font-style:italic;opacity:.85}
@@ -514,42 +528,98 @@
     })(rounds[rounds.length-1].matches[0].m);       // root = the Final
     return pos;
   }
+  // one bracket slot. When its match has been PLAYED we show the goals it scored and
+  // style winner/loser; otherwise we show where the slot feeds from (group position for
+  // R32, or "via Match N · score" for a team that already advanced a round).
+  function bslotHtml(s, mt){
+    if(s.team){
+      var cls = 'bslot confirmed', tail;
+      if(mt.played){
+        cls += s.won ? ' won' : ' lost';
+        tail = (s.goals!=null) ? '<span class="bgoal">'+s.goals+'</span>' : '';
+      } else if(s.from){                             // advanced from an earlier match
+        var sub = 'via Match '+s.from;
+        if(s.score){ var sc=s.score.slice().sort(function(a,b){return b-a;});
+                     sub += ' · '+sc[0]+'–'+sc[1]; }
+        tail = '<span class="bsub">'+esc(sub)+'</span>';
+      } else {                                        // R32 group position, e.g. "Runner-up A"
+        tail = '<span class="bsub">'+esc(s.label)+'</span>';
+      }
+      return '<div class="'+cls+'"><span class="bteam">'+esc(s.team)+'</span>'+tail+'</div>';
+    }
+    var cls2 = s.status==='pending' ? 'pending' : 'open';
+    var note = s.note ? '<span class="bnote">'+esc(s.note)+'</span>' : '';
+    return '<div class="bslot ph '+cls2+'">'+esc(s.label)+note+'</div>';
+  }
   function renderBracket(){
     var bk = D.bracket;
     var host = document.getElementById('bracket');
     var leg = document.getElementById('bracket-legend');
     if(!bk || !host){ if(host) host.innerHTML=''; return; }
     leg.innerHTML =
-      '<span><i style="background:var(--good)"></i>confirmed — team has qualified or advanced</span>'+
-      '<span>otherwise = the group position or feeder match that feeds the slot</span>'+
+      '<span><i style="background:var(--good)"></i>confirmed / winner (advanced)</span>'+
+      '<span><i style="background:var(--muted)"></i>eliminated</span>'+
+      '<span>lines link each match to the two matches that feed it</span>'+
       '<span>'+(bk.group_stage_complete ? 'bracket set' :
                 '3rd-place slots lock once the group stage ends')+'</span>';
     var pos = bracketOrder(bk.rounds);
-    host.innerHTML = bk.rounds.map(function(r){
+    var cols = bk.rounds.map(function(r){
       var matches = r.matches.slice().sort(function(a,b){
         return (pos[a.m]==null?0:pos[a.m]) - (pos[b.m]==null?0:pos[b.m]);
       });
       var cards = matches.map(function(mt){
-        var slots = mt.slots.map(function(s){
-          if(s.team){
-            var sub = s.label;                       // group position, e.g. "Runner-up A"
-            if(s.from){                              // a later-round winner that advanced
-              sub = 'via Match '+s.from;
-              if(s.score){ var sc=s.score.slice().sort(function(a,b){return b-a;});
-                           sub += ' · '+sc[0]+'–'+sc[1]; }
-            }
-            return '<div class="bslot confirmed">'+esc(s.team)+
-                   '<span class="bsub">'+esc(sub)+'</span></div>';
-          }
-          var cls = s.status==='pending' ? 'pending' : 'open';
-          var note = s.note ? '<span class="bnote">'+esc(s.note)+'</span>' : '';
-          return '<div class="bslot ph '+cls+'">'+esc(s.label)+note+'</div>';
-        }).join('');
-        return '<div class="bmatch"><div class="bm">Match '+mt.m+'</div>'+slots+'</div>';
+        var hdr = 'Match '+mt.m;
+        if(mt.played){                               // "1–0" (winner–loser) badge
+          var gs = mt.slots.map(function(s){return s.goals;}).filter(function(x){return x!=null;});
+          if(gs.length===2) hdr += '<span class="bscore">'+Math.max(gs[0],gs[1])+'–'+Math.min(gs[0],gs[1])+'</span>';
+        }
+        var slots = mt.slots.map(function(s){return bslotHtml(s, mt);}).join('');
+        return '<div class="bmatch'+(mt.played?' played':'')+'" data-m="'+mt.m+'">'+
+               '<div class="bm">'+hdr+'</div>'+slots+'</div>';
       }).join('');
       return '<div class="bround"><h4>'+esc(r.name)+'</h4>'+
              '<div class="bmatches">'+cards+'</div></div>';
     }).join('');
+    host.innerHTML = '<svg class="blines"></svg>' + cols;
+    drawBracketConnectors();
+  }
+
+  // Draw elbow connector lines from each match to its two feeder matches, measured from
+  // the REAL rendered card positions (robust to any centring imperfection). The bracket
+  // tab starts hidden (display:none => zero-size), so this also runs when the tab is
+  // shown and on resize.
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  function drawBracketConnectors(){
+    var host = document.getElementById('bracket');
+    var bk = D.bracket;
+    if(!host || !bk) return;
+    var svg = host.querySelector('svg.blines');
+    if(!svg) return;
+    if(!(host.offsetWidth>0 && host.offsetHeight>0)) return;   // hidden -> nothing to measure
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var W = host.scrollWidth, H = host.scrollHeight;
+    svg.setAttribute('width', W); svg.setAttribute('height', H);
+    svg.style.width = W+'px'; svg.style.height = H+'px';
+    var sr = svg.getBoundingClientRect();                      // scroll-safe origin
+    var cards = {};
+    Array.prototype.forEach.call(host.querySelectorAll('.bmatch'), function(el){
+      cards[el.getAttribute('data-m')] = el; });
+    bk.rounds.forEach(function(r){ r.matches.forEach(function(mt){
+      var pe = cards[mt.m]; if(!pe) return;
+      var pr = pe.getBoundingClientRect();
+      var px = pr.left - sr.left, pcy = (pr.top+pr.bottom)/2 - sr.top;
+      mt.slots.forEach(function(s){
+        if(s.from==null) return;
+        var fe = cards[s.from]; if(!fe) return;
+        var fr = fe.getBoundingClientRect();
+        var fx = fr.right - sr.left, fcy = (fr.top+fr.bottom)/2 - sr.top;
+        var midX = (fx + px)/2;
+        var p = document.createElementNS(SVGNS,'path');
+        p.setAttribute('d','M'+fx+' '+fcy+' H'+midX+' V'+pcy+' H'+px);
+        p.setAttribute('class', s.team ? 'bline dec' : 'bline');   // green once decided
+        svg.appendChild(p);
+      });
+    });});
   }
 
   // ---- footer -----------------------------------------------------------
@@ -782,7 +852,14 @@
       document.getElementById('tab-bracket').style.display      = tab==='bracket'      ? '' : 'none';
       document.getElementById('tab-invest').style.display       = tab==='invest'       ? '' : 'none';
       window.scrollTo(0,0);
+      if(tab==='bracket') drawBracketConnectors();      // now visible -> measurable
     });
+  });
+
+  // connector lines are pixel-measured, so re-draw them when the layout width changes
+  var _brTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(_brTimer); _brTimer = setTimeout(drawBracketConnectors, 150);
   });
 
   renderAll(); renderInvest(); renderTitleOdds(); renderScorer(); renderGroups(); renderBracket();

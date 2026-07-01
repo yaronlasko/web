@@ -116,6 +116,24 @@ def build_bracket(teams: dict, ko: dict | None = None) -> dict:
             return None
         return {"winner": v} if isinstance(v, str) else v
 
+    def annotate_played(match: dict) -> dict:
+        """If this match has a recorded result, mark it played and tag each slot with the
+        goals it scored + whether it won — so the CELL WHERE THE GAME WAS PLAYED shows the
+        outcome, not just carries the winner forward to the next round."""
+        res = _kw(match["m"])
+        if not res:
+            return match
+        match["played"] = True
+        match["winner"] = res.get("winner")
+        score = res.get("score")                           # [hg, ag]; winner scored max()
+        if score:
+            hi, lo = max(score), min(score)
+            for sl in match["slots"]:
+                if sl.get("team"):
+                    sl["won"] = (sl["team"] == match["winner"])
+                    sl["goals"] = hi if sl["won"] else lo
+        return match
+
     groups = sorted({teams[t]["group"] for t in teams})
     order = {g: _group_order(teams, g) for g in groups}
     done = {g: _group_done(teams, g) for g in groups}
@@ -166,7 +184,7 @@ def build_bracket(teams: dict, ko: dict | None = None) -> dict:
     # Round of 32 (+ a per-match descriptor used to explain later-round feeders)
     r32_desc, r32_matches = {}, []
     for (m, a, b) in R32:
-        r32_matches.append({"m": m, "slots": [fill(a, m), fill(b, m)]})
+        r32_matches.append(annotate_played({"m": m, "slots": [fill(a, m), fill(b, m)]}))
         r32_desc[m] = _desc(a) + " vs " + _desc(b)
     rounds = [{"name": "Round of 32", "matches": r32_matches}]
 
@@ -182,10 +200,10 @@ def build_bracket(teams: dict, ko: dict | None = None) -> dict:
         return s
 
     rounds.append({"name": "Round of 16", "matches": [
-        {"m": m, "slots": [feeder(x, True), feeder(y, True)]} for (m, x, y) in R16]})
+        annotate_played({"m": m, "slots": [feeder(x, True), feeder(y, True)]}) for (m, x, y) in R16]})
     for name, spec in [("Quarter-finals", QF), ("Semi-finals", SF), ("Final", FINAL)]:
         rounds.append({"name": name, "matches": [
-            {"m": m, "slots": [feeder(x), feeder(y)]} for (m, x, y) in spec]})
+            annotate_played({"m": m, "slots": [feeder(x), feeder(y)]}) for (m, x, y) in spec]})
 
     return {
         "group_stage_complete": gs_complete,

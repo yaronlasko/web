@@ -1,342 +1,12 @@
 window.WC_DATA = {
   "meta": {
     "snapshot": "2026-06-25",
-    "generated": "2026-06-28T22:19:02+00:00",
+    "generated": "2026-07-01T08:47:15+00:00",
     "w_market": 0.7,
     "n_sims": 40000
   },
   "matches": [],
   "knockout": [
-    {
-      "slug": "fifwc-bra-jpn-2026-06-29",
-      "group": "C",
-      "home": "Brazil",
-      "away": "Japan",
-      "date": "2026-06-29",
-      "kickoff": "2026-06-29T17:00:00Z",
-      "mult": 2,
-      "lambda_home": 1.57,
-      "lambda_away": 1.06,
-      "blend_wdl": [
-        0.546,
-        0.247,
-        0.207
-      ],
-      "model_wdl": [
-        0.499,
-        0.238,
-        0.263
-      ],
-      "market_wdl": [
-        0.567,
-        0.251,
-        0.182
-      ],
-      "pick": [
-        1,
-        0
-      ],
-      "pick_ev": 1.543,
-      "pick_class": "home",
-      "pick_hit": 0.129,
-      "confidence": 0.546,
-      "modal": [
-        1,
-        0
-      ],
-      "modal_p": 0.129,
-      "modal_ev": 1.543,
-      "modal_class": "home",
-      "modal_conf": 0.546,
-      "stage": "Round of 32",
-      "match": 76,
-      "needs_advancer": false,
-      "advance": {
-        "Brazil": 0.725,
-        "Japan": 0.275
-      },
-      "advancer": "Brazil",
-      "price": {
-        "home": 0.575,
-        "draw": 0.255,
-        "away": 0.185
-      }
-    },
-    {
-      "slug": "fifwc-ger-par-2026-06-29",
-      "group": "E",
-      "home": "Germany",
-      "away": "Paraguay",
-      "date": "2026-06-29",
-      "kickoff": "2026-06-29T20:30:00Z",
-      "mult": 2,
-      "lambda_home": 1.75,
-      "lambda_away": 0.93,
-      "blend_wdl": [
-        0.689,
-        0.19,
-        0.122
-      ],
-      "model_wdl": [
-        0.572,
-        0.222,
-        0.206
-      ],
-      "market_wdl": [
-        0.739,
-        0.176,
-        0.085
-      ],
-      "pick": [
-        2,
-        0
-      ],
-      "pick_ev": 1.887,
-      "pick_class": "home",
-      "pick_hit": 0.131,
-      "confidence": 0.689,
-      "modal": [
-        2,
-        0
-      ],
-      "modal_p": 0.131,
-      "modal_ev": 1.887,
-      "modal_class": "home",
-      "modal_conf": 0.689,
-      "stage": "Round of 32",
-      "match": 74,
-      "needs_advancer": false,
-      "advance": {
-        "Germany": 0.85,
-        "Paraguay": 0.15
-      },
-      "advancer": "Germany",
-      "price": {
-        "home": 0.735,
-        "draw": 0.175,
-        "away": 0.085
-      }
-    },
-    {
-      "slug": "fifwc-nld-mar-2026-06-29",
-      "group": "F",
-      "home": "Netherlands",
-      "away": "Morocco",
-      "date": "2026-06-29",
-      "kickoff": "2026-06-30T01:00:00Z",
-      "mult": 2,
-      "lambda_home": 1.62,
-      "lambda_away": 1.03,
-      "blend_wdl": [
-        0.464,
-        0.287,
-        0.249
-      ],
-      "model_wdl": [
-        0.518,
-        0.234,
-        0.248
-      ],
-      "market_wdl": [
-        0.442,
-        0.31,
-        0.249
-      ],
-      "pick": [
-        1,
-        0
-      ],
-      "pick_ev": 1.312,
-      "pick_class": "home",
-      "pick_hit": 0.116,
-      "confidence": 0.464,
-      "modal": [
-        1,
-        1
-      ],
-      "modal_p": 0.136,
-      "modal_ev": 1.116,
-      "modal_class": "draw",
-      "modal_conf": 0.287,
-      "stage": "Round of 32",
-      "match": 75,
-      "needs_advancer": false,
-      "advance": {
-        "Netherlands": 0.651,
-        "Morocco": 0.349
-      },
-      "advancer": "Netherlands",
-      "price": {
-        "away": 0.245,
-        "home": 0.435,
-        "draw": 0.305
-      }
-    },
-    {
-      "slug": "fifwc-civ-nor-2026-06-30",
-      "group": "E",
-      "home": "Côte d'Ivoire",
-      "away": "Norway",
-      "date": "2026-06-30",
-      "kickoff": "2026-06-30T17:00:00Z",
-      "mult": 2,
-      "lambda_home": 0.53,
-      "lambda_away": 2.3,
-      "blend_wdl": [
-        0.201,
-        0.231,
-        0.568
-      ],
-      "model_wdl": [
-        0.073,
-        0.147,
-        0.78
-      ],
-      "market_wdl": [
-        0.256,
-        0.266,
-        0.477
-      ],
-      "pick": [
-        0,
-        1
-      ],
-      "pick_ev": 1.503,
-      "pick_class": "away",
-      "pick_hit": 0.107,
-      "confidence": 0.568,
-      "modal": [
-        0,
-        1
-      ],
-      "modal_p": 0.107,
-      "modal_ev": 1.503,
-      "modal_class": "away",
-      "modal_conf": 0.568,
-      "stage": "Round of 32",
-      "match": 78,
-      "needs_advancer": false,
-      "advance": {
-        "Côte d'Ivoire": 0.261,
-        "Norway": 0.739
-      },
-      "advancer": "Norway",
-      "price": {
-        "home": 0.255,
-        "draw": 0.265,
-        "away": 0.475
-      }
-    },
-    {
-      "slug": "fifwc-fra-swe-2026-06-30",
-      "group": "I",
-      "home": "France",
-      "away": "Sweden",
-      "date": "2026-06-30",
-      "kickoff": "2026-06-30T21:00:00Z",
-      "mult": 2,
-      "lambda_home": 2.77,
-      "lambda_away": 0.19,
-      "blend_wdl": [
-        0.811,
-        0.132,
-        0.057
-      ],
-      "model_wdl": [
-        0.904,
-        0.08,
-        0.016
-      ],
-      "market_wdl": [
-        0.771,
-        0.154,
-        0.075
-      ],
-      "pick": [
-        4,
-        0
-      ],
-      "pick_ev": 2.279,
-      "pick_class": "home",
-      "pick_hit": 0.11,
-      "confidence": 0.811,
-      "modal": [
-        2,
-        0
-      ],
-      "modal_p": 0.149,
-      "modal_ev": 2.211,
-      "modal_class": "home",
-      "modal_conf": 0.811,
-      "stage": "Round of 32",
-      "match": 77,
-      "needs_advancer": false,
-      "advance": {
-        "France": 0.934,
-        "Sweden": 0.066
-      },
-      "advancer": "France",
-      "price": {
-        "home": 0.775,
-        "draw": 0.155,
-        "away": 0.075
-      }
-    },
-    {
-      "slug": "fifwc-mex-ecu-2026-06-30",
-      "group": "A",
-      "home": "Mexico",
-      "away": "Ecuador",
-      "date": "2026-06-30",
-      "kickoff": "2026-07-01T01:00:00Z",
-      "mult": 2,
-      "lambda_home": 1.69,
-      "lambda_away": 0.98,
-      "blend_wdl": [
-        0.46,
-        0.295,
-        0.245
-      ],
-      "model_wdl": [
-        0.547,
-        0.228,
-        0.225
-      ],
-      "market_wdl": [
-        0.423,
-        0.323,
-        0.254
-      ],
-      "pick": [
-        1,
-        0
-      ],
-      "pick_ev": 1.386,
-      "pick_class": "home",
-      "pick_hit": 0.14,
-      "confidence": 0.46,
-      "modal": [
-        1,
-        0
-      ],
-      "modal_p": 0.14,
-      "modal_ev": 1.386,
-      "modal_class": "home",
-      "modal_conf": 0.46,
-      "stage": "Round of 32",
-      "match": 79,
-      "needs_advancer": false,
-      "advance": {
-        "Mexico": 0.652,
-        "Ecuador": 0.348
-      },
-      "advancer": "Mexico",
-      "price": {
-        "draw": 0.325,
-        "home": 0.425,
-        "away": 0.255
-      }
-    },
     {
       "slug": "fifwc-eng-cdr-2026-07-01",
       "group": "L",
@@ -839,7 +509,7 @@ window.WC_DATA = {
       "reach_r16": 0.966,
       "reach_qf": 0.942,
       "reach_sf": 0.737,
-      "reach_final": 0.555,
+      "reach_final": 0.558,
       "champion": 0.341
     },
     {
@@ -847,79 +517,79 @@ window.WC_DATA = {
       "reach_r16": 0.921,
       "reach_qf": 0.712,
       "reach_sf": 0.641,
-      "reach_final": 0.426,
-      "champion": 0.251
+      "reach_final": 0.421,
+      "champion": 0.248
     },
     {
       "team": "France",
-      "reach_r16": 0.936,
-      "reach_qf": 0.708,
-      "reach_sf": 0.555,
-      "reach_final": 0.31,
-      "champion": 0.163
+      "reach_r16": 0.984,
+      "reach_qf": 0.76,
+      "reach_sf": 0.594,
+      "reach_final": 0.332,
+      "champion": 0.175
     },
     {
       "team": "England",
       "reach_r16": 0.936,
-      "reach_qf": 0.646,
-      "reach_sf": 0.379,
-      "reach_final": 0.141,
-      "champion": 0.06
-    },
-    {
-      "team": "Brazil",
-      "reach_r16": 0.722,
-      "reach_qf": 0.515,
-      "reach_sf": 0.282,
-      "reach_final": 0.1,
-      "champion": 0.042
+      "reach_qf": 0.645,
+      "reach_sf": 0.384,
+      "reach_final": 0.143,
+      "champion": 0.061
     },
     {
       "team": "Colombia",
       "reach_r16": 0.886,
       "reach_qf": 0.637,
       "reach_sf": 0.193,
-      "reach_final": 0.1,
+      "reach_final": 0.101,
       "champion": 0.039
+    },
+    {
+      "team": "Brazil",
+      "reach_r16": 0.65,
+      "reach_qf": 0.426,
+      "reach_sf": 0.231,
+      "reach_final": 0.082,
+      "champion": 0.034
+    },
+    {
+      "team": "Netherlands",
+      "reach_r16": 0.676,
+      "reach_qf": 0.532,
+      "reach_sf": 0.194,
+      "reach_final": 0.074,
+      "champion": 0.024
     },
     {
       "team": "Portugal",
       "reach_r16": 0.713,
       "reach_qf": 0.216,
       "reach_sf": 0.161,
-      "reach_final": 0.07,
-      "champion": 0.025
-    },
-    {
-      "team": "Netherlands",
-      "reach_r16": 0.651,
-      "reach_qf": 0.513,
-      "reach_sf": 0.193,
-      "reach_final": 0.074,
+      "reach_final": 0.068,
       "champion": 0.024
     },
     {
       "team": "Germany",
-      "reach_r16": 0.851,
-      "reach_qf": 0.263,
-      "reach_sf": 0.154,
-      "reach_final": 0.054,
-      "champion": 0.017
+      "reach_r16": 0.735,
+      "reach_qf": 0.206,
+      "reach_sf": 0.12,
+      "reach_final": 0.042,
+      "champion": 0.014
     },
     {
       "team": "Norway",
-      "reach_r16": 0.74,
-      "reach_qf": 0.31,
-      "reach_sf": 0.131,
-      "reach_final": 0.034,
-      "champion": 0.01
+      "reach_r16": 0.914,
+      "reach_qf": 0.39,
+      "reach_sf": 0.166,
+      "reach_final": 0.043,
+      "champion": 0.012
     },
     {
       "team": "Mexico",
-      "reach_r16": 0.649,
-      "reach_qf": 0.254,
-      "reach_sf": 0.117,
-      "reach_final": 0.03,
+      "reach_r16": 0.657,
+      "reach_qf": 0.257,
+      "reach_sf": 0.12,
+      "reach_final": 0.031,
       "champion": 0.008
     },
     {
@@ -935,30 +605,30 @@ window.WC_DATA = {
       "reach_r16": 0.599,
       "reach_qf": 0.407,
       "reach_sf": 0.077,
-      "reach_final": 0.02,
+      "reach_final": 0.019,
       "champion": 0.004
     },
     {
       "team": "Japan",
-      "reach_r16": 0.279,
-      "reach_qf": 0.161,
-      "reach_sf": 0.062,
-      "reach_final": 0.013,
-      "champion": 0.003
-    },
-    {
-      "team": "Morocco",
-      "reach_r16": 0.349,
-      "reach_qf": 0.226,
-      "reach_sf": 0.054,
-      "reach_final": 0.012,
-      "champion": 0.002
+      "reach_r16": 0.35,
+      "reach_qf": 0.178,
+      "reach_sf": 0.069,
+      "reach_final": 0.015,
+      "champion": 0.004
     },
     {
       "team": "Senegal",
       "reach_r16": 0.401,
       "reach_qf": 0.27,
       "reach_sf": 0.049,
+      "reach_final": 0.011,
+      "champion": 0.002
+    },
+    {
+      "team": "Morocco",
+      "reach_r16": 0.324,
+      "reach_qf": 0.21,
+      "reach_sf": 0.048,
       "reach_final": 0.011,
       "champion": 0.002
     },
@@ -980,8 +650,8 @@ window.WC_DATA = {
     },
     {
       "team": "Ecuador",
-      "reach_r16": 0.351,
-      "reach_qf": 0.093,
+      "reach_r16": 0.343,
+      "reach_qf": 0.091,
       "reach_sf": 0.028,
       "reach_final": 0.004,
       "champion": 0.001
@@ -989,16 +659,16 @@ window.WC_DATA = {
     {
       "team": "Canada",
       "reach_r16": 1.0,
-      "reach_qf": 0.262,
-      "reach_sf": 0.035,
-      "reach_final": 0.005,
+      "reach_qf": 0.258,
+      "reach_sf": 0.032,
+      "reach_final": 0.004,
       "champion": 0.0
     },
     {
       "team": "Paraguay",
-      "reach_r16": 0.149,
-      "reach_qf": 0.023,
-      "reach_sf": 0.009,
+      "reach_r16": 0.265,
+      "reach_qf": 0.032,
+      "reach_sf": 0.011,
       "reach_final": 0.002,
       "champion": 0.0
     },
@@ -1043,26 +713,26 @@ window.WC_DATA = {
       "champion": 0.0
     },
     {
-      "team": "Côte d'Ivoire",
-      "reach_r16": 0.26,
-      "reach_qf": 0.014,
+      "team": "DR Congo",
+      "reach_r16": 0.064,
+      "reach_qf": 0.007,
       "reach_sf": 0.001,
+      "reach_final": 0.0,
+      "champion": 0.0
+    },
+    {
+      "team": "Côte d'Ivoire",
+      "reach_r16": 0.086,
+      "reach_qf": 0.006,
+      "reach_sf": 0.0,
       "reach_final": 0.0,
       "champion": 0.0
     },
     {
       "team": "Sweden",
-      "reach_r16": 0.064,
-      "reach_qf": 0.007,
-      "reach_sf": 0.001,
-      "reach_final": 0.0,
-      "champion": 0.0
-    },
-    {
-      "team": "DR Congo",
-      "reach_r16": 0.064,
-      "reach_qf": 0.007,
-      "reach_sf": 0.001,
+      "reach_r16": 0.016,
+      "reach_qf": 0.002,
+      "reach_sf": 0.0,
       "reach_final": 0.0,
       "champion": 0.0
     },
@@ -1171,14 +841,20 @@ window.WC_DATA = {
               {
                 "team": "South Africa",
                 "status": "confirmed",
-                "label": "Runner-up A"
+                "label": "Runner-up A",
+                "won": false,
+                "goals": 0
               },
               {
                 "team": "Canada",
                 "status": "confirmed",
-                "label": "Runner-up B"
+                "label": "Runner-up B",
+                "won": true,
+                "goals": 1
               }
-            ]
+            ],
+            "played": true,
+            "winner": "Canada"
           },
           {
             "m": 74,
