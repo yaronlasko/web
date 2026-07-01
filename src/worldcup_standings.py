@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import unicodedata
 from pathlib import Path
 
 import requests
@@ -37,6 +38,26 @@ KO_LEDGER = WC / "knockout_results.json"    # {match_no: {"winner": team, "score
 SNAPSHOT_FROM_DATE = "2026-06-25"           # apply only games on/after this date
 GAME_RE = re.compile(r"^fifwc-[a-z]{3}-[a-z]{3}-2026-\d\d-\d\d$")
 H = {"User-Agent": USER_AGENT}
+
+# ESPN's free (no-auth) soccer scoreboard is the AUTHORITATIVE knockout-result source: it
+# reports the ADVANCER directly (competitor.winner flag) incl. penalty shootouts, which the
+# Polymarket markets can't (no "advance" market), and it doesn't age out of a volume feed.
+ESPN_SCOREBOARD = "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard"
+ESPN_KO_WINDOW = "20260628-20260720"        # R32 start .. past the Final (fixed WC26 schedule)
+# ESPN displayName -> our teams.json key, only where accent/punctuation normalisation isn't
+# enough (word order / different English exonym).
+ESPN_ALIAS = {
+    "Ivory Coast": "Côte d'Ivoire", "Congo DR": "DR Congo",
+    "Bosnia-Herzegovina": "Bosnia and Herzegovina", "Cape Verde": "Cabo Verde",
+    "Turkey": "Türkiye", "Iran": "IR Iran", "Korea Republic": "South Korea",
+    "Czech Republic": "Czechia",
+}
+
+
+def _norm(s: str) -> str:
+    """accent/punctuation-insensitive key, e.g. 'Türkiye' -> 'turkiye'."""
+    s = unicodedata.normalize("NFKD", s).encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-z0-9]", "", s.lower())
 
 
 def _jl(x):
@@ -127,19 +148,58 @@ def apply_result(teams: dict, home: str, away: str, hg: int, ag: int):
         teams[home]["pts"] += 1; teams[away]["pts"] += 1
 
 
+def fetch_espn_ko(teams: dict) -> dict:
+    """Finished knockout results from ESPN, keyed by our-name team pair:
+        {frozenset({homeName, awayName}): {"winner": ourName, "score": [hg, ag]}}
+    Winner is ESPN's advancer flag (covers penalties). Score is the on-pitch goals (level
+    for a shootout, so the bracket shows '1-1 pens'). Best-effort: any failure -> {} and the
+    caller falls back to the Polymarket path."""
+    idx = {_norm(t): t for t in teams}                     # normalised -> our name
+    def to_ours(name: str):
+        return ESPN_ALIAS.get(name) or (name if name in teams else idx.get(_norm(name)))
+    out: dict = {}
+    try:
+        r = requests.get(ESPN_SCOREBOARD, params={"dates": ESPN_KO_WINDOW}, headers=H, timeout=25)
+        events = r.json().get("events", [])
+    except Exception:
+        return out
+    for e in events:
+        comp = (e.get("competitions") or [{}])[0]
+        if not comp.get("status", {}).get("type", {}).get("completed"):
+            continue                                       # not finished yet
+        cs = comp.get("competitors", [])
+        if len(cs) != 2:
+            continue
+        by = {c.get("homeAway"): c for c in cs}
+        home, away = by.get("home"), by.get("away")
+        if not (home and away):
+            continue
+        th = to_ours(home["team"]["displayName"]); ta = to_ours(away["team"]["displayName"])
+        win = next((c for c in cs if c.get("winner")), None)
+        if not (th and ta and win):
+            continue                                       # unmapped name or no winner -> skip
+        tw = to_ours(win["team"]["displayName"])
+        try:
+            hg, ag = int(home.get("score")), int(away.get("score"))
+        except (TypeError, ValueError):
+            continue
+        if tw:
+            out[frozenset((th, ta))] = {"winner": tw, "score": [hg, ag]}
+    return out
+
+
 def fold_knockouts(teams: dict, events: dict, dry_run: bool = False):
     """Record winners of finished KNOCKOUT games so the bracket fills in round by round.
 
     Knockout games are the cross-group fixtures (R32 pairs teams from different groups).
-    We match each resolved cross-group game to its bracket slot by the pair of teams,
-    read the winner from the resolved exact-score market, and store it in
-    `knockout_results.json`. A 90-minute draw (extra time / penalties) or a game with no
-    exact-score market can't reveal who advanced -> flagged for MANUAL entry, exactly like
-    the group-stage fallback. Folds iteratively (R32 -> R16 -> ... -> Final) so each round's
-    winners unlock the next round's pairings. CI re-derives this each run; the committed
-    file persists any manual entries.
+    Winners come from ESPN first (its advancer flag covers penalty shootouts and never ages
+    out), falling back to the Polymarket exact-score / moneyline markets. Only a game ESPN
+    hasn't got AND whose Polymarket market resolved to a 90-min draw still needs MANUAL entry.
+    Folds iteratively (R32 -> R16 -> ... -> Final) so each round's winners unlock the next
+    round's pairings. CI re-derives this each run; the committed file persists prior results.
     """
     ko = _load(KO_LEDGER, {})
+    espn = fetch_espn_ko(teams)                            # {frozenset(pair): {winner, score}}
     # resolved cross-group (knockout) games, indexed by their unordered team pair
     resolved = {}
     for slug, e in events.items():
@@ -166,6 +226,12 @@ def fold_knockouts(teams: dict, events: dict, dry_run: bool = False):
                 a, b = mt["slots"][0].get("team"), mt["slots"][1].get("team")
                 if not (a and b):
                     continue                               # both sides not known yet
+                hit = espn.get(frozenset((a, b)))          # authoritative advancer (incl. pens)
+                if hit:
+                    ko[str(m)] = {"winner": hit["winner"], "score": hit["score"]}
+                    applied.append((m, hit["winner"]))
+                    changed = True
+                    continue
                 got = resolved.get(frozenset((a, b)))
                 if not got:
                     continue                               # not finished (or names mismatch)
