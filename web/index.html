@@ -101,6 +101,7 @@
   .bmatch .bm{font-size:9.5px;color:var(--muted);padding:3px 9px;background:var(--panel2);letter-spacing:.05em;
     display:flex;align-items:center;justify-content:space-between;gap:8px}
   .bmatch .bm .bscore{color:var(--txt);font-weight:700;letter-spacing:.02em}
+  .bmatch .bm .bpens{color:var(--muted);font-weight:600;font-size:8.5px;text-transform:uppercase;letter-spacing:.04em}
   .bslot{padding:8px 10px;font-size:12.5px;border-top:1px solid var(--line);display:flex;align-items:center;gap:6px;min-height:34px}
   .bslot:first-of-type{border-top:0}
   .bslot.confirmed{color:var(--txt);font-weight:600}
@@ -571,7 +572,8 @@
         var hdr = 'Match '+mt.m;
         if(mt.played){                               // "1–0" (winner–loser) badge
           var gs = mt.slots.map(function(s){return s.goals;}).filter(function(x){return x!=null;});
-          if(gs.length===2) hdr += '<span class="bscore">'+Math.max(gs[0],gs[1])+'–'+Math.min(gs[0],gs[1])+'</span>';
+          if(gs.length===2){ var hi=Math.max(gs[0],gs[1]), lo=Math.min(gs[0],gs[1]);
+            hdr += '<span class="bscore">'+hi+'–'+lo+(hi===lo?' <span class="bpens">pens</span>':'')+'</span>'; }
         }
         var slots = mt.slots.map(function(s){return bslotHtml(s, mt);}).join('');
         return '<div class="bmatch'+(mt.played?' played':'')+'" data-m="'+mt.m+'">'+

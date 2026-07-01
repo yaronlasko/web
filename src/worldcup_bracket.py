@@ -126,11 +126,11 @@ def build_bracket(teams: dict, ko: dict | None = None) -> dict:
         match["played"] = True
         match["winner"] = res.get("winner")
         score = res.get("score")                           # [hg, ag]; winner scored max()
-        if score:
-            hi, lo = max(score), min(score)
-            for sl in match["slots"]:
-                if sl.get("team"):
-                    sl["won"] = (sl["team"] == match["winner"])
+        hi, lo = (max(score), min(score)) if score else (None, None)
+        for sl in match["slots"]:                          # mark winner/loser even w/o a score
+            if sl.get("team"):
+                sl["won"] = (sl["team"] == match["winner"])
+                if score:
                     sl["goals"] = hi if sl["won"] else lo
         return match
 

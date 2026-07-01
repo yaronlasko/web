@@ -88,6 +88,30 @@ def resolved_score(es_event: dict | None):
     return None
 
 
+def moneyline_winner(game_event: dict | None, home: str, away: str):
+    """Winner of a resolved game from its MONEYLINE market. For knockouts we only need who
+    ADVANCED, so this recovers a winner even when the exact score resolved to 'Any Other
+    Score' (which blocks resolved_score). Returns the team name, 'draw' if the 90-minute
+    draw market resolved YES (undecided by 90' — the ET/pens advancer still needs manual
+    entry), or None if nothing resolved yet."""
+    if not game_event:
+        return None
+    for m in game_event.get("markets", []):
+        outs = _jl(m.get("outcomes")); pr = _jl(m.get("outcomePrices"))
+        if not (outs and pr and len(outs) == 2 and outs[0].lower() == "yes"):
+            continue
+        if float(pr[0]) <= 0.99:                    # this line hasn't resolved YES
+            continue
+        q = m.get("question", "")
+        if q.startswith(f"Will {home} win"):
+            return home
+        if q.startswith(f"Will {away} win"):
+            return away
+        if "end in a draw" in q:
+            return "draw"
+    return None
+
+
 def apply_result(teams: dict, home: str, away: str, hg: int, ag: int):
     for t in (home, away):
         teams[t]["pld"] += 1
@@ -147,13 +171,21 @@ def fold_knockouts(teams: dict, events: dict, dry_run: bool = False):
                     continue                               # not finished (or names mismatch)
                 home, away, slug = got
                 score = resolved_score(events.get(slug + "-exact-score"))
-                if score is None or score == "other" or score[0] == score[1]:
-                    manual.append((a, b, slug))            # pens / no clean market
+                if score is not None and score != "other" and score[0] != score[1]:
+                    hg, ag = score                         # clean decisive scoreline
+                    ko[str(m)] = {"winner": home if hg > ag else away, "score": [hg, ag]}
+                    applied.append((m, ko[str(m)]["winner"]))
+                    changed = True
                     continue
-                hg, ag = score
-                ko[str(m)] = {"winner": home if hg > ag else away, "score": [hg, ag]}
-                applied.append((m, ko[str(m)]["winner"]))
-                changed = True
+                # no clean exact score (high/uncommon scoreline lumped into "Any Other
+                # Score", or a draw) -> take the ADVANCER from the moneyline market.
+                win = moneyline_winner(events.get(slug), home, away)
+                if win and win != "draw":
+                    ko[str(m)] = {"winner": win}           # winner known, exact score isn't
+                    applied.append((m, win))
+                    changed = True
+                else:
+                    manual.append((a, b, slug))            # 90-min draw -> ET/pens, needs manual
         if not changed:
             break
 

@@ -1,7 +1,7 @@
 window.WC_DATA = {
   "meta": {
     "snapshot": "2026-06-25",
-    "generated": "2026-07-01T08:47:15+00:00",
+    "generated": "2026-07-01T09:59:26+00:00",
     "w_market": 0.7,
     "n_sims": 40000
   },
@@ -506,248 +506,208 @@ window.WC_DATA = {
   "title_odds": [
     {
       "team": "Argentina",
-      "reach_r16": 0.966,
-      "reach_qf": 0.942,
-      "reach_sf": 0.737,
-      "reach_final": 0.558,
-      "champion": 0.341
+      "reach_r16": 0.969,
+      "reach_qf": 0.943,
+      "reach_sf": 0.742,
+      "reach_final": 0.566,
+      "champion": 0.34
     },
     {
       "team": "Spain",
-      "reach_r16": 0.921,
-      "reach_qf": 0.712,
-      "reach_sf": 0.641,
-      "reach_final": 0.421,
-      "champion": 0.248
+      "reach_r16": 0.922,
+      "reach_qf": 0.718,
+      "reach_sf": 0.65,
+      "reach_final": 0.418,
+      "champion": 0.249
     },
     {
       "team": "France",
-      "reach_r16": 0.984,
-      "reach_qf": 0.76,
-      "reach_sf": 0.594,
-      "reach_final": 0.332,
-      "champion": 0.175
+      "reach_r16": 1.0,
+      "reach_qf": 0.893,
+      "reach_sf": 0.77,
+      "reach_final": 0.427,
+      "champion": 0.225
     },
     {
       "team": "England",
-      "reach_r16": 0.936,
-      "reach_qf": 0.645,
-      "reach_sf": 0.384,
-      "reach_final": 0.143,
-      "champion": 0.061
+      "reach_r16": 0.935,
+      "reach_qf": 0.601,
+      "reach_sf": 0.359,
+      "reach_final": 0.128,
+      "champion": 0.049
     },
     {
       "team": "Colombia",
-      "reach_r16": 0.886,
+      "reach_r16": 0.887,
       "reach_qf": 0.637,
-      "reach_sf": 0.193,
+      "reach_sf": 0.189,
       "reach_final": 0.101,
-      "champion": 0.039
+      "champion": 0.035
     },
     {
       "team": "Brazil",
-      "reach_r16": 0.65,
-      "reach_qf": 0.426,
-      "reach_sf": 0.231,
-      "reach_final": 0.082,
-      "champion": 0.034
-    },
-    {
-      "team": "Netherlands",
-      "reach_r16": 0.676,
-      "reach_qf": 0.532,
-      "reach_sf": 0.194,
-      "reach_final": 0.074,
-      "champion": 0.024
+      "reach_r16": 0.661,
+      "reach_qf": 0.415,
+      "reach_sf": 0.223,
+      "reach_final": 0.078,
+      "champion": 0.03
     },
     {
       "team": "Portugal",
-      "reach_r16": 0.713,
-      "reach_qf": 0.216,
+      "reach_r16": 0.718,
+      "reach_qf": 0.213,
       "reach_sf": 0.161,
-      "reach_final": 0.068,
-      "champion": 0.024
+      "reach_final": 0.066,
+      "champion": 0.023
     },
     {
-      "team": "Germany",
-      "reach_r16": 0.735,
-      "reach_qf": 0.206,
-      "reach_sf": 0.12,
-      "reach_final": 0.042,
+      "team": "Mexico",
+      "reach_r16": 1.0,
+      "reach_qf": 0.395,
+      "reach_sf": 0.184,
+      "reach_final": 0.047,
       "champion": 0.014
     },
     {
       "team": "Norway",
-      "reach_r16": 0.914,
-      "reach_qf": 0.39,
-      "reach_sf": 0.166,
-      "reach_final": 0.043,
+      "reach_r16": 1.0,
+      "reach_qf": 0.425,
+      "reach_sf": 0.175,
+      "reach_final": 0.045,
       "champion": 0.012
     },
     {
-      "team": "Mexico",
-      "reach_r16": 0.657,
-      "reach_qf": 0.257,
-      "reach_sf": 0.12,
+      "team": "Morocco",
+      "reach_r16": 1.0,
+      "reach_qf": 0.647,
+      "reach_sf": 0.135,
       "reach_final": 0.031,
-      "champion": 0.008
+      "champion": 0.006
     },
     {
       "team": "Switzerland",
-      "reach_r16": 0.735,
-      "reach_qf": 0.304,
-      "reach_sf": 0.058,
+      "reach_r16": 0.737,
+      "reach_qf": 0.307,
+      "reach_sf": 0.056,
       "reach_final": 0.021,
-      "champion": 0.005
+      "champion": 0.004
     },
     {
       "team": "Belgium",
-      "reach_r16": 0.599,
+      "reach_r16": 0.597,
       "reach_qf": 0.407,
-      "reach_sf": 0.077,
-      "reach_final": 0.019,
-      "champion": 0.004
+      "reach_sf": 0.073,
+      "reach_final": 0.017,
+      "champion": 0.003
     },
     {
       "team": "Japan",
-      "reach_r16": 0.35,
-      "reach_qf": 0.178,
-      "reach_sf": 0.069,
-      "reach_final": 0.015,
-      "champion": 0.004
+      "reach_r16": 0.339,
+      "reach_qf": 0.16,
+      "reach_sf": 0.059,
+      "reach_final": 0.013,
+      "champion": 0.003
     },
     {
       "team": "Senegal",
-      "reach_r16": 0.401,
+      "reach_r16": 0.404,
       "reach_qf": 0.27,
-      "reach_sf": 0.049,
+      "reach_sf": 0.047,
       "reach_final": 0.011,
       "champion": 0.002
     },
     {
-      "team": "Morocco",
-      "reach_r16": 0.324,
-      "reach_qf": 0.21,
+      "team": "Paraguay",
+      "reach_r16": 1.0,
+      "reach_qf": 0.107,
       "reach_sf": 0.048,
-      "reach_final": 0.011,
-      "champion": 0.002
-    },
-    {
-      "team": "Croatia",
-      "reach_r16": 0.287,
-      "reach_qf": 0.052,
-      "reach_sf": 0.031,
-      "reach_final": 0.009,
-      "champion": 0.002
-    },
-    {
-      "team": "United States",
-      "reach_r16": 0.835,
-      "reach_qf": 0.29,
-      "reach_sf": 0.031,
-      "reach_final": 0.005,
-      "champion": 0.001
-    },
-    {
-      "team": "Ecuador",
-      "reach_r16": 0.343,
-      "reach_qf": 0.091,
-      "reach_sf": 0.028,
-      "reach_final": 0.004,
+      "reach_final": 0.008,
       "champion": 0.001
     },
     {
       "team": "Canada",
       "reach_r16": 1.0,
-      "reach_qf": 0.258,
-      "reach_sf": 0.032,
-      "reach_final": 0.004,
-      "champion": 0.0
+      "reach_qf": 0.353,
+      "reach_sf": 0.046,
+      "reach_final": 0.008,
+      "champion": 0.001
     },
     {
-      "team": "Paraguay",
-      "reach_r16": 0.265,
-      "reach_qf": 0.032,
-      "reach_sf": 0.011,
-      "reach_final": 0.002,
+      "team": "Croatia",
+      "reach_r16": 0.282,
+      "reach_qf": 0.049,
+      "reach_sf": 0.03,
+      "reach_final": 0.008,
+      "champion": 0.001
+    },
+    {
+      "team": "United States",
+      "reach_r16": 0.833,
+      "reach_qf": 0.29,
+      "reach_sf": 0.03,
+      "reach_final": 0.005,
       "champion": 0.0
     },
     {
       "team": "Austria",
-      "reach_r16": 0.079,
-      "reach_qf": 0.021,
+      "reach_r16": 0.078,
+      "reach_qf": 0.019,
       "reach_sf": 0.009,
-      "reach_final": 0.002,
+      "reach_final": 0.001,
       "champion": 0.0
     },
     {
       "team": "Australia",
-      "reach_r16": 0.51,
-      "reach_qf": 0.032,
+      "reach_r16": 0.505,
+      "reach_qf": 0.033,
       "reach_sf": 0.007,
       "reach_final": 0.001,
       "champion": 0.0
     },
     {
       "team": "Algeria",
-      "reach_r16": 0.265,
-      "reach_qf": 0.05,
+      "reach_r16": 0.263,
+      "reach_qf": 0.048,
       "reach_sf": 0.003,
       "reach_final": 0.0,
       "champion": 0.0
     },
     {
       "team": "Egypt",
-      "reach_r16": 0.49,
-      "reach_qf": 0.018,
+      "reach_r16": 0.495,
+      "reach_qf": 0.017,
       "reach_sf": 0.002,
       "reach_final": 0.0,
       "champion": 0.0
     },
     {
       "team": "Bosnia and Herzegovina",
-      "reach_r16": 0.165,
-      "reach_qf": 0.032,
+      "reach_r16": 0.167,
+      "reach_qf": 0.034,
       "reach_sf": 0.001,
-      "reach_final": 0.0,
-      "champion": 0.0
-    },
-    {
-      "team": "DR Congo",
-      "reach_r16": 0.064,
-      "reach_qf": 0.007,
-      "reach_sf": 0.001,
-      "reach_final": 0.0,
-      "champion": 0.0
-    },
-    {
-      "team": "Côte d'Ivoire",
-      "reach_r16": 0.086,
-      "reach_qf": 0.006,
-      "reach_sf": 0.0,
-      "reach_final": 0.0,
-      "champion": 0.0
-    },
-    {
-      "team": "Sweden",
-      "reach_r16": 0.016,
-      "reach_qf": 0.002,
-      "reach_sf": 0.0,
       "reach_final": 0.0,
       "champion": 0.0
     },
     {
       "team": "Cabo Verde",
-      "reach_r16": 0.034,
-      "reach_qf": 0.009,
+      "reach_r16": 0.032,
+      "reach_qf": 0.007,
+      "reach_sf": 0.0,
+      "reach_final": 0.0,
+      "champion": 0.0
+    },
+    {
+      "team": "DR Congo",
+      "reach_r16": 0.065,
+      "reach_qf": 0.005,
       "reach_sf": 0.0,
       "reach_final": 0.0,
       "champion": 0.0
     },
     {
       "team": "Ghana",
-      "reach_r16": 0.114,
-      "reach_qf": 0.009,
+      "reach_r16": 0.113,
+      "reach_qf": 0.008,
       "reach_sf": 0.0,
       "reach_final": 0.0,
       "champion": 0.0
@@ -862,14 +822,20 @@ window.WC_DATA = {
               {
                 "team": "Germany",
                 "status": "confirmed",
-                "label": "Winner E"
+                "label": "Winner E",
+                "won": false,
+                "goals": 1
               },
               {
                 "team": "Paraguay",
                 "status": "confirmed",
-                "label": "3rd A/B/C/D/F"
+                "label": "3rd A/B/C/D/F",
+                "won": true,
+                "goals": 1
               }
-            ]
+            ],
+            "played": true,
+            "winner": "Paraguay"
           },
           {
             "m": 75,
@@ -877,14 +843,20 @@ window.WC_DATA = {
               {
                 "team": "Netherlands",
                 "status": "confirmed",
-                "label": "Winner F"
+                "label": "Winner F",
+                "won": false,
+                "goals": 1
               },
               {
                 "team": "Morocco",
                 "status": "confirmed",
-                "label": "Runner-up C"
+                "label": "Runner-up C",
+                "won": true,
+                "goals": 1
               }
-            ]
+            ],
+            "played": true,
+            "winner": "Morocco"
           },
           {
             "m": 76,
@@ -907,14 +879,20 @@ window.WC_DATA = {
               {
                 "team": "France",
                 "status": "confirmed",
-                "label": "Winner I"
+                "label": "Winner I",
+                "won": true,
+                "goals": 3
               },
               {
                 "team": "Sweden",
                 "status": "confirmed",
-                "label": "3rd C/D/F/G/H"
+                "label": "3rd C/D/F/G/H",
+                "won": false,
+                "goals": 0
               }
-            ]
+            ],
+            "played": true,
+            "winner": "France"
           },
           {
             "m": 78,
@@ -922,14 +900,20 @@ window.WC_DATA = {
               {
                 "team": "Côte d'Ivoire",
                 "status": "confirmed",
-                "label": "Runner-up E"
+                "label": "Runner-up E",
+                "won": false,
+                "goals": 1
               },
               {
                 "team": "Norway",
                 "status": "confirmed",
-                "label": "Runner-up I"
+                "label": "Runner-up I",
+                "won": true,
+                "goals": 2
               }
-            ]
+            ],
+            "played": true,
+            "winner": "Norway"
           },
           {
             "m": 79,
@@ -937,14 +921,20 @@ window.WC_DATA = {
               {
                 "team": "Mexico",
                 "status": "confirmed",
-                "label": "Winner A"
+                "label": "Winner A",
+                "won": true,
+                "goals": 2
               },
               {
                 "team": "Ecuador",
                 "status": "confirmed",
-                "label": "3rd C/E/F/H/I"
+                "label": "3rd C/E/F/H/I",
+                "won": false,
+                "goals": 0
               }
-            ]
+            ],
+            "played": true,
+            "winner": "Mexico"
           },
           {
             "m": 80,
@@ -1090,18 +1080,24 @@ window.WC_DATA = {
             "m": 89,
             "slots": [
               {
-                "team": null,
+                "team": "Paraguay",
                 "from": 74,
-                "status": "open",
+                "status": "confirmed",
                 "label": "Winner of Match 74",
-                "note": "Winner E vs 3rd place"
+                "score": [
+                  1,
+                  1
+                ]
               },
               {
-                "team": null,
+                "team": "France",
                 "from": 77,
-                "status": "open",
+                "status": "confirmed",
                 "label": "Winner of Match 77",
-                "note": "Winner I vs 3rd place"
+                "score": [
+                  3,
+                  0
+                ]
               }
             ]
           },
@@ -1119,11 +1115,14 @@ window.WC_DATA = {
                 ]
               },
               {
-                "team": null,
+                "team": "Morocco",
                 "from": 75,
-                "status": "open",
+                "status": "confirmed",
                 "label": "Winner of Match 75",
-                "note": "Winner F vs Runner-up C"
+                "score": [
+                  1,
+                  1
+                ]
               }
             ]
           },
@@ -1138,11 +1137,14 @@ window.WC_DATA = {
                 "note": "Winner C vs Runner-up F"
               },
               {
-                "team": null,
+                "team": "Norway",
                 "from": 78,
-                "status": "open",
+                "status": "confirmed",
                 "label": "Winner of Match 78",
-                "note": "Runner-up E vs Runner-up I"
+                "score": [
+                  1,
+                  2
+                ]
               }
             ]
           },
@@ -1150,11 +1152,14 @@ window.WC_DATA = {
             "m": 92,
             "slots": [
               {
-                "team": null,
+                "team": "Mexico",
                 "from": 79,
-                "status": "open",
+                "status": "confirmed",
                 "label": "Winner of Match 79",
-                "note": "Winner A vs 3rd place"
+                "score": [
+                  2,
+                  0
+                ]
               },
               {
                 "team": null,
